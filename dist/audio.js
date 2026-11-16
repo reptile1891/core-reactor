@@ -1,11 +1,11 @@
-/* Original procedural score: PULSE CIRCUIT. No recordings, external assets, or borrowed melodies. */
+/* Original procedural score: PULSE CIRCUIT / NEON RUN / SOLAR DRIVE. No recordings, external assets, or borrowed melodies. */
 (function(root){
 'use strict';
 const BPM=126,STEP=60/BPM/4,MAX_VOICES=88;
 const midi=n=>440*Math.pow(2,(n-69)/12);
 const CHORDS=[{root:38,notes:[0,3,7,14]},{root:34,notes:[0,4,7,11]},{root:41,notes:[0,4,7,14]},{root:36,notes:[0,4,7,9]},{root:38,notes:[0,3,7,10]},{root:43,notes:[0,4,7,9]},{root:34,notes:[0,4,7,14]},{root:36,notes:[0,4,7,14]}];
 const ARP=[0,2,1,3,2,1,3,2,0,3,2,1,3,1,2,3];
-function scoreStep(index,mode='combat'){
+function baseScoreStep(index,mode='combat'){
  const s=index%16,bar=Math.floor(index/16)%16,chord=CHORDS[Math.floor(bar/2)],boss=mode==='boss',soft=mode==='paused'||mode==='result',menu=mode==='menu',events=[];
  const add=(kind,data={})=>events.push({kind,offset:0,...data});
  if(s%4===0&&(!soft||s===0))add('kick',{level:soft?.32:menu?.64:.82});
@@ -25,14 +25,41 @@ function scoreStep(index,mode='combat'){
  if(boss&&s===15)add('noise',{duration:.055,level:.036,cutoff:3800,filter:'bandpass'});
  return events;
 }
+// Themes share a tempo and change at phrase boundaries; sustained tails bridge the transition.
+const THEMES=[
+ {name:'Pulse Circuit',transpose:0,arp:ARP,bass:[0,3,6,8,11,14]},
+ {name:'Neon Run',transpose:5,arp:[0,1,2,1,3,2,1,0,2,3,1,2,0,2,3,1],bass:[0,2,5,8,10,13]},
+ {name:'Solar Drive',transpose:7,arp:[0,2,3,2,1,3,2,0,3,1,2,3,1,0,2,1],bass:[0,3,7,8,12,14]}
+];
+function scoreStep(index,mode='combat'){
+ const theme=THEMES[Math.floor(index/256)%THEMES.length],s=index%16,bar=Math.floor(index/16),soft=mode==='paused'||mode==='result';
+ const events=baseScoreStep(index,mode);
+ // Change voicing, articulation and stereo motion without changing the shared beat grid.
+ for(const e of events)if(e.kind==='synth'){
+  e.note+=theme.transpose;
+  if(e.pan!==undefined&&e.pluck)e.pan=Math.sin((index%768)*.31+.3)*.42;
+  if(theme===THEMES[1]&&e.pluck&&e.wave==='triangle'){const chord=CHORDS[Math.floor(bar%16/2)];e.note=chord.root+theme.transpose+24+chord.notes[theme.arp[s]];e.wave='sine';e.release=.24;}
+  if(theme===THEMES[2]&&e.pluck&&e.wave==='sawtooth'){e.wave='triangle';e.cutoff*=1.3;}
+ }
+ // Distinct syncopation in later themes, with restrained phrase-ending fills.
+ if(theme!==THEMES[0]){
+  const chord=CHORDS[Math.floor(bar%16/2)];
+  for(let i=events.length-1;i>=0;i--)if(events[i].kind==='synth'&&events[i].pluck&&events[i].wave!=='sine'&&events[i].note<60)events.splice(i,1);
+  if(theme.bass.includes(s))events.push({kind:'synth',offset:0,note:chord.root+theme.transpose,duration:STEP*1.3,wave:'sawtooth',level:soft?.055:.095,cutoff:soft?450:1400,attack:.008,release:.08,pluck:true});
+ }
+ if(!soft&&bar%4===3&&[13,15].includes(s))events.push({kind:'hat',offset:0,level:.022,open:false});
+ if(!soft&&bar%8===7&&s===15)events.push({kind:'synth',offset:0,note:74+theme.transpose,duration:STEP*2,level:.035,wave:'sine',attack:.02,release:.25,wet:true,pan:-.3});
+ return events;
+}
 function effectPlan(name,enemy='',options={}){
+ const variant=Math.abs(Math.floor(options.variant||0))%3;
  const out=[],add=(note,offset=0,duration=.1,level=.1,wave='triangle',extra={})=>out.push({kind:'synth',note,offset,duration,level,wave,attack:.003,release:.06,...extra});
  const noise=(duration,level,cutoff,offset=0)=>out.push({kind:'noise',duration,level,cutoff,filter:'bandpass',offset});
- if(name==='block'){add(74+Math.min(4,Math.floor((options.combo||0)/12)),0,.07,.17,'triangle',{endNote:79});add(86,.015,.05,.045,'sine');}
- else if(name==='perfect'){[74,77,81,86].forEach((n,i)=>add(n,i*.028,.13,.115-i*.016,'triangle',{cutoff:7000}));noise(.055,.032,6500,.025);}
+ if(name==='block'){add(74+[0,2,-2][variant]+Math.min(4,Math.floor((options.combo||0)/12)),0,.07,.17,'triangle',{endNote:79});add(86,.015,.05,.045,'sine');}
+ else if(name==='perfect'){[[74,77,81,86],[74,79,81,86],[77,81,84,89]][variant].forEach((n,i)=>add(n,i*.028,.13,.115-i*.016,'triangle',{cutoff:7000}));noise(.055,.032,6500,.025);}
  else if(name==='hurt'){add(43,0,.23,.23,'sawtooth',{endNote:31,cutoff:1100});noise(.14,.13,600);}
- else if(name==='kill'){add(62,0,.075,.075,'square',{endNote:50,cutoff:1900});noise(.075,.042,2100);}
- else if(['level','choose','buy','record','bossWin','revive'].includes(name)){
+ else if(name==='kill'){add(62+[0,3,7][variant],0,.075,.075,'square',{endNote:50,cutoff:1900});noise(.075,.042,2100);}
+ else if(['level','choose','buy','record','bossWin','revive','route','specialization','trainingEnd'].includes(name)){
   const notes=name==='buy'?[74,81]:name==='choose'?[69,74,81]:name==='level'?[62,69,74,77]:name==='bossWin'?[62,69,74,78,81]:name==='record'?[74,78,81,86]:[62,67,74,79];
   notes.forEach((n,i)=>add(n,i*.055,name==='bossWin'?.32:.2,.11,'triangle',{cutoff:5500}));
  }else if(name==='boss'||name==='guardianPhase'){
@@ -42,11 +69,13 @@ function effectPlan(name,enemy='',options={}){
  else if(name==='pulse'){add(38,0,.45,.24,'sawtooth',{cutoff:1600,endNote:26});noise(.28,.11,1800);[74,81,86].forEach((n,i)=>add(n,.06+i*.035,.22,.065));}
  else if(name==='suppress'){add(58,0,.25,.13,'square',{endNote:46,cutoff:1100});}
  else if(name==='death'){add(50,0,.55,.17,'sawtooth',{endNote:26,cutoff:1000});add(62,.04,.65,.085,'triangle',{endNote:38});noise(.35,.07,750);}
- else if(name==='fire'){const types=['shooter','gunner','sniper','shotgun','laser','orbital','splitter','suppressor','boss'],i=Math.max(0,types.indexOf(enemy));add(48+i*2,0,.045,.035,'triangle',{endNote:43+i*2,cutoff:1500});}
+ else if(name==='teleport'){[86,81,74].forEach((n,i)=>add(n,i*.035,.08,.045,'sine',{pan:i%2?.35:-.35}));}
+ else if(name==='section'){[69,74,81].forEach((n,i)=>add(n,i*.04,.1,.065));}
+ else if(name==='fire'){const types=['shooter','gunner','sniper','shotgun','laser','orbital','splitter','suppressor','boss','healer','relay','carrier'],i=Math.max(0,types.indexOf(enemy));add(48+i*2,0,.045,.035,'triangle',{endNote:43+i*2,cutoff:1500});}
  return out;
 }
 class AudioSystem{
- constructor(getSettings=()=>({music:.16,sfx:.55}),options={}){this.getSettings=getSettings;this.contextFactory=options.contextFactory||(()=>new(root.AudioContext||root.webkitAudioContext)());this.ctx=null;this.next=0;this.step=0;this.mode='menu';this.voices=new Set();this.settingsSnapshot={};this.failed=false;}
+ constructor(getSettings=()=>({music:.16,sfx:.55}),options={}){this.getSettings=getSettings;this.contextFactory=options.contextFactory||(()=>new(root.AudioContext||root.webkitAudioContext)());this.ctx=null;this.next=0;this.step=0;this.mode='menu';this.voices=new Set();this.settingsSnapshot={};this.failed=false;this.effectCounts={};}
  unlock(){
   if(this.failed)return;
   try{if(!this.ctx){this.ctx=this.contextFactory();this.setup();this.next=this.ctx.currentTime+.025;}
@@ -87,7 +116,7 @@ class AudioSystem{
   output.connect(music?this.music:this.sfx);if(music&&event.wet)output.connect(this.delaySend);
   const voice={source,nodes};this.voices.add(voice);source.onended=()=>{for(const node of nodes)node.disconnect();this.voices.delete(voice);};source.start(start);source.stop(end+.015);
  }
- play(name,enemy='',options={}){if(!this.ctx||this.ctx.state!=='running'||!this.getSettings().sfx)return;const at=this.ctx.currentTime;for(const e of effectPlan(name,enemy,options))this.render(e,at+e.offset,false);}
+ play(name,enemy='',options={}){if(!this.ctx||this.ctx.state!=='running'||!this.getSettings().sfx)return;const at=this.ctx.currentTime;const variant=this.effectCounts[name]||0;this.effectCounts[name]=(variant+1)%3;for(const e of effectPlan(name,enemy,{...options,variant}))this.render(e,at+e.offset,false);}
  update(mode=this.mode){
   if(!this.ctx||this.ctx.state!=='running')return;this.syncVolumes();this.setMode(mode);
   const now=this.ctx.currentTime;if(this.next<now-.2){this.next=now+.025;this.step=Math.ceil(this.step/16)*16;}
@@ -95,5 +124,5 @@ class AudioSystem{
   let count=0;while(this.next<now+.105&&count++<4){for(const event of scoreStep(this.step,this.mode))this.render(event,this.next+event.offset,true);this.step++;this.next+=STEP;}
  }
 }
-const api={AudioSystem,scoreStep,effectPlan,BPM,STEP,MAX_VOICES,midi};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreAudio=api;
+const api={THEMES,AudioSystem,scoreStep,effectPlan,BPM,STEP,MAX_VOICES,midi};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreAudio=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

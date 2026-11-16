@@ -274,13 +274,13 @@ class Engine{
   // No reward for an immediate exit. One settlement per run; output is bounded by actual simulated play time.
   const base=this.time<8?0:Math.floor(12+this.time*.42+Math.min(this.kills,this.time*2)*.5+this.bossKills*15);
   const multiplier=(1+.1*this.m('shards'))*(this.mode==='horizon'?1.8:this.mode==='challenge'?1.4+.15*this.m('challenge'):1);
-  const contractShards=this.time>=8&&this.contractDone?(D.contracts.find(x=>x.id===this.contract)?.reward||0):0;const sectorShards=this.time>=8?Math.min(this.routeCredit,(this.time*.42+Math.min(this.kills,this.time*2)*.5)*.18):0;const shards=Math.min(10000,Math.round((base+sectorShards)*multiplier)+contractShards);s.shards+=shards;s.settled.push(this.id);s.settled=s.settled.slice(-30);
+  const sectorShards=this.time>=8?Math.min(this.routeCredit,(this.time*.42+Math.min(this.kills,this.time*2)*.5)*.18):0;const contractDef=D.contracts.find(x=>x.id===this.contract)||D.contracts[0],contractShards=this.time>=8&&this.contractDone?contractDef.reward:0;const shards=Math.min(10000,Math.round((base+sectorShards)*multiplier)+contractShards);const contractPenalty=!this.contractDone?Math.min(s.shards+shards,contractDef.penalty||0):0;s.shards+=shards-contractPenalty;s.settled.push(this.id);s.settled=s.settled.slice(-30);
   s.totals.runs++;s.totals.kills+=this.kills;s.totals.bosses+=this.bossKills;s.totals.blocks+=this.blocks;s.totals.perfect+=this.perfects;s.totals.time=Math.max(s.totals.time,r.time);s.totals.combo=Math.max(s.totals.combo,r.combo);
   for(const id of this.clearedBosses)if(!s.bosses.includes(id))s.bosses.push(id);
   if((s.totals.time>=60||s.bosses.length)&&!s.modes.includes('challenge'))s.modes.push('challenge');
   const best=s.currentBests[this.mode]||(s.currentBests[this.mode]={});const all=s.bests[this.mode]||(s.bests[this.mode]={});const newRecords=[];for(const key of ['time','score','combo','perfectCombo','kills','bosses','wave']){all[key]=Math.max(all[key]||0,r[key]);if(r[key]>(best[key]||0)){newRecords.push(key);best[key]=r[key];}}
   s.records[this.mode].push(r);s.records[this.mode].sort((a,b)=>b.score-a.score);s.records[this.mode]=s.records[this.mode].slice(0,10);
-  const unlocked=claimAchievements(s);return{...r,shards,contractShards,sectorShards:Math.round(sectorShards*multiplier),achievementShards:unlocked.reduce((n,a)=>n+a.reward,0),unlocked,newRecords,old};
+  const unlocked=claimAchievements(s);return{...r,shards,contractShards,contractPenalty,sectorShards:Math.round(sectorShards*multiplier),achievementShards:unlocked.reduce((n,a)=>n+a.reward,0),unlocked,newRecords,old};
  }
 }
 function claimAchievements(s){const unlocked=[];for(const a of D.achievements)if(!s.achievements.includes(a.id)&&a.test(s)){s.achievements.push(a.id);s.shards+=a.reward;unlocked.push(a);}return unlocked;}

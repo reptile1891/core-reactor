@@ -460,14 +460,6 @@
 Скорость снарядов +18%. Осколки за время и обычных врагов этого сектора +18%.	Projectile speed +18%. Shards from time and regular enemies in this sector +18%.
 Сектор помех	Interference sector
 Враги поддержки появляются чаще. Вес редких технологий +25% за ступень редкости.	More support enemies. Upgrade rarity weight +25% per rarity tier.
-Без контракта	No contract
-Попытка без дополнительной цели и награды.	No extra objective or reward.
-Точная серия	Precision streak
-Сделайте 3 идеальных отражения подряд.	Make 3 perfect reflections in a row.
-Чистая победа	Clean victory
-Победите босса без Перегрузки во время боя с ним.	Defeat a boss without using Overload during that fight.
-Дальний рубеж	Distant frontier
-Продержитесь 90 секунд.	Survive for 90 seconds.
 Разветвление	Fork
 Две дополнительные цели, урон цепи −35%.	Two extra targets, chain damage −35%.
 Концентрация	Focus
@@ -508,7 +500,6 @@
 Босс побеждён	Boss defeated
 Тренировка завершена	Training complete
 Осколки, достижения и рекорды в тренировке не начисляются.	Training awards no shards, achievements or records.
-Контракт:	Contract:
 Маршрут:	Route:
 
 Дальний перехват	Distant interception
@@ -551,7 +542,6 @@
 Ритм атак изменился	Attack rhythm has changed
 БОСС ПОБЕЖДЁН · ПЕРЕДЫШКА	BOSS DEFEATED · BREATHER
 
-КОНТРАКТ · НЕОБЯЗАТЕЛЬНО	CONTRACT · OPTIONAL
 Текущая сборка	Current build
 Технологии появятся здесь после повышения уровня.	Technologies will appear here after you level up.
 Управление	Controls
@@ -622,3 +612,25 @@ E / ПКМ · Геймпад: A / ✕	E / RMB · Gamepad: A / ✕
 Требуется:	Requires:
 СОЕДИНЯЙТЕ ТЕХНОЛОГИИ ДЛЯ НОВЫХ БОНУСОВ	COMBINE TECHNOLOGIES FOR NEW BONUSES
 Тактика	Tactic
+
+Обычная попытка. Дополнительной задачи и награды нет.	A normal run with no extra objective or reward.
+Серия отражений	Reflection streak
+Трижды подряд идеально отразите атаку.	Make three perfect reflections in a row.
+Босс без Перегрузки	Boss without Overload
+Победите любого босса, не применяя Перегрузку в этом бою.	Defeat any boss without using Overload in that fight.
+Выстоять 90 секунд	Survive 90 seconds
+Защищайте ядро не меньше 90 секунд.	Defend the core for at least 90 seconds.
+Выберите одну дополнительную цель. Если не выполните её, ничего не потеряете.	Choose one extra objective. There is no penalty if you miss it.
+Награда начисляется после завершения попытки.	The reward is granted when the run ends.
+ЦЕЛЬ:	OBJECTIVE:
+Цель вылета:	Run objective:
+
+Без контракта	No contract
+Играйте без условий: ни награды, ни штрафа.	Play without conditions: no reward and no penalty.
+КОНТРАКТ · НАГРАДА И ШТРАФ	CONTRACT · REWARD AND PENALTY
+Возьмите обязательство перед вылетом. Выполните его — получите награду; не выполните — заплатите штраф.	Accept an obligation before launch. Complete it for a reward; fail it and pay a penalty.
+Провал:	Failure:
+КОНТРАКТ:	CONTRACT:
+
+Успех:	Success:
+Провал или ранний выход:	Failure or early exit:

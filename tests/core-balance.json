@@ -1,0 +1,50 @@
+[
+  {
+    "core": "standard",
+    "active": false,
+    "median": 53.5,
+    "max": 107.4
+  },
+  {
+    "core": "standard",
+    "active": true,
+    "median": 63.7,
+    "max": 101.8
+  },
+  {
+    "core": "mirror",
+    "active": false,
+    "median": 53.5,
+    "max": 82.7
+  },
+  {
+    "core": "mirror",
+    "active": true,
+    "median": 55.8,
+    "max": 96.7
+  },
+  {
+    "core": "storm",
+    "active": false,
+    "median": 51.2,
+    "max": 94.6
+  },
+  {
+    "core": "storm",
+    "active": true,
+    "median": 65.2,
+    "max": 107.4
+  },
+  {
+    "core": "bastion",
+    "active": false,
+    "median": 53.5,
+    "max": 107.5
+  },
+  {
+    "core": "bastion",
+    "active": true,
+    "median": 63.7,
+    "max": 109.8
+  }
+]

@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080d15">
+<meta name="description" content="CORE: ЯДРО — неоновая аркада о реакции, отражении и последнем рубеже. Автономная браузерная игра с развитием и четырьмя боссами." data-i18n-content="CORE: ЯДРО — неоновая аркада о реакции, отражении и последнем рубеже. Автономная браузерная игра с развитием и четырьмя боссами.">
+<title data-i18n="CORE — ЯДРО">CORE — ЯДРО</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='%2364f4d4' d='M24 2 45 14v20L24 46 3 34V14z'/%3E%3Cpath fill='%23080d15' d='m24 12 12 7v10l-12 7-12-7V19z'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:dark;--bg:#080d15;--panel:#0d141e;--line:#202c38;--text:#e7eef2;--muted:#798a9c;--mint:#70f5d1;--cyan:#78dfff;--red:#ff6c84;--gold:#ffd27a;--purple:#b48aff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-synthesis:none}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-size:14px}button,input,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{cursor:pointer;color:inherit}button{border:0}button:disabled{cursor:default;opacity:.4}button:focus-visible,a:focus-visible,input:focus-visible,canvas:focus-visible{outline:2px solid var(--mint);outline-offset:4px}button{transition:background .18s,border-color .18s,transform .18s}a{color:inherit;text-decoration:none}.hidden{display:none!important}#app{display:flex;min-height:100dvh}.sidebar{width:226px;flex-shrink:0;display:flex;flex-direction:column;padding:35px 19px 21px;border-right:1px solid var(--line);background:#0b111a;z-index:5}.brand{display:flex;gap:13px;align-items:center;margin:0 12px 63px}.brand svg{width:37px;height:42px;fill:none;stroke:var(--mint);stroke-width:1.5}.brand svg path+path{fill:#70f5d117}.brand>span{font-size:29px;letter-spacing:4px;font-weight:750;line-height:1}.brand small{display:block;font-size:11px;letter-spacing:5px;color:var(--muted);margin-top:9px}.rail-caption{font-size:11px;color:#91a6b8;letter-spacing:1.6px;margin:0 13px 17px}.nav-button{display:flex;align-items:center;gap:12px;width:100%;padding:15px 13px;margin-bottom:7px;border:1px solid transparent;background:transparent;border-radius:5px;color:#91a0b0;font-size:13px;text-align:left}.nav-button:hover{color:var(--text);background:#ffffff05}.nav-button.active{color:var(--mint);background:linear-gradient(90deg,#70f5d114,#70f5d104);border-color:#70f5d12b}.nav-icon{width:22px;font-size:21px;line-height:20px;text-align:center}.nav-mark{margin-left:auto;font-size:11px;opacity:.5;font-family:monospace}.rail-bottom{margin-top:auto;padding-top:70px}.connection{border-top:1px solid var(--line);padding-top:24px;margin:20px 12px 0;font-size:11px;letter-spacing:1px;color:#9aaab8}.connection i,.system-footer i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px #70f5d155;margin-right:7px}.connection small{display:block;color:#91a6b8;font-size:11px;letter-spacing:.65px;margin-top:10px}.main{flex:1;min-width:0;display:flex;flex-direction:column;height:100dvh;min-height:700px}.topbar{height:83px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 39px}.breadcrumb{font-size:11px;letter-spacing:1.1px;display:flex;align-items:center;gap:12px;color:#b4c1cc}.tiny-square{height:5px;width:5px;background:var(--mint)}.muted{color:var(--muted)}.top-divider{color:#3d4b5a;margin:0 3px}.wallet{display:flex;align-items:center;gap:9px}.wallet b{font-family:ui-monospace,SFMono-Regular,monospace;font-size:17px;min-width:15px}.wallet>span:last-of-type{font-size:11px;letter-spacing:1px;color:var(--muted)}.shard-symbol{font-size:23px;color:var(--mint)}.icon-button{background:#101a25;border:1px solid var(--line);width:31px;height:31px;border-radius:5px;color:var(--muted);margin-left:14px}.icon-button:hover{border-color:var(--mint);color:var(--mint)}.stage{position:relative;flex:1;min-height:0;overflow:hidden;background:radial-gradient(ellipse at 62% 46%,#10232e77,transparent 58%)}#arena{position:absolute;inset:0;width:100%;height:100%;touch-action:none;outline:none}.screen{position:relative;height:100%;overflow:auto;scrollbar-width:thin;scrollbar-color:#304252 transparent;z-index:2;pointer-events:none}.screen>*{pointer-events:auto}.system-footer{height:39px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 39px;border-top:1px solid var(--line);font-family:monospace;font-size:11px;letter-spacing:.65px;color:#91a6b8}.footer-separator{margin:0 13px;color:#344554}.home{position:relative;min-height:100%;padding:47px 46px 32px;display:flex;flex-direction:column;pointer-events:none}.home>*{pointer-events:auto}.eyebrow{font-family:monospace;font-size:11px;letter-spacing:2px;color:var(--mint);display:flex;align-items:center;gap:10px}.eyebrow::before{content:"";width:24px;height:1px;background:var(--mint)}.home h1{font-size:clamp(90px,10.8vw,158px);letter-spacing:-7px;line-height:.95;margin:25px 0 0;font-weight:800;color:#edf3f3}.home .title-sub{font-size:12px;color:#c3d4dd;letter-spacing:12px;margin-top:16px;padding-left:5px}.hero-copy{margin:27px 0 0;color:#91a6b5;font-size:14px;line-height:1.9;max-width:290px}.hero-copy b{color:#d6e2e9;font-weight:450}.hero-tags{display:flex;gap:8px;margin-top:23px}.hero-tags span{padding:6px 8px;border:1px solid #344554;border-radius:3px;color:#9eb1c0;font:11px monospace;letter-spacing:1px}.station-card{position:absolute;right:38px;top:40px;border-left:1px solid #30424f;padding-left:15px;font:11px monospace;line-height:1.7;letter-spacing:1px;color:#7d94a5}.station-card strong{font-weight:400;color:#d5e3ea;display:block;font-size:11px}.orbit-label{position:absolute;right:7%;top:54%;color:#7eacbc;letter-spacing:1px;font:11px monospace;text-align:right}.orbit-label:before{content:"";display:block;width:65px;height:1px;background:#3c6576;margin:0 0 9px auto}.home-bottom{margin-top:auto;padding-top:55px;display:grid;grid-template-columns:minmax(220px,1fr) minmax(230px,.9fr);gap:38px;align-items:end}.launch-group{max-width:380px}.mode-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font:11px monospace;letter-spacing:1px;color:#8da2b2}.text-button{background:none;color:var(--mint);font-size:11px;padding:0}.launch{background:var(--mint);color:#08251e;border:1px solid var(--mint);border-radius:5px;padding:21px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;font-size:13px;letter-spacing:1.5px;font-weight:700;box-shadow:0 7px 36px #70f5d11a}.launch:hover{background:#a0ffe5;box-shadow:0 0 35px #70f5d12b;transform:translateY(-1px)}.launch .launch-arrow{font-size:22px;font-weight:400}.launch kbd{font:11px monospace;border:1px solid #204f43;border-radius:3px;padding:4px;margin-left:auto}.control-tip{display:flex;gap:15px;color:#7a8f9f;font-size:11px;margin-top:13px;align-items:center}.control-tip kbd,.key{font:11px monospace;padding:3px 5px;border:1px solid #354555;border-radius:3px;color:#b9cad4}.best-preview{display:flex;gap:25px;border-top:1px solid #2e404c;padding:19px 0 4px}.mini-stat small{font:11px monospace;color:#7e93a5;letter-spacing:1px;display:block;margin-bottom:10px}.mini-stat strong{font:24px ui-monospace,monospace;font-weight:400}.mini-stat strong em{font-size:11px;font-style:normal;color:#6f8a9b}.home-note{font:11px monospace;letter-spacing:.9px;color:#91a6b8;margin-top:19px}.page{padding:38px 40px 45px;min-height:100%;background:linear-gradient(#080d15e8,#080d15f7);animation:arrive .3s ease}.page-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:25px}.page h2{font-size:32px;font-weight:550;letter-spacing:-1px;margin:11px 0 12px}.page p{color:#8fa4b4;line-height:1.6;font-size:12px;max-width:640px}.balance-chip{border:1px solid #31504b;padding:12px 17px;white-space:nowrap;border-radius:4px;color:var(--mint);background:#70f5d108;font:12px monospace}.tabs{display:flex;gap:5px;border-bottom:1px solid var(--line);margin-bottom:23px;overflow:auto}.tab{background:none;padding:12px 16px;border-bottom:2px solid transparent;color:#8196a7;white-space:nowrap;font-size:12px}.tab.active{color:var(--mint);border-color:var(--mint)}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.tech-card,.achievement-card,.mode-card{position:relative;border:1px solid #253340;border-radius:6px;background:linear-gradient(135deg,#111c27,#0d151e);padding:22px;overflow:hidden}.card-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid #35504f;border-radius:7px;color:var(--mint);background:#70f5d108;font-size:25px;margin-bottom:20px}.card-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.card-head h3{font-size:14px;font-weight:550;margin:0;line-height:1.5}.card-level{font:11px monospace;color:#79909e;white-space:nowrap}.tech-card p,.achievement-card p,.mode-card p{font-size:11px;line-height:1.7;min-height:52px;margin:10px 0 18px}.level-bars{display:flex;gap:4px;margin:15px 0}.level-bars span{height:3px;flex:1;background:#293947}.level-bars .filled{background:var(--mint);box-shadow:0 0 7px #70f5d12b}.buy-button{background:#142e2a;color:var(--mint);border:1px solid #33584e;padding:10px 13px;border-radius:4px;width:100%;display:flex;justify-content:space-between;font-size:11px}.buy-button:hover:enabled{background:#204c40}.buy-button:disabled{opacity:.55}.achievement-card.locked .card-icon{filter:grayscale(1);opacity:.5}.achievement-card .reward{font:11px monospace;color:var(--gold)}.unlocked-tag{color:var(--mint);font:11px monospace;letter-spacing:1px}.modes-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.mode-card{padding:28px;min-height:225px}.mode-card.selected{border-color:#70f5d17a}.mode-card h3{font-size:20px;font-weight:500;margin:10px 0}.mode-card .mode-number{font:11px monospace;color:#648594;letter-spacing:2px}.mode-card .mode-bonus{font:11px monospace;display:block;color:var(--mint);margin-bottom:20px}.mode-card .primary,.mode-card .secondary{width:100%}.primary,.secondary,.danger-button{padding:13px 19px;border-radius:4px;font-size:12px;letter-spacing:.3px}.primary{background:var(--mint);color:#06261e;font-weight:650}.primary:hover{background:#a0ffe4}.secondary{background:#14212d;color:#bad0de;border:1px solid #304454}.secondary:hover{background:#203343}.danger-button{background:#341d29;border:1px solid #6c354a;color:#ffa0b2}.records-table{border-collapse:collapse;width:100%;font:12px ui-monospace,monospace;text-align:left}.records-table th{color:#7390a2;font-size:11px;font-weight:400;letter-spacing:1px;padding:15px 12px;border-bottom:1px solid #30414e}.records-table td{padding:17px 12px;border-bottom:1px solid #1c2a36;color:#c1d0db}.records-table tr:first-child td{color:var(--mint)}.records-table td:first-child{color:#91a6b8}.table-wrap{overflow:auto}.empty-state{padding:60px 20px;text-align:center;border:1px dashed #293c4d;color:#7893a4;border-radius:5px;font-size:13px;line-height:2}.record-stats{display:flex;gap:32px;margin:25px 0;flex-wrap:wrap}.record-stats .mini-stat strong{font-size:27px}.settings-section{max-width:740px;margin-bottom:20px;padding:23px 26px;background:#0e1822;border:1px solid #253544;border-radius:6px}.settings-section h3{font-size:14px;margin:0 0 20px;font-weight:500}.setting-row{display:flex;justify-content:space-between;align-items:center;gap:25px;padding:14px 0;border-top:1px solid #20313e;font-size:12px}.setting-row small{display:block;color:#728b9f;margin-top:7px;font-size:11px;line-height:1.5}.setting-row input[type=range]{accent-color:var(--mint);width:170px}.setting-row input[type=checkbox]{accent-color:var(--mint);width:19px;height:19px}.button-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.codex-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.codex-item{display:flex;gap:10px;align-items:flex-start;border:1px solid #253644;padding:13px;border-radius:4px}.codex-item strong{font-size:11px}.codex-item small{color:#7f97aa;font-size:11px;line-height:1.5;display:block;margin-top:5px}.codex-icon{font-size:23px}.prestige-banner{padding:25px;border:1px solid #66517e;border-radius:6px;background:linear-gradient(120deg,#22182e,#111b2b);margin-bottom:20px}.prestige-banner h3{margin:0 0 12px;font-weight:500}.prestige-banner p{font-size:11px}.hud{position:absolute;left:27px;right:27px;top:23px;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none}.hud-left,.hud-right{display:flex;align-items:center;gap:25px}.hud small{display:block;font:11px monospace;letter-spacing:1px;color:#7e97a8;margin-bottom:7px}.hud .value{font:23px ui-monospace,monospace}.health{display:flex;gap:5px;height:25px;align-items:center}.health span{display:inline-block;width:11px;height:17px;border:1px solid #67d9bf;background:#70f5d1b0;transform:skew(-12deg);box-shadow:0 0 8px #70f5d119}.health span.empty{background:transparent;border-color:#344750}.hud-pause{pointer-events:auto;width:38px;height:38px;background:#152430;border:1px solid #355062;border-radius:5px;color:var(--mint);font-size:18px}.game-footer{position:absolute;bottom:24px;left:28px;right:28px;z-index:3;pointer-events:none}.energy-head{display:flex;justify-content:space-between;font:11px monospace;color:#86a5b8;letter-spacing:1px;margin-bottom:9px}.energy-track{height:4px;border-radius:2px;background:#20313f;overflow:hidden}.energy-fill{height:100%;background:var(--gold);box-shadow:0 0 10px #ffd27a88;transition:width .1s}.game-info{display:flex;justify-content:space-between;gap:15px;margin-top:14px;color:#7d99aa;font:11px monospace}.active-build{color:var(--mint);max-width:55%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.boss-hud{position:absolute;z-index:3;top:91px;left:25%;right:25%;text-align:center;pointer-events:none}.boss-name{display:flex;justify-content:space-between;font:11px monospace;letter-spacing:2px;margin-bottom:8px}.boss-track{height:4px;background:#2a2231}.boss-fill{height:100%;transition:width .1s;background:var(--red)}.modal{position:absolute;inset:0;z-index:8;background:#060c14d9;backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:30px;overflow:auto;animation:arrive .2s}.dialog{max-width:780px;width:100%;margin:auto;text-align:center}.dialog .eyebrow{justify-content:center}.dialog h2{font-size:35px;letter-spacing:-.8px;font-weight:550;margin:15px 0}.dialog>p{color:#8ca6b7;font-size:12px;line-height:1.8;margin-bottom:27px}.dialog .button-row{justify-content:center}.upgrade-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;text-align:left}.upgrade-card{display:block;position:relative;min-height:240px;padding:24px 21px;background:linear-gradient(160deg,#12242e,#0b1722);border:1px solid #435a67;border-radius:7px;text-align:left}.upgrade-card:hover{transform:translateY(-5px);border-color:var(--mint);box-shadow:0 10px 40px #70f5d115}.upgrade-card.rarity-1{border-color:#568aa5}.upgrade-card.rarity-2{border-color:#77559d;background:linear-gradient(150deg,#281c3a,#0b1722)}.upgrade-card.rarity-3{border-color:#a7884f;background:linear-gradient(150deg,#332917,#0b1722)}.upgrade-card .card-icon{background:none}.upgrade-card h3{font-size:16px;margin:15px 0 10px;font-weight:500}.upgrade-card p{color:#9cb3c4;font-size:11px;line-height:1.7;min-height:70px}.rarity-label{font:11px monospace;letter-spacing:1px;color:#90a7b5}.rarity-1 .rarity-label{color:var(--cyan)}.rarity-2 .rarity-label{color:var(--purple)}.rarity-3 .rarity-label{color:var(--gold)}.upgrade-card .card-level{display:block;margin-top:15px}.result-hero{font:54px ui-monospace,monospace;color:var(--mint);margin:20px 0 10px}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:27px auto;max-width:600px;padding:23px 0;border-top:1px solid #2b414e;border-bottom:1px solid #2b414e}.result-grid strong{font:22px monospace;display:block;margin-top:8px}.result-grid small{font:11px monospace;letter-spacing:1px;color:#84a1b3}.record-label{color:var(--gold);font:11px monospace;letter-spacing:1px}.result-reward{color:var(--gold);font-size:17px;margin:22px 0}.result-reward small{display:block;color:#8097a9;font-size:11px;margin-top:9px}.toasts{position:fixed;bottom:36px;right:28px;display:flex;flex-direction:column;gap:9px;z-index:30;pointer-events:none;max-width:min(390px,90vw)}.toast{font-size:12px;line-height:1.6;background:#12252b;border:1px solid #3b6b5f;border-radius:5px;padding:14px 19px;box-shadow:0 10px 35px #0006;animation:arrive .25s}.toast.gold{border-color:#8e7643;color:var(--gold)}.toast.purple{border-color:#776291;color:#d7b6ff}.notice{border:1px solid #7b6641;background:#352a1788;color:#ead6a7;padding:15px;font-size:12px;line-height:1.7;border-radius:5px;margin-bottom:20px}.game-active .sidebar{width:78px;padding:26px 11px}.game-active .brand{margin:0 auto 47px;justify-content:center}.game-active .brand>span,.game-active .rail-caption,.game-active .nav-button>span:not(.nav-icon),.game-active .connection{display:none}.game-active .nav-button{justify-content:center;padding:14px 8px}.game-active .topbar{height:62px}.game-active .main{min-height:560px}.game-active .system-footer{height:29px}.key-hint{font:11px monospace;color:#91a6b8;margin-top:18px}.pause-stats{font:14px monospace;color:var(--mint);margin:25px}.warning-text{color:var(--red)!important}.badge{font:11px monospace;padding:5px 8px;border:1px solid #375d53;color:var(--mint);border-radius:3px}.section-sub{font:11px monospace;color:#7691a3;letter-spacing:1px;margin:30px 0 15px}@keyframes arrive{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}@media(min-width:1500px){.home{padding:64px 64px 45px}.home-bottom{grid-template-columns:minmax(260px,1fr) 1fr;gap:90px}.station-card{right:55px;top:62px}.hero-copy{font-size:16px;max-width:340px}.launch-group{max-width:420px}.cards{grid-template-columns:repeat(3,1fr)}.home h1{font-size:174px}.home .title-sub{font-size:14px}}@media(max-width:1150px){.sidebar{width:194px;padding-left:12px;padding-right:12px}.home{padding:35px 30px 26px}.home-bottom{gap:24px}.home h1{font-size:105px}.topbar{padding:0 27px}.cards{grid-template-columns:repeat(2,1fr)}.station-card{right:25px;font-size:11px}.station-card strong{font-size:11px}.hero-copy{font-size:12px;max-width:260px}.hero-tags span{font-size:11px}.best-preview{gap:18px}.mini-stat strong{font-size:21px}.page{padding:30px}.brand{margin-bottom:53px}}@media(max-width:850px){.sidebar{width:76px;padding:26px 10px}.brand{margin:0 auto 45px;justify-content:center}.brand>span,.rail-caption,.nav-mark,.connection,.nav-button>span:not(.nav-icon){display:none}.nav-button{justify-content:center;padding:15px 8px}.topbar{height:65px;padding:0 24px}.breadcrumb{font-size:11px;gap:8px}.breadcrumb .muted{display:none}.home h1{font-size:106px}.home{padding:35px 27px 26px}.home .title-sub{letter-spacing:10px;font-size:11px}.home-bottom{grid-template-columns:1fr .85fr;gap:24px}.hero-copy{max-width:245px}.station-card{display:none}.orbit-label{right:5%}.cards{gap:11px}.tech-card{padding:18px}.main{min-height:660px}.system-footer{padding:0 24px}.mode-card{padding:23px}.hud-left,.hud-right{gap:16px}}@media(max-width:600px){#app{display:block}.sidebar{position:fixed;bottom:0;left:0;right:0;width:100%;height:65px;padding:5px 12px;flex-direction:row;border-right:0;border-top:1px solid var(--line);background:#0b111af7;backdrop-filter:blur(12px)}.sidebar .brand{display:none}#navigation{display:flex;width:100%;justify-content:space-between}.nav-button{width:46px;margin:0;padding:9px;border:0;border-radius:5px}.nav-button .nav-icon{font-size:22px}.rail-bottom{margin:0;padding:0}.rail-bottom .nav-button{height:53px}.main{height:calc(100dvh - 65px);min-height:630px}.topbar{height:58px;padding:0 20px}.breadcrumb{font-size:11px;letter-spacing:.6px}.wallet{gap:6px}.wallet b{font-size:14px}.wallet>span:last-of-type{display:none}.icon-button{margin-left:6px;height:29px;width:29px}.shard-symbol{font-size:19px}.home{padding:29px 24px 25px}.eyebrow{font-size:11px;letter-spacing:1.4px}.home h1{font-size:88px;letter-spacing:-5px;margin-top:20px}.home .title-sub{font-size:11px;margin-top:10px;letter-spacing:9px}.hero-copy{font-size:11px;line-height:1.8;max-width:215px;margin-top:22px}.hero-tags{display:none}.home-bottom{padding-top:190px;display:block}.launch-group{max-width:none}.launch{padding:17px 21px;font-size:12px}.launch kbd{display:none}.control-tip{font-size:11px;justify-content:center}.best-preview{margin-top:23px;justify-content:space-around;padding-top:15px}.mini-stat small{font-size:11px}.mini-stat strong{font-size:21px}.home-note{display:none}.orbit-label{top:49%;font-size:11px;right:7%}.system-footer{height:28px;padding:0 20px;font-size:11px}.system-footer>span:last-child{display:none}.page{padding:26px 19px}.page h2{font-size:27px}.page-head{gap:10px;margin-bottom:18px}.balance-chip{font-size:11px;padding:10px}.cards{grid-template-columns:1fr 1fr;gap:9px}.tech-card,.achievement-card{padding:15px 12px}.card-icon{width:34px;height:34px;font-size:21px;margin-bottom:14px}.card-head{align-items:flex-start;gap:4px;flex-direction:column}.card-head h3{font-size:12px}.tech-card p,.achievement-card p{font-size:11px;min-height:65px;margin:10px 0}.buy-button{font-size:11px;padding:9px}.tabs{margin-bottom:17px}.tab{padding:11px 12px;font-size:11px}.modes-grid{grid-template-columns:1fr}.mode-card{min-height:190px}.settings-section{padding:20px 17px}.setting-row{font-size:11px;gap:10px}.setting-row input[type=range]{width:110px}.codex-list{grid-template-columns:1fr}.record-stats{gap:23px}.records-table th,.records-table td{padding:13px 9px;white-space:nowrap}.modal{position:fixed;padding:25px 16px;bottom:65px}.dialog h2{font-size:29px}.upgrade-options{grid-template-columns:1fr;gap:10px}.upgrade-card{padding:15px 16px;min-height:125px}.upgrade-card .card-icon{float:left;margin:0 15px 32px 0}.upgrade-card h3{font-size:14px;margin:8px 0}.upgrade-card p{min-height:0;font-size:11px;margin:0}.upgrade-card .card-level{font-size:11px;margin-top:8px}.upgrade-card:hover{transform:none}.dialog>p{margin-bottom:20px;font-size:11px}.result-grid{gap:10px;padding:20px 0}.result-grid small{font-size:11px}.result-grid strong{font-size:20px}.result-hero{font-size:46px}.dialog .button-row{gap:8px}.button-row>button{font-size:11px;padding:12px 14px}.game-active .sidebar{height:55px;width:100%;padding:0 12px}.game-active .sidebar .brand{display:none}.game-active .rail-bottom{padding:0}.game-active .main{height:calc(100dvh - 55px);min-height:400px}.game-active .topbar{height:45px;padding:0 16px}.game-active .system-footer{display:none}.game-active .sidebar .nav-button{padding:12px 8px}.hud{left:15px;right:15px;top:17px}.hud-left,.hud-right{gap:13px}.hud small{font-size:11px;letter-spacing:.5px;margin-bottom:6px}.hud .value{font-size:18px}.health{gap:3px}.health span{width:8px;height:13px}.hud-pause{width:30px;height:30px;font-size:14px}.game-footer{left:17px;right:17px;bottom:18px}.game-info{font-size:11px}.energy-head{font-size:11px}.boss-hud{top:76px;left:17%;right:17%}.boss-name{font-size:11px}.toasts{bottom:80px;right:16px}.game-active .modal{bottom:55px}}@media(max-height:650px) and (min-width:601px){.main{min-height:540px}.topbar{height:60px}.home{padding-top:24px;padding-bottom:23px}.home h1{font-size:86px;margin-top:19px}.hero-copy{margin-top:17px}.hero-tags{margin-top:15px}.home-bottom{padding-top:30px}.home .title-sub{margin-top:10px}.sidebar{padding-top:25px}.brand{margin-bottom:40px}.rail-bottom{padding-top:20px}.system-footer{height:29px}.modal{padding:18px}.dialog h2{font-size:29px;margin:10px 0}.dialog>p{margin-bottom:15px}.upgrade-card{min-height:210px;padding:18px}.result-grid{margin:17px auto;padding:17px 0}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+@media(min-width:601px) and (max-height:800px){.home{padding-top:30px;padding-bottom:25px}.home h1{font-size:112px}.hero-copy{font-size:12px;line-height:1.8;margin-top:21px}.hero-tags{margin-top:18px}.home-bottom{padding-top:35px}.home .title-sub{margin-top:12px}}
+.topbar-controls{display:flex;align-items:center;gap:19px}.language-switch{display:inline-flex;align-items:center;gap:3px;padding:3px;border:1px solid #304454;border-radius:5px;background:#0c1721;flex-shrink:0}.language-switch button{padding:6px 9px;min-width:30px;background:transparent;border:1px solid transparent;border-radius:3px;color:#8ca4b4;font:11px ui-monospace,monospace}.language-switch button.selected{color:var(--mint);border-color:#3b665b;background:#70f5d112}.language-switch button:hover{color:var(--mint);background:#70f5d10b}.settings-section .language-switch button{font-family:inherit;font-size:12px;padding:8px 12px}.settings-section .setting-row:has(.language-switch){flex-wrap:wrap}.language-switch button:focus-visible{outline-offset:1px}@media(max-width:600px){.topbar-controls{gap:8px}.topbar-controls .language-switch{padding:2px;gap:0}.topbar-controls .language-switch button{min-width:25px;padding:5px;font-size:11px}.topbar .breadcrumb{min-width:0}.topbar #page-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:135px}.topbar .wallet{flex-shrink:0}.setting-row:has(.language-switch){align-items:flex-start}}
+.core-picker{margin:14px 0 16px}.core-picker small{font:11px monospace;color:#8da2b2}.core-picker>div{display:flex;gap:4px;margin-top:8px}.core-picker button{flex:1;background:#14212d;color:#94adbd;border:1px solid #304454;border-radius:4px;padding:7px 4px;font-size:11px}.core-picker button.selected{color:#70f5d1;border-color:#5e9b87;background:#183b31}.core-picker p{font-size:11px;line-height:1.5;color:#8da2b2;min-height:28px;margin:8px 0}.overload-button{pointer-events:auto;display:block;margin:0 auto 14px;padding:9px 14px;font-size:11px}.synergy-hint{color:#d0a8ff;font-size:11px;line-height:1.5;margin:10px 0}.death-review{display:flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:10px;border:1px solid #304454;border-radius:5px;padding:8px;margin:12px auto;max-width:620px}.death-review small{font:11px monospace;color:#8da2b2;width:100%}.death-review canvas{width:150px;height:80px}.death-review p{max-width:300px;font-size:11px;color:#b1c5d3}.game-footer{pointer-events:none}
+.controller-indicator{font-size:17px;opacity:.4;filter:grayscale(1);flex-shrink:0}.controller-indicator.connected{opacity:1;filter:none}.pad-focus{outline:2px solid var(--mint)!important;outline-offset:3px;box-shadow:0 0 15px #70f5d133}.pad-help{font-size:11px!important;color:#8cbaae!important}.control-tip{flex-wrap:wrap}@media(max-width:600px){.controller-indicator{font-size:14px}.topbar-controls{gap:5px}.topbar #page-label{max-width:105px}}
+
+/* 1.6: shared type scale, safe viewports, touch targets and compact landscape. */
+:root{--font-ui:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--font-numbers:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;--text-xs:11px;--text-sm:12px;--text-body:14px;--text-value:22px;--nav-height:0px;--bar-height:72px;--muted:#9aafbf;font-family:var(--font-ui)}
+#app{min-height:100vh;min-height:100dvh}#app .main{height:calc(100vh - var(--nav-height));height:calc(100dvh - var(--nav-height));min-height:0}#app.game-active{height:100vh;height:100dvh;min-height:0;overflow:hidden}#app.game-active .system-footer{display:none}
+.topbar,.game-active .topbar{height:calc(var(--bar-height) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.topbar .breadcrumb{min-width:0;flex:1;overflow:hidden}.topbar-controls{flex-shrink:0;gap:10px}.topbar #page-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.breadcrumb .muted{white-space:nowrap}
+.icon-button,.hud-pause{height:44px;width:44px;min-width:44px}.language-switch button,.topbar-controls .language-switch button,.settings-section .language-switch button{min-height:44px;min-width:44px;font-size:12px;padding:8px}.controller-indicator{width:24px;text-align:center}.text-button{min-height:44px;min-width:44px;padding:6px}.core-picker button{min-height:44px;font-size:13px;padding:9px 6px}.buy-button{min-height:44px;font-size:14px}.tab{min-height:44px;font-size:14px}.setting-row input[type=checkbox]{width:24px;height:24px}.setting-row{min-height:48px}
+.page p,.tech-card p,.achievement-card p,.mode-card p,.settings-section p,.upgrade-card p,.dialog>p{font-size:var(--text-body);line-height:1.6;min-height:0}.card-head h3{font-size:16px}.card-head{flex-wrap:wrap}.card-level,.rarity-label,.section-sub,.key-hint,.mini-stat small{font-size:var(--text-xs);line-height:1.5}.setting-row{font-size:14px}.setting-row small,.codex-item small{font-size:12px;line-height:1.6}.codex-item strong{font-size:14px}.dialog h2{font-size:clamp(24px,4vw,35px)}.records-table{font-size:14px}.records-table th{font-size:11px}.record-stats{gap:20px}
+.value,.mini-stat strong,.records-table,.wallet b,.result-hero{font-family:var(--font-numbers);font-variant-numeric:tabular-nums}.brand small{font-size:11px;letter-spacing:3px}.home{padding-top:32px}.home-bottom{padding-top:24px}.hero-copy{font-size:14px}.core-picker p{font-size:12px;line-height:1.5}.home .control-tip{font-size:12px;line-height:1.6;gap:10px}.home .best-preview small{font-size:11px}.station-card,.orbit-label,.home-note,.connection small{color:#91a6b8}.orbit-label{font-size:11px}.controller-status{font-size:14px}
+.hud small{font-size:11px;line-height:1.3;letter-spacing:.3px}.hud .value{font-size:22px}.energy-head,.game-info{font-size:11px;line-height:1.4;letter-spacing:.3px}.hud{top:14px;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px))}.hud-left,.hud-right{gap:20px}.game-footer{left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:12px}.overload-button{min-height:44px;font-size:12px;margin-bottom:10px}.game-info{flex-wrap:wrap;gap:8px}.active-build{max-width:45%;font-size:11px}.boss-hud{top:92px;left:18%;right:18%}.boss-name{font-size:11px;letter-spacing:.5px;gap:12px}.boss-name span:first-child{min-width:0;overflow-wrap:anywhere}.boss-name span:last-child{white-space:nowrap}
+.modal{padding:24px;bottom:0}.modal .dialog{max-height:none}.upgrade-card{min-height:0;padding:22px}.upgrade-card p{min-height:0}.upgrade-card h3{font-size:18px}.synergy-hint{font-size:12px;line-height:1.6}.death-review{max-width:620px}.death-review canvas{display:block;width:min(100%,280px);height:auto;aspect-ratio:14/9}.death-review p{font-size:14px;max-width:280px}.replay-controls{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap;width:100%}.replay-controls button{min-width:44px;min-height:44px}.replay-time{font-size:12px;font-family:var(--font-numbers);color:var(--gold)}.svg-icon{width:1em;height:1em;display:inline-block;vertical-align:-.14em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.card-icon .svg-icon{width:26px;height:26px}.nav-icon .svg-icon{width:22px;height:22px}
+@media(max-width:850px){.breadcrumb .muted,.top-divider{display:none}.topbar-controls{gap:6px}.page{padding:24px}.page-head{flex-wrap:wrap}.page-head p{margin-bottom:8px}}
+@media(max-width:600px){:root{--nav-height:calc(68px + env(safe-area-inset-bottom,0px));--bar-height:60px}#app .sidebar,#app.game-active .sidebar{height:var(--nav-height);padding:6px max(10px,env(safe-area-inset-left,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-right,0px))}.nav-button,.game-active .sidebar .nav-button{width:44px;min-height:44px;padding:10px}.rail-bottom .nav-button{height:44px}.topbar #page-label{max-width:80px;font-size:11px}.topbar-controls{gap:5px}.wallet{gap:4px}.wallet b{font-size:14px}.wallet .icon-button{margin-left:4px}.home{padding:22px 20px}.home h1{font-size:72px}.home .hero-copy{font-size:14px;line-height:1.6;margin-top:16px;max-width:240px}.home-bottom{padding-top:24px}.home .orbit-label,.station-card{display:none}.launch{min-height:52px;font-size:14px}.home .title-sub{font-size:12px}.home .best-preview{margin-top:18px}.core-picker>div{flex-wrap:wrap}.core-picker button{flex:1 1 40%}.control-tip kbd{font-size:11px}.page{padding:22px 16px}.cards{gap:12px}.tech-card,.achievement-card{padding:20px}.page h2{font-size:28px}.settings-section{padding:18px}.setting-row{flex-wrap:wrap;gap:12px}.setting-row input[type=range]{width:150px}.modal,.game-active .modal{bottom:var(--nav-height);padding:18px 14px}.dialog>p{font-size:14px}.upgrade-card{padding:18px}.upgrade-card .card-icon{float:none;display:inline-flex;margin:0 10px 8px 0}.upgrade-card .card-level{font-size:12px}.upgrade-card p{font-size:14px}.hud-left,.hud-right{gap:12px}.hud small{font-size:11px}.hud .value{font-size:20px}.health span{width:9px;height:15px}.hud{left:12px;right:12px}.game-info,.energy-head{font-size:11px}.game-footer{left:12px;right:12px;bottom:10px}.boss-hud{left:12%;right:12%;top:94px}.active-build{max-width:40%}.result-grid small{font-size:11px}.result-grid strong{font-size:22px}.button-row>button{font-size:14px;min-height:44px}.codex-list{grid-template-columns:1fr}.toasts{bottom:calc(var(--nav-height) + 12px)}.toast{font-size:14px}}
+@media(max-width:440px){.cards{grid-template-columns:1fr}.hud-left,.hud-right{gap:8px}.hud small{max-width:105px}.hud .value{font-size:20px}.boss-name{font-size:11px}.page-head .balance-chip{padding:10px}}
+@media(max-height:500px) and (orientation:landscape){:root{--bar-height:52px}#app.game-active{--nav-height:0px}#app.game-active .sidebar{display:none}#app.game-active .main{width:100%;height:100vh;height:100dvh;min-height:0}.game-active .topbar{height:calc(52px + env(safe-area-inset-top,0px))}.game-active .system-footer{display:none}.game-active .modal{position:absolute;inset:0;padding:16px}.hud{top:6px}.hud small{font-size:11px}.hud .value{font-size:20px}.hud-left,.hud-right{gap:16px}.hud-pause{height:44px;width:44px}.boss-hud{top:10px;left:34%;right:29%}.boss-name{font-size:11px;line-height:1.3;letter-spacing:0}.game-footer{bottom:6px;padding-right:210px;min-height:50px}.overload-button{position:absolute;right:0;bottom:0;width:196px;margin:0;min-height:44px}.game-info{margin-top:5px}.active-build{display:none}.energy-head{margin-bottom:5px}.game-active .breadcrumb{display:none}.game-active .topbar-controls{margin-left:auto}.home{padding-top:18px}.home h1{font-size:64px}.home-bottom{grid-template-columns:1fr;padding-top:16px}.home .station-card,.home .hero-tags,.home .orbit-label{display:none}.home .hero-copy{font-size:14px}.upgrade-options{grid-template-columns:repeat(3,minmax(0,1fr))}.upgrade-card p{font-size:14px}.upgrade-card{padding:16px}.dialog{margin:auto}.modal{bottom:0}}
+.build-list{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0}.build-list span{padding:6px 10px;border:1px solid #3b5462;border-radius:5px;font-size:13px;line-height:1.6;color:#c9e1eb}.build-list svg{margin-right:5px}
+
+.modal{align-items:flex-start}.page-head>div{min-width:0}.page h2{overflow-wrap:break-word}.settings-section p,.page-head p{max-width:65ch}
+
+.sidebar{max-height:100vh;max-height:100dvh;overflow-y:auto;scrollbar-width:thin}
+
+</style>
+
+</head>
+<body>
+<div id="app">
+<aside class="sidebar" aria-label="Основная навигация" data-i18n-aria-label="Основная навигация">
+<a class="brand" href="#home" aria-label="CORE — главное меню" data-i18n-aria-label="CORE — главное меню"><svg viewBox="0 0 42 46" aria-hidden="true"><path d="M21 2 39 12.5v21L21 44 3 33.5v-21Z"/><path d="m21 12 9.5 5.5v11L21 34l-9.5-5.5v-11Z"/></svg><span>CORE<small data-i18n="Я Д Р О">Я Д Р О</small></span></a>
+<div class="rail-caption" data-i18n="ЦЕНТР УПРАВЛЕНИЯ">ЦЕНТР УПРАВЛЕНИЯ</div>
+<nav id="navigation">
+<button class="nav-button active" data-page="home" aria-label="Играть" data-i18n-aria-label="Играть"><span class="nav-icon" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7Z"/></svg></span><span data-i18n="Играть">Играть</span><span class="nav-mark">01</span></button>
+<button class="nav-button" data-page="upgrades" aria-label="Технологии" data-i18n-aria-label="Технологии"><span class="nav-icon" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3l8 5v8l-8 5-8-5V8Z M8 10l4-3 4 3v5l-4 2-4-2Z"/></svg></span><span data-i18n="Технологии">Технологии</span><span class="nav-mark">02</span></button>
+<button class="nav-button" data-page="achievements" aria-label="Достижения" data-i18n-aria-label="Достижения"><span class="nav-icon" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3l3 6 6 3-6 3-3 6-3-6-6-3 6-3Z"/></svg></span><span data-i18n="Достижения">Достижения</span><span class="nav-mark">03</span></button>
+<button class="nav-button" data-page="records" aria-label="Рекорды" data-i18n-aria-label="Рекорды"><span class="nav-icon" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M5 20V12h3v8m3 0V5h3v15m3 0V9h3v11"/></svg></span><span data-i18n="Рекорды">Рекорды</span><span class="nav-mark">04</span></button>
+<button class="nav-button" data-page="modes" aria-label="Режимы" data-i18n-aria-label="Режимы"><span class="nav-icon" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 5h8v8H3Z M13 11h8v8h-8Z"/></svg></span><span data-i18n="Режимы">Режимы</span><span class="nav-mark">05</span></button>
+</nav>
+<div class="rail-bottom"><button class="nav-button" data-page="settings" aria-label="Настройки" data-i18n-aria-label="Настройки"><span class="nav-icon" aria-hidden="true"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/></svg></span><span data-i18n="Настройки">Настройки</span></button><div class="connection"><i></i><span data-i18n="РЕАКТОР В СЕТИ"> РЕАКТОР В СЕТИ</span><small data-i18n="СЕКТОР 07 / СТАНЦИЯ «ИСТОК»">СЕКТОР 07 / СТАНЦИЯ «ИСТОК»</small></div></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="breadcrumb"><span class="tiny-square"></span> <span id="page-label" data-i18n="ОБЗОР РЕАКТОРА">ОБЗОР РЕАКТОРА</span><span class="top-divider">/</span><span class="muted" data-i18n="СИСТЕМА ГОТОВА">СИСТЕМА ГОТОВА</span></div><div class="topbar-controls"><div class="language-switch" role="group" aria-label="Сменить язык" data-i18n-aria-label="Сменить язык"><button id="language-ru" data-language="ru" type="button" aria-pressed="true" class="selected">RU</button><button id="language-en" data-language="en" type="button" aria-pressed="false">EN</button></div><span id="controller-icon" class="controller-indicator" role="img" aria-label="Геймпад"><svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10c3 0 5 10 3 11-2 1-4-3-5-3H9c-1 0-3 4-5 3C2 17 4 7 7 7Z M6 11h5m-2.5-2.5v5M16 10v1m2 2v1"/></svg></span><div class="wallet"><span class="shard-symbol">◈</span> <b id="wallet">0</b><span data-i18n="ОСКОЛКОВ">ОСКОЛКОВ</span><button id="sound-toggle" class="icon-button" aria-label="Выключить звук" title="Звук" data-i18n-aria-label="Выключить звук" data-i18n-title="Звук">♫</button></div></div></header>
+<section id="stage" class="stage">
+<canvas id="arena" aria-label="Игровая арена: ядро и вращающийся защитный щит" tabindex="0" data-i18n-aria-label="Игровая арена: ядро и вращающийся защитный щит"></canvas>
+<div id="screen" class="screen"></div>
+<div id="hud" class="hud hidden"></div>
+<div id="game-footer" class="game-footer hidden"></div>
+<div id="boss-hud" class="boss-hud hidden"></div>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Игровое меню" data-i18n-aria-label="Игровое меню"></div>
+</section>
+<footer class="system-footer"><span><i></i><span data-i18n="ВСЕ СИСТЕМЫ НОМИНАЛЬНЫ"> ВСЕ СИСТЕМЫ НОМИНАЛЬНЫ</span></span><span><span data-i18n="ЛОКАЛЬНЫЙ ПРОГРЕСС">ЛОКАЛЬНЫЙ ПРОГРЕСС</span><span class="footer-separator">/</span> v1.6.0</span></footer>
+</main>
+</div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<input id="import-file" type="file" accept=".json,application/json" hidden>
+<script>
+/* CORE — ЯДРО. All content and balancing values are local. */
+(function(root){
+'use strict';
+const upgrades = [
+ ['wide','Световой парус','Ширина щита +8°.', 'Защита',0,4,'+8°', '◔'],
+ ['turn','Гироскоп','Скорость поворота +65°/с.', 'Защита',0,4,'+65°/с','↻'],
+ ['segment','Двойная орбита','Вторая дуга напротив основной: +18° за уровень.', 'Защита',2,2,'18°','◒'],
+ ['heal','Ремонтный рой','Восстанавливает 1 HP. Появляется при повреждении.', 'Защита',0,6,'+1 HP','✚'],
+ ['armor','Кинетическая броня','Каждое 5-е попадание не наносит урон; затем каждое 4-е.', 'Защита',1,2,'1 / 5','⬡'],
+ ['barrier','Зеркальный барьер','Идеальное отражение даёт барьер на 0,6 с за уровень.', 'Защита',1,3,'0,6 с','◇'],
+ ['damage','Разгон частиц','Урон отражения +0,6.', 'Атака',0,4,'+0,6','↗'],
+ ['chain','Дуговой разряд','Попадание поражает ещё 1 врага на 70% урона. Разряды могут критовать.', 'Атака',1,3,'+1 цель','ϟ'],
+ ['blast','Нестабильная материя','Попадания взрываются в радиусе 45 (+15) ед. с уроном 65%.', 'Атака',1,3,'45 ед.','✳'],
+ ['pierce','Фазовый пробой','Отражённый снаряд пробивает ещё одного врага.', 'Атака',1,3,'+1 цель','⇢'],
+ ['double','Эхо отражения','Каждый блок выпускает дополнительный самонаводящийся снаряд с уроном 45%.', 'Атака',2,2,'+1 снаряд','⋈'],
+ ['turret','Малая турель','Автоматический выстрел каждые 5 с. Уровень ускоряет на 0,6 с.', 'Атака',2,3,'5 с','⌖'],
+ ['energy','Рекуперация','Энергия за блок +25%.', 'Энергия',0,4,'+25%','⚡'],
+ ['learn','Адаптивный реактор','Порог следующего уровня −8% (максимум −24%).', 'Энергия',0,3,'−8%','△'],
+ ['pcombo','Резонанс серии','Серия идеальных отражений даёт +2 энергии за уровень.', 'Энергия',1,3,'+2','∞'],
+ ['salvage','Сборщик энергии','Уничтожение врага даёт ещё 3 энергии.', 'Энергия',0,3,'+3','⬢'],
+ ['bounty','Золотой импульс','Следующие 25 с: очки ×1,5 и энергия ×1,25 за уровень.', 'Энергия',1,3,'25 с','✧'],
+ ['lucky','Квантовая удача','Вес редких карт +35%.', 'Энергия',1,3,'+35%','⟡'],
+ ['slow','Вязкое поле','На расстоянии 130 ед. снаряды медленнее на 15% за уровень (до 45%).', 'Спецтехнологии',1,3,'−15%','◎'],
+ ['drone','Орбитальный спутник','Боевой дрон: выстрел раз в 6 с, быстрее на 0,7 с за уровень.', 'Спецтехнологии',2,3,'6 с','◈'],
+ ['aura','Электрическая корона','Каждые 4 с повреждает до 2 врагов на 0,35 за уровень.', 'Спецтехнологии',2,3,'0,35','☼'],
+ ['revenge','Ответный импульс','При потере HP всем врагам наносится 1,5 урона за уровень.', 'Спецтехнологии',1,3,'1,5','✴'],
+ ['crit','Критическая масса','18% шанс тройного урона отражений и цепных разрядов.', 'Спецтехнологии',2,3,'18%','✦'],
+ ['pulse','Сверхновая','Каждый 8-й блок очищает вражеские снаряды и наносит 1,5 урона всем врагам.', 'Спецтехнологии',3,2,'8 блоков','✺']
+].map(([id,name,desc,category,rarity,max,value,icon])=>({id,name,desc,category,rarity,max,value,icon}));
+const tech = [
+ ['hp','Усиленный корпус','Максимальное здоровье +1 (до 5 HP).','Корпус',45,2,'+1 HP','⬡'],
+ ['plate','Композитная обшивка','Каждое 8-е попадание блокируется; второй уровень — каждое 7-е.','Корпус',90,2,'1 / 8','▱'],
+ ['repair','Полевой ремонт','Победа над боссом восстанавливает 1 HP за уровень.','Корпус',150,2,'+1 HP','✚'],
+ ['grace','Страховка ошибки','Неуязвимость после урона +0,1 с за уровень.','Корпус',70,3,'+0,1 с','◷'],
+ ['emergency','Аварийный контур','При 1 HP включает барьер на 2 с. Один раз за попытку.','Корпус',380,1,'2 с','◇'],
+ ['width','Широкий спектр','Начальная ширина щита +4°, максимум +12°.','Щит',35,3,'+4°','◔'],
+ ['rotation','Магнитный подвес','Начальная скорость поворота +30°/с.','Щит',40,3,'+30°/с','↻'],
+ ['reflect','Разгон отражения','Начальный урон отражения +0,15.','Щит',90,3,'+0,15','↗'],
+ ['perfect','Точный резонанс','Урон идеального отражения +15%. Окно остаётся 120 мс.','Щит',160,3,'+15%','✦'],
+ ['arc','Резервная дуга','Противоположный сегмент щита шириной 12°.','Щит',750,1,'12°','◒'],
+ ['shards','Стабильный синтез','Заработок осколков +10%.','Реактор',55,3,'+10%','⬢'],
+ ['charge','Рекуператор','Энергия за отражение +10%.','Реактор',50,3,'+10%','ϟ'],
+ ['choices','Резерв вариантов','Один повторный выбор карт за попытку. Второй уровень: ещё один.','Реактор',200,2,'+1 замена','⤨'],
+ ['initial','Предзаряд','Стартовая энергия +10.','Реактор',65,2,'+10','△'],
+ ['rarity','Чистый кристалл','Вес редких технологий +15%.','Реактор',130,3,'+15%','⟡'],
+ ['satellite','Малый спутник','Стартовый дрон: выстрел каждые 9 с.','Эксперименты',700,1,'9 с','◈'],
+ ['cascade','Каскадный разряд','Цепная молния и взрывы наносят на 12% больше урона.','Эксперименты',350,3,'+12%','⋈'],
+ ['legend','Протокол сверхновой','Урон легендарного импульса +25%.','Эксперименты',800,2,'+25%','✺'],
+ ['revive','Вторая жизнь','Один раз восстанавливает 1 HP после смертельного попадания.','Эксперименты',1200,1,'1 спасение','✧'],
+ ['challenge','Перегрузка','Награды испытаний +15%, входящий темп растёт на 5%.','Эксперименты',400,2,'+15%','⌁']
+].map(([id,name,desc,category,cost,max,value,icon])=>({id,name,desc,category,cost,max,value,icon}));
+const enemies=[
+ {id:'shooter',name:'Стрелок',color:'#ff657a',sides:4,hp:1,speed:115,unlock:0,desc:'Одиночные снаряды. Красный ромб.'},
+ {id:'gunner',name:'Пулемётчик',color:'#ff9c61',sides:6,hp:2,speed:125,unlock:15,desc:'Очередь из трёх снарядов.'},
+ {id:'sniper',name:'Снайпер',color:'#ed80ff',sides:3,hp:1.6,speed:225,unlock:30,desc:'Долгое прицеливание и быстрый выстрел.'},
+ {id:'shotgun',name:'Дробовик',color:'#ffcb66',sides:5,hp:2,speed:130,unlock:45,desc:'Веер из трёх снарядов.'},
+ {id:'laser',name:'Лазерная платформа',color:'#ff537b',sides:4,hp:2,speed:0,unlock:70,desc:'Полоса заряда, затем лазерный импульс.'},
+ {id:'orbital',name:'Орбитальный дрон',color:'#76a0ff',sides:3,hp:1.8,speed:150,unlock:90,desc:'Движется по орбите и меняет направление атаки.'},
+ {id:'splitter',name:'Разделитель',color:'#d986ff',sides:6,hp:2,speed:135,unlock:110,desc:'После гибели выпускает два малых объекта с предупреждением.'},
+ {id:'suppressor',name:'Подавитель',color:'#9bdd87',sides:8,hp:2.3,speed:145,unlock:130,desc:'При попадании замедляет щит и отключает автоматику на 3 с.'}
+];
+const bosses=[
+ {id:'guardian',name:'СТРАЖ',title:'Осадный автомат',color:'#ffb76d',hp:16,reward:'Укрепление: +1 HP к текущему максимуму (до 6)',icon:'⬡'},
+ {id:'hydra',name:'ГИДРА',title:'Распределённое сознание',color:'#ad88ff',hp:21,reward:'Гидра: постоянное эхо отражения до конца попытки',icon:'⋈'},
+ {id:'phantom',name:'ФАНТОМ',title:'Искажение пространства',color:'#70d5ff',hp:20,reward:'Фантом: барьер после идеального отражения',icon:'◇'},
+ {id:'singularity',name:'СИНГУЛЯРНОСТЬ',title:'Горизонт событий',color:'#e58dff',hp:25,reward:'Сингулярность: замедление снарядов +10%',icon:'◎'}
+];
+const achievements=[
+ ['first','Первый контакт','Завершить первую попытку.',s=>s.totals.runs>=1,15,'◈'],
+ ['blocks','Держать рубеж','Отразить суммарно 100 атак.',s=>s.totals.blocks>=100,40,'◔'],
+ ['perfect','Точка резонанса','Выполнить 20 идеальных отражений.',s=>s.totals.perfect>=20,50,'✦'],
+ ['minute','За горизонтом','Выжить 60 секунд.',s=>s.totals.time>=60,60,'◷'],
+ ['guardian','Протокол: Страж','Победить Стража.',s=>s.bosses.includes('guardian'),80,'⬡'],
+ ['hydra','Разорвать цепь','Победить Гидру.',s=>s.bosses.includes('hydra'),100,'⋈'],
+ ['phantom','Сквозь иллюзии','Победить Фантома.',s=>s.bosses.includes('phantom'),120,'◇'],
+ ['singularity','Невозможное возможно','Победить Сингулярность.',s=>s.bosses.includes('singularity'),150,'◎'],
+ ['combo','Без права на ошибку','Серия из 30 отражений.',s=>s.totals.combo>=30,60,'∞'],
+ ['tech','Инженер ядра','Приобрести 10 уровней технологий.',s=>Object.values(s.tech).reduce((a,b)=>a+b,0)>=10,80,'ϟ'],
+ ['veteran','Снова в бой','Завершить 25 попыток.',s=>s.totals.runs>=25,120,'✧'],
+ ['prestige','Новое начало','Перезагрузить реактор.',s=>s.prestige>0,100,'✺']
+].map(([id,name,desc,test,reward,icon])=>({id,name,desc,test,reward,icon}));
+const prestigeTech=[
+ {id:'prism',name:'Призма истока',desc:'Энергия +5% за уровень во всех режимах, кроме «Чистого навыка».',max:3,cost:1,icon:'◇'},
+ {id:'memory',name:'Память реактора',desc:'Начальная энергия +5 за уровень. Новый след у щита.',max:3,cost:1,icon:'∞'},
+ {id:'void',name:'За гранью',desc:'Открывает испытание «Горизонт»: темп +35%, осколки ×1,8.',max:1,cost:2,icon:'◎'}
+];
+const rarity=['Обычная','Редкая','Эпическая','Легендарная'];
+function cost(t,level){return Math.round(t.cost*Math.pow(1.85,level));}
+const api={upgrades,tech,enemies,bosses,achievements,prestigeTech,rarity,cost};
+if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreData=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+
+</script>
+<script>
+/* Pure simulation: no DOM, audio, timers, or networking. */
+(function(root){
+'use strict';
+const D=typeof module!=='undefined'&&module.exports?require('./data.js'):root.CoreData;
+const BALANCE='1.6';
+const TAU=Math.PI*2, RAD=Math.PI/180;
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const angleDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
+const pos=(a,r)=>({x:Math.cos(a)*r,y:Math.sin(a)*r});
+function random(seed){let s=seed>>>0;return()=>((s=(Math.imul(s,1664525)+1013904223)>>>0)/4294967296);}
+function freshSave(){return{version:3,shards:0,rare:0,prestige:0,prestigeTech:{},tech:{},achievements:[],bosses:[],modes:['classic','skill'],records:{classic:[],skill:[],challenge:[],horizon:[]},bests:{},currentBalance:BALANCE,currentBests:{},recordsArchive:{classic:[],skill:[],challenge:[],horizon:[]},totals:{runs:0,kills:0,bosses:0,perfect:0,blocks:0,time:0,combo:0},settings:{sfx:.55,music:.16,reduced:false,language:'ru',deadzone:.22},settled:[]};}
+function validateSave(value){
+ if(!value||typeof value!=='object'||Array.isArray(value)||![1,2,3].includes(value.version))throw Error('Неподдерживаемая версия сохранения.');
+ const s=freshSave(), integer=(v,max=1e9)=>Number.isFinite(v)&&v>=0?Math.min(max,Math.floor(v)):0;
+ s.shards=integer(value.shards,1e7);s.rare=integer(value.rare,1e4);s.prestige=integer(value.prestige,1e4);
+ for(const t of D.tech)s.tech[t.id]=integer(value.tech?.[t.id],t.max);
+ for(const t of D.prestigeTech)s.prestigeTech[t.id]=integer(value.prestigeTech?.[t.id],t.max);
+ s.achievements=D.achievements.filter(x=>value.achievements?.includes(x.id)).map(x=>x.id);
+ s.bosses=D.bosses.filter(x=>value.bosses?.includes(x.id)).map(x=>x.id);
+ s.modes=['classic','skill'];if(value.modes?.includes('challenge'))s.modes.push('challenge');if(s.prestigeTech.void)s.modes.push('horizon');
+ for(const key of Object.keys(s.totals))s.totals[key]=integer(value.totals?.[key]);
+ for(const mode of Object.keys(s.records)){
+  const rows=Array.isArray(value.records?.[mode])?value.records[mode]:[];
+  s.records[mode]=rows.slice(0,10).filter(r=>r&&typeof r==='object').map(r=>({time:integer(r.time,86400),score:integer(r.score),kills:integer(r.kills),bosses:integer(r.bosses),combo:integer(r.combo),perfect:integer(r.perfect),perfectCombo:integer(r.perfectCombo),wave:integer(r.wave,6000),date:typeof r.date==='string'?r.date.slice(0,10):'',id:typeof r.id==='string'?r.id.slice(0,70):''}));
+  const best=value.bests?.[mode]||{};s.bests[mode]={};for(const key of ['time','score','kills','bosses','combo','perfectCombo','wave'])s.bests[mode][key]=integer(best[key]);
+ }
+ s.currentBalance=BALANCE;
+ for(const mode of Object.keys(s.records)){const oldRows=Array.isArray(value.recordsArchive?.[mode])?value.recordsArchive[mode]:[];const clean=rows=>rows.filter(r=>r&&typeof r==='object').map(r=>({...r,time:integer(r.time,86400),score:integer(r.score),kills:integer(r.kills),bosses:integer(r.bosses),combo:integer(r.combo),perfect:integer(r.perfect),perfectCombo:integer(r.perfectCombo),wave:integer(r.wave),date:typeof r.date==='string'?r.date.slice(0,10):'',id:typeof r.id==='string'?r.id.slice(0,70):'',balance:typeof r.balance==='string'?r.balance.slice(0,12):'legacy',core:['standard','mirror','storm','bastion'].includes(r.core)?r.core:'unknown'}));const source=clean(Array.isArray(value.records?.[mode])?value.records[mode]:[]);s.records[mode]=source.filter(r=>r.balance===BALANCE).slice(0,10);s.recordsArchive[mode]=clean(oldRows).concat(source.filter(r=>r.balance!==BALANCE));const b=value.currentBalance===BALANCE?value.currentBests?.[mode]:null;s.currentBests[mode]={};for(const key of ['time','score','kills','bosses','combo','perfectCombo','wave'])s.currentBests[mode][key]=integer(b?.[key]);for(const r of s.records[mode])for(const key of Object.keys(s.currentBests[mode]))s.currentBests[mode][key]=Math.max(s.currentBests[mode][key],r[key]||0);}
+ s.settings.deadzone=Number.isFinite(value.settings?.deadzone)?clamp(value.settings.deadzone,.1,.4):.22;
+ s.settings.sfx=typeof value.settings?.sfx==='number'?clamp(value.settings.sfx,0,1):.55;
+ s.settings.music=typeof value.settings?.music==='number'?clamp(value.settings.music,0,1):.16;
+ s.settings.reduced=Boolean(value.settings?.reduced);
+ s.settings.language=value.settings?.language==='en'?'en':'ru';s.settings.core=['mirror','storm','bastion'].includes(value.settings?.core)?value.settings.core:'standard';
+ s.settled=Array.isArray(value.settled)?value.settled.filter(x=>typeof x==='string').slice(-30):[];
+ return s;
+}
+class SaveStore{
+ constructor(storage){this.storage=storage;this.warning='';this.protected=false;this.key='core-reactor-v2';this.data=freshSave();try{let raw=storage.getItem(this.key);if(raw)this.data=validateSave(JSON.parse(raw));}catch(e){this.protected=true;this.warning='Сохранение не удалось прочитать. Исходные данные сохранены; экспортируйте их в настройках. Новый прогресс пока хранится в памяти.';}}
+ write(){if(this.protected)return false;try{this.storage.setItem(this.key,JSON.stringify(this.data));return true;}catch(e){this.warning='Браузер не разрешил запись. Экспортируйте прогресс в настройках.';return false;}}
+ import(raw){const parsed=validateSave(JSON.parse(raw));try{const old=this.storage.getItem(this.key);if(old)this.storage.setItem(this.key+'-backup',old);this.storage.setItem(this.key,JSON.stringify(parsed));}catch(e){throw Error('Нет доступа к хранилищу. Импорт не выполнен.');}this.data=parsed;this.protected=false;this.warning='';return parsed;}
+ original(){try{return this.storage.getItem(this.key)||JSON.stringify(this.data);}catch(e){return JSON.stringify(this.data);}}
+}
+class Engine{
+ constructor(save=freshSave(),options={}){this.save=save;this.mode=options.mode||'classic';this.rng=random(options.seed??Date.now());this.events=[];this.state='playing';this.time=0;this.score=0;this.wave=1;this.hp=3;this.level=1;this.energy=0;this.combo=0;this.bestCombo=0;this.perfectCombo=0;this.bestPerfectCombo=0;this.perfects=0;this.blocks=0;this.kills=0;this.bossKills=0;this.angle=-Math.PI/2;this.target=this.angle;this.rotation=0;this.invuln=0;this.barrier=0;this.suppressed=0;this.bounty=0;this.hitCount=0;this.up={};this.enemies=[];this.projectiles=[];this.warnings=[];this.effects=[];this.groups=[];this.choices=[];this.clearedBosses=[];this.nextSpawn=1.3;this.nextAttack=2.2;this.nextBoss=60;this.lastArrival=0;this.lastAttackAngle=this.angle;this.nextId=0;this.autoTimer=0;this.droneTimer=0;this.auraTimer=0;this.emergencyUsed=false;this.reviveUsed=false;this.boss=null;this.bossIndex=0;this.pendingLevels=0;this.rewarded=false;this.deathReason='';this.meta=this.mode==='skill'?{}:save.tech||{};this.pt=this.mode==='skill'?{}:save.prestigeTech||{};this.rerolls=this.m('choices');this.maxHp=Math.min(5,3+this.m('hp'));this.hp=this.maxHp;this.energy=this.m('initial')*10+(this.pt.memory||0)*5;this.id=options.id||('run-'+Date.now().toString(36)+'-'+Math.floor(this.rng()*1e9).toString(36));this.difficulty=this.mode==='horizon'?1.35:this.mode==='challenge'?1.16+this.m('challenge')*.05:1;this.core=this.mode==='skill'?'standard':(options.core||save.settings.core||'standard');this.overloadCooldown=0;this.replay=[];this.replayAt=0;this.lastHit=null;if(this.core==='storm')this.up.chain=1;this.challengeTitle=this.mode==='horizon'?'Горизонт событий':this.mode==='challenge'?'Разогнанный реактор':'';}
+ overload(){if(this.state!=='playing'||this.energy<20||this.overloadCooldown>0)return false;this.energy-=20;this.overloadCooldown=8;for(const p of this.projectiles)if(!p.friendly&&p.r<=140)p.active=false;this.effects.push({type:'pulse',r:140,life:.5,max:.5});this.emit('pulse');return true;}
+ synergies(extra){const has=id=>this.u(id)>0||id===extra;return [{ids:['chain','crit'],name:'Грозовой резонанс',desc:'Цепные разряды могут наносить критический урон.'},{ids:['blast','pierce'],name:'Каскад взрывов',desc:'Каждое пробитое попадание создаёт взрыв.'},{ids:['double','damage'],name:'Зеркальный каскад',desc:'Эхо наследует усиленный урон отражения.'},{ids:['barrier','pcombo'],name:'Безупречный контур',desc:'Идеальные серии одновременно дают энергию и барьер.'}].filter(x=>x.ids.every(has));}
+ captureReplay(){this.replay.push({time:this.time,angle:this.angle,width:this.width,secondary:this.secondary,barrier:this.barrier,invuln:this.invuln,hp:this.hp,bullets:this.projectiles.filter(p=>!p.friendly&&p.active).slice(0,35).map(p=>({x:p.x,y:p.y})),feints:this.effects.filter(f=>f.type==='feint').map(f=>f.angle),beams:this.groups.filter(g=>g.kind==='laser'&&!g.resolved).map(g=>g.angle)});this.replay=this.replay.filter(f=>this.time-f.time<=1.8);}
+ m(id){return this.meta[id]||0;} u(id){return this.up[id]||0;}
+ emit(type,data={}){this.events.push({type,...data});}
+ drain(){return this.events.splice(0);}
+ get width(){return Math.min(105,55+(this.core==='bastion'?10:0)+this.m('width')*4+this.u('wide')*8)*RAD;}
+ get turnSpeed(){return (540+this.m('rotation')*30+this.u('turn')*65)*RAD*(this.core==='bastion'?.82:1)*(this.suppressed>0?.7:1);}
+ get damage(){return (1+this.m('reflect')*.15+this.u('damage')*.6)*(this.core==='storm'?.8:this.core==='mirror'?.9:1);}
+ get threshold(){return Math.round((36+(this.level-1)*15)*Math.max(.76,1-this.u('learn')*.08));}
+ get secondary(){return (this.m('arc')*12+this.u('segment')*18)*RAD;}
+ covers(a,angle=this.angle){const d=Math.abs(angleDiff(a,angle));return d<=this.width/2||(this.secondary>0&&Math.abs(Math.PI-d)<=this.secondary/2);}
+ orbitSpeed(e){
+  if(e.type==='boss')return [.16,-.22,.30,-.24][e.spec]*(1+.15*((e.phase||1)-1));
+  const progress=clamp((this.time-18)/90,0,1),direction=e.id%2===0?-1:1;
+  if(e.type==='orbital')return direction*(.24+.1*progress);
+  const rates={shooter:.16,gunner:.13,sniper:.11,shotgun:.15,laser:.1,splitter:.17,suppressor:.14};
+  return direction*(rates[e.type]||.14)*progress;
+ }
+ addEnemy(type,angle,r=265){const spec=D.enemies.find(x=>x.id===type)||D.enemies[0];const e={id:++this.nextId,type:spec.id,angle,r,hp:spec.hp,maxHp:spec.hp,size:13,born:this.time,cool:0,...pos(angle,r)};this.enemies.push(e);this.emit('spawn',{enemy:type});return e;}
+ addBoss(index=this.bossIndex){const spec=D.bosses[index%4],cycle=Math.floor(index/4);this.projectiles=this.projectiles.filter(p=>p.friendly);this.warnings=[];this.groups=[];this.lastArrival=this.time;this.enemies=[];const e={id:++this.nextId,type:'boss',spec:index%4,angle:-Math.PI/2,r:248,hp:spec.hp*(1+cycle*.35),maxHp:spec.hp*(1+cycle*.35),size:30,born:this.time,cool:0,sections:3,phase:1,...pos(-Math.PI/2,248)};this.enemies.push(e);this.boss=e;this.nextAttack=this.time+1.6;this.emit('boss',{name:spec.name,index:index%4});return e;}
+ schedule(e,kind='shot',options={}){
+  if(!e||this.groups.length>9)return null;
+  const angle=options.angle??(e.angle+(e.type==='boss'&&e.spec!==0?(e.attackCycle%2?1.05:-1.05):0)),spec=D.enemies.find(x=>x.id===e.type)||D.enemies[0],speed=(options.speed||spec.speed||150)*(this.mode==='horizon'?1.15:this.mode==='challenge'?1.1:1);
+  const slow=Math.min(.45,this.u('slow')*.15)+(this.singularityGift?.1:0);
+  const travel=kind==='laser'?0:Math.max(0,(e.r-130))/speed+65/(speed*(1-slow));
+  const windup=options.windup??(e.type==='sniper'?1.25:kind==='laser'?1.2:.62);
+  const pressure=e.type==='boss'&&e.spec===0;
+  const gap=options.sameGroup?.12:pressure?[.24,.21,.19][e.phase-1]:Math.max(.17,.63-Math.max(0,this.time-10)*.008)/this.difficulty;
+  // Guardian has a tighter rhythm, still below the player's turn speed and with reaction time reserved.
+  const rotationBudget=Math.min((pressure||this.time>=18?420:300)*RAD,this.turnSpeed*.8);
+  const separation=gap+Math.abs(angleDiff(angle,this.lastAttackAngle))/rotationBudget;
+  const arrival=Math.max(this.time+windup+travel,this.lastArrival+separation);
+  this.lastArrival=arrival;this.lastAttackAngle=angle;
+  // The charge stays at its telegraphed position while its owner continues orbiting.
+  const g={id:++this.nextId,owner:e.id,kind,angle,radius:e.r,arrival,launch:arrival-travel,created:this.time,speed,slow,fired:false,burst:options.burst||1,fan:options.fan||0,curve:options.curve||0,damage:1,suppress:e.type==='suppressor',trackedAt:null,aligned:false,perfect:false};
+  if(kind==='laser'||e.type==='sniper')this.emit('warning',{enemy:e.type,kind});
+  g.tracks=Array.from({length:g.fan||g.burst},(_,i)=>({angle:angle+(i-((g.fan||g.burst)-1)/2)*(g.fan?10:4)*RAD,aligned:false,trackedAt:null}));this.groups.push(g);this.warnings.push(g);return g;
+ }
+ attack(e){
+  if(e.type==='boss')return this.bossAttack(e);
+  if(e.type==='gunner')for(let i=0;i<3;i++)this.schedule(e,'shot',{sameGroup:i>0});
+  else this.schedule(e,e.type==='laser'?'laser':'shot',{fan:e.type==='shotgun'?3:0});
+  e.cool=this.time+(this.time<18?3:2.2);
+ }
+ bossAttack(e){
+  if(e.spec!==0)e.attackCycle=(e.attackCycle||0)+1;const def=D.bosses[e.spec];e.phase=1+Number(e.hp<e.maxHp*.67)+Number(e.hp<e.maxHp*.34);
+  if(def.id==='guardian'){
+   this.guardianAttack(e);
+  }else if(def.id==='hydra'){
+   const remaining=Math.max(1,Math.ceil(e.hp/(e.maxHp/3)));if(remaining<e.sections){e.sections=remaining;this.emit('section',{remaining});}
+   this.schedule(e,'shot',{fan:remaining===3?3:0,burst:remaining===1?2:1,speed:150+(3-remaining)*20});
+  }else if(def.id==='phantom'){
+   if(this.rng()<.65){e.angle=this.rng()*TAU;Object.assign(e,pos(e.angle,e.r));this.emit('teleport',{x:e.x,y:e.y});}
+   this.effects.push({type:'feint',angle:e.angle+Math.PI*.7,life:1.3,max:1.3});
+   this.schedule(e,e.phase===3?'laser':'shot',{speed:190,windup:1.2});
+  }else{
+   this.schedule(e,'shot',{speed:145+e.phase*12,curve:e.phase>=2?.6:0,fan:e.phase===3?3:0,windup:1});
+   if(e.phase>=2){this.effects.push({type:'wave',life:1.5,max:1.5,angle:e.angle});for(let i=1;i<=e.phase-1;i++)this.schedule(e,'shot',{angle:e.angle+i*.55,speed:160,curve:.6,windup:1.15});}
+  }
+ }
+ guardianAttack(e){
+  const patterns=['Перекрёстный огонь','Лазерный захват','Перегрузка орудий'];
+  e.pattern=patterns[e.phase-1];
+  if(e.patternPhase!==e.phase){e.patternPhase=e.phase;this.emit('guardianPhase',{phase:e.phase,pattern:e.pattern});}
+  const required=e.phase===3?3:2;
+  const pending=this.groups.filter(g=>!g.cancelled&&!g.resolved&&g.arrival>this.time).length;
+  if(pending+required>4)return;
+  const direction=(e.attackCycle||0)%2===0?1:-1;e.attackCycle=(e.attackCycle||0)+1;
+  if(e.phase===1){
+   this.schedule(e,'shot',{angle:e.angle-direction*.95,speed:175,windup:.85});
+   this.schedule(e,'shot',{angle:e.angle+direction*.95,speed:190,windup:.85});
+  }else if(e.phase===2){
+   this.schedule(e,'laser',{angle:e.angle+direction*1.2,windup:1.1});
+   this.schedule(e,'shot',{angle:e.angle-direction*1.2,burst:2,speed:205,windup:.95});
+  }else{
+   this.schedule(e,'shot',{angle:e.angle-direction*1.4,speed:220,windup:.85});
+   this.schedule(e,'laser',{angle:e.angle,windup:1.1});
+   this.schedule(e,'shot',{angle:e.angle+direction*1.4,burst:2,speed:210,windup:.95});
+  }
+ }
+ fireGroup(g){
+  const e=this.enemies.find(e=>e.id===g.owner);if(!e){g.cancelled=true;return;}
+  g.fired=true;
+  if(g.kind==='laser'){g.beam=true;return;}
+  const count=g.fan||g.burst;
+  for(let i=0;i<count;i++){
+   const offset=(i-(count-1)/2)*(g.fan?10:4)*RAD;
+   const a=g.angle+offset;
+   this.projectiles.push({id:++this.nextId,group:g,track:g.tracks[i],angle:a,finalAngle:a,r:g.radius,originRadius:g.radius,speed:g.speed,slow:g.slow,curve:g.curve,age:0,friendly:false,damage:1,suppress:g.suppress,active:true,trail:[],...pos(a-g.curve,g.radius)});
+  }
+  this.emit('fire',{enemy:e.type});
+ }
+ gainEnergy(n){this.energy+=n*(this.time>=18?.82:1)*(1+(this.pt.prism||0)*.05)*(this.bounty>0?1+.25*this.u('bounty'):1);}
+ reflect(p,g){
+  const perfect=Boolean(g.perfect);this.blocks++;this.combo++;this.bestCombo=Math.max(this.combo,this.bestCombo);
+  this.perfectCombo=perfect?this.perfectCombo+1:0;this.bestPerfectCombo=Math.max(this.bestPerfectCombo,this.perfectCombo);if(perfect)this.perfects++;const owner=this.enemies.find(e=>e.id===g.owner);if(owner?.type==='boss'){owner.seriesBlocks=(owner.seriesBlocks||0)+1;if(perfect||owner.seriesBlocks%4===0)owner.vulnerableUntil=Math.max(owner.vulnerableUntil||0,this.time+(perfect?2.1:.65));}
+  const multi=Math.min(5,1+Math.floor(this.combo/8)*.25+this.perfectCombo*.1);
+  this.score+=Math.round((perfect?70:25)*multi*(this.bounty>0?1.5:1));
+  this.gainEnergy((perfect?12:6)*(1+.25*this.u('energy')+.1*this.m('charge'))+(perfect?Math.min(5,this.perfectCombo)*this.u('pcombo')*2:0));
+  if(perfect&&(this.u('barrier')||this.phantomGift))this.barrier=Math.max(this.barrier,this.u('barrier')*.6+(this.phantomGift?.5:0));
+  const crit=this.rng()<this.u('crit')*.18;
+  const damage=this.damage*(perfect&&this.core==='mirror'?1.25:1)*(perfect?2*(1+.15*this.m('perfect')):1)*(crit?3:1);
+  this.launchFriendly(p.angle,damage,g.owner,{pierce:this.u('pierce')+1,crit});
+  const echoes=this.u('double')+(this.hydraGift?1:0);for(let i=0;i<echoes;i++)this.launchFriendly(p.angle+.12*(i+1),damage*.45,null,{pierce:1,crit});
+  this.effects.push({type:perfect?'perfect':'block',...pos(p.angle,65),angle:p.angle,life:perfect?.55:.3,max:perfect?.55:.3});
+  this.emit(perfect?'perfect':'block',{combo:this.combo});
+  if(this.u('pulse')&&this.blocks%8===0){this.projectiles=this.projectiles.filter(q=>q.friendly);for(const w of this.groups)if(w.fired)w.cancelled=true;this.areaDamage(1.5*this.u('pulse')*(1+.25*this.m('legend')));this.effects.push({type:'pulse',life:1,max:1});this.emit('pulse');}
+ }
+ launchFriendly(a,damage,target,opts={}){const targetEnemy=this.enemies.find(e=>e.id===target)||this.enemies.reduce((best,e)=>!best||Math.abs(angleDiff(e.angle,a))<Math.abs(angleDiff(best.angle,a))?e:best,null);const v=pos(a,68);this.projectiles.push({id:++this.nextId,friendly:true,active:true,x:v.x,y:v.y,angle:a,damage,target:targetEnemy?.id,age:0,trail:[],hit:[],pierce:opts.pierce||1,crit:opts.crit||false,auto:opts.auto||false});}
+ hitCore(suppress=false,reason='Снаряд прошёл мимо щита',attackAngle,miss){
+  if(this.invuln>0||this.barrier>0)return;
+  this.hitCount++;
+  if((this.u('armor')&&this.hitCount%(6-this.u('armor'))===0)||(this.m('plate')&&this.hitCount%(9-this.m('plate'))===0)){this.barrier=.4;this.emit('armor');return;}
+  this.lastHit=miss||this.missInfo(Number.isFinite(attackAngle)?attackAngle:this.angle+Math.PI);this.hp--;this.combo=0;this.perfectCombo=0;this.invuln=.7+.1*this.m('grace');if(suppress){this.suppressed=3;this.emit('suppress');}
+  this.emit('hurt',{hp:this.hp});this.effects.push({type:'hurt',life:.5,max:.5});
+  if(this.u('revenge'))this.areaDamage(1.5*this.u('revenge'));
+  if(this.hp===1&&this.m('emergency')&&!this.emergencyUsed){this.emergencyUsed=true;this.barrier=2;this.emit('emergency');}
+  if(this.hp<=0&&this.m('revive')&&!this.reviveUsed){this.reviveUsed=true;this.hp=1;this.barrier=2;this.emit('revive');}
+  if(this.hp<=0){this.hp=0;this.state='dead';this.deathReason=reason;this.emit('death');}this.captureReplay();
+ }
+ missInfo(angle){const late=Math.abs(angleDiff(this.target,angle))<=this.width/2;const fake=this.effects.some(f=>f.type==='feint'&&Math.abs(angleDiff(f.angle,this.angle))<this.width/2);return {angle,shield:this.angle,width:this.width,secondary:this.secondary,time:this.time,hint:fake?'Вы защищали ложный луч. Пунктир с меткой ЭХО безопасен.':late?'Щит не успел повернуться. Начинайте поворот раньше.':'Вы защищали другое направление. Следите за ближайшим ударом.'};}
+ areaDamage(n){for(const e of this.enemies.slice())this.damageEnemy(e,n);}
+ damageEnemy(e,n){if(e.dead)return;if(e.type==='boss')n*=this.time<(e.vulnerableUntil||0)?1.45:.65;e.hp-=n;this.effects.push({type:'hit',x:e.x,y:e.y,life:.2,max:.2});if(e.hp<=0)this.kill(e);}
+ kill(e){
+  if(e.dead)return;e.dead=true;this.kills++;this.score+=e.type==='boss'?1500:100;
+  this.gainEnergy((e.type==='boss'?22:4)+this.u('salvage')*3);this.emit('kill',{x:e.x,y:e.y});this.effects.push({type:'destroy',x:e.x,y:e.y,life:.6,max:.6});
+  if(e.type==='splitter')for(const offset of [-.35,.35]){const child=this.addEnemy('shooter',e.angle+offset,e.r);child.hp=.5;child.maxHp=.5;child.size=8;child.fragment=true;child.cool=this.time+4;this.schedule(child,'shot',{speed:120,windup:.9});}
+  if(e.type==='boss'){
+   this.bossKills++;this.clearedBosses.push(D.bosses[e.spec].id);this.boss=null;this.bossIndex++;this.nextBoss=Math.max(this.nextBoss+60,this.time+20);this.hp=Math.min(this.maxHp,this.hp+this.m('repair'));
+   if(e.spec===0){this.maxHp=Math.min(6,this.maxHp+1);this.hp=Math.min(this.maxHp,this.hp+1);}
+   if(e.spec===1)this.hydraGift=true;if(e.spec===2)this.phantomGift=true;if(e.spec===3)this.singularityGift=true;
+   this.projectiles=this.projectiles.filter(p=>p.friendly);this.groups=[];this.warnings=[];this.lastArrival=this.time;this.emit('bossWin',{index:e.spec,reward:D.bosses[e.spec].reward});
+  }
+ }
+ offer(){
+  const pool=D.upgrades.filter(u=>this.u(u.id)<u.max&&(u.id!=='heal'||this.hp<this.maxHp));const selected=[];
+  for(let i=0;i<Math.min(3,pool.length);i++){
+   const weights=pool.map(u=>[8,3,1,.28][u.rarity]*Math.pow(1+this.m('rarity')*.15+this.u('lucky')*.35,u.rarity));let v=this.rng()*weights.reduce((a,b)=>a+b,0),index=0;for(;index<pool.length-1;index++){v-=weights[index];if(v<=0)break;}selected.push(pool.splice(index,1)[0]);
+  }
+  if(!selected.length){this.choices=[];this.score+=300;this.emit('overflow');return [];}this.choices=selected;this.state='upgrade';this.emit('level',{level:this.level});return selected;
+ }
+ choose(id){if(this.state!=='upgrade'||!this.choices.some(u=>u.id===id))return false;const before=this.synergies().length;this.applyUpgrade(id);if(this.synergies().length>before)this.emit('synergy',{name:this.synergies().at(-1).name});this.choices=[];this.state='playing';this.emit('choose',{id});return true;}
+ applyUpgrade(id){const def=D.upgrades.find(x=>x.id===id);if(!def||this.u(id)>=def.max)return false;this.up[id]=this.u(id)+1;if(id==='heal')this.hp=Math.min(this.maxHp,this.hp+1);if(id==='bounty')this.bounty=25;return true;}
+ reroll(){if(this.state!=='upgrade'||!this.rerolls)return false;this.rerolls--;this.offer();return true;}
+ update(dt,input={}){if(this.state!=='playing')return;dt=clamp(dt,0,.05);let left=dt;while(left>1e-7&&this.state==='playing'){const step=Math.min(left,1/120);this.step(step,input);left-=step;}}
+ step(dt,input){
+  const oldAngle=this.angle;this.time+=dt;if(this.time>=this.replayAt){this.replayAt=this.time+.08;this.captureReplay();}
+  if(input.axis){this.angle+=clamp(input.axis,-1,1)*this.turnSpeed*dt;this.target=this.angle;}
+  else {if(Number.isFinite(input.angle))this.target=input.angle;this.angle+=clamp(angleDiff(this.target,this.angle),-this.turnSpeed*dt,this.turnSpeed*dt);}
+  this.angle=Math.atan2(Math.sin(this.angle),Math.cos(this.angle));this.rotation=angleDiff(this.angle,oldAngle)/dt;
+  for(const key of ['invuln','barrier','suppressed','bounty','overloadCooldown'])this[key]=Math.max(0,this[key]-dt);
+  const wave=1+Math.floor(this.time/18);if(wave!==this.wave){this.wave=wave;this.emit('wave',{wave});}
+  if(this.time>=this.nextBoss&&!this.boss)this.addBoss();
+  if(this.time>=this.nextSpawn&&!this.boss){
+   const allowed=D.enemies.filter(e=>e.unlock<=this.time),type=allowed[Math.floor(this.rng()*allowed.length)];if(this.enemies.filter(e=>!e.dead).length<Math.min(11,3+this.wave))this.addEnemy(type.id,this.rng()*TAU);this.nextSpawn=this.time+Math.max(1.3,3.4-this.time*.02)/(this.difficulty*(this.time>=18?1.16:1));
+  }
+  if(this.time>=this.nextAttack){
+   const candidates=this.enemies.filter(e=>!e.dead&&e.cool<=this.time);const e=candidates[Math.floor(this.rng()*candidates.length)];if(e)this.attack(e);const interval=this.boss?.spec===0?[1.1,.9,.75][this.boss.phase-1]:Math.max(.5,1.8-this.time*.011);this.nextAttack=this.time+interval/(this.difficulty*(this.time>=18?1.16:1));
+  }
+  for(const e of this.enemies){
+   e.orbitVelocity=this.orbitSpeed(e);
+   e.angle=Math.atan2(Math.sin(e.angle+dt*e.orbitVelocity),Math.cos(e.angle+dt*e.orbitVelocity));
+   Object.assign(e,pos(e.angle,e.r));
+  }
+  // Record each group's first real overlap caused by shield movement. Holding a shield never refreshes the timestamp.
+  for(const g of this.groups){if(g.cancelled)continue;const moving=Math.abs(this.rotation)>20*RAD;for(const track of g.tracks){const aligned=this.covers(track.angle);if(aligned&&!track.aligned&&moving)track.trackedAt=this.time;track.aligned=aligned;if(!aligned)track.trackedAt=null;}g.trackedAt=g.tracks[0].trackedAt;
+   if(!g.fired&&this.time>=g.launch)this.fireGroup(g);
+   if(g.kind==='laser'&&g.fired&&this.time>=g.arrival&&!g.resolved){g.resolved=true;g.perfect=g.trackedAt!==null&&this.time-g.trackedAt<=.12&&this.covers(g.angle);if(this.covers(g.angle))this.reflect({angle:g.angle},g);else this.hitCore(false,'Лазер: щит не перекрыл предупреждающий луч',g.angle);this.effects.push({type:'laser',angle:g.angle,r:g.radius,life:.25,max:.25});}
+  }
+  const current=this.projectiles.slice();
+  for(const p of current){if(!p.active)continue;p.age+=dt;if(p.age>12){p.active=false;continue;}p.trail.push({x:p.x,y:p.y});if(p.trail.length>6)p.trail.shift();
+   if(p.friendly){
+    const target=this.enemies.find(e=>e.id===p.target&&!e.dead);if(target)p.angle=Math.atan2(target.y-p.y,target.x-p.x);p.x+=Math.cos(p.angle)*430*dt;p.y+=Math.sin(p.angle)*430*dt;
+    if(Math.hypot(p.x,p.y)>375){p.active=false;continue;}
+    for(const e of this.enemies.slice()){if(e.dead||p.hit.includes(e.id))continue;if(Math.hypot(p.x-e.x,p.y-e.y)<e.size+7){p.hit.push(e.id);this.damageEnemy(e,p.damage);if(!p.auto)this.onProjectileHit(p,e);p.pierce--;const onward=this.enemies.filter(q=>!q.dead&&!p.hit.includes(q.id)).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y))[0];p.target=onward?.id;if(p.pierce<=0){p.active=false;break;}}}
+   }else{
+    if(p.group.cancelled){p.active=false;continue;}
+    const oldR=p.r;p.r-=p.speed*(p.r<=130?1-p.slow:1)*dt;
+    const a=p.finalAngle-p.curve*clamp((p.r-65)/(p.originRadius-65),0,1);p.angle=a;Object.assign(p,pos(a,p.r));
+    if(oldR>65&&p.r<=65){const g=p.group;g.perfect=p.track.trackedAt!==null&&this.time-p.track.trackedAt<=.12&&this.covers(p.angle);if(this.covers(p.angle)){this.reflect(p,g);p.active=false;continue;}p.miss=this.missInfo(p.angle);this.captureReplay();}
+    if(p.r<26){p.active=false;this.hitCore(p.suppress,p.suppress?'Подавитель: атака прошла мимо щита':'Снаряд прошёл через незащищённую сторону ядра',p.angle,p.miss);}
+   }
+  }
+  if(this.suppressed<=0){
+   if(this.u('turret')){this.autoTimer+=dt;if(this.autoTimer>=5-(this.u('turret')-1)*.6){this.autoTimer=0;this.autoShot(.55);}}
+   if(this.u('drone')||this.m('satellite')){this.droneTimer+=dt;const period=this.u('drone')?6-(this.u('drone')-1)*.7:9;if(this.droneTimer>=period){this.droneTimer=0;this.autoShot(.7);}}
+   if(this.u('aura')){this.auraTimer+=dt;if(this.auraTimer>=4){this.auraTimer=0;for(const e of this.enemies.filter(e=>!e.dead).slice(0,2)){this.damageEnemy(e,.35*this.u('aura'));this.effects.push({type:'chain',x:0,y:0,x2:e.x,y2:e.y,life:.25,max:.25});}}}
+  }
+  this.projectiles=this.projectiles.filter(p=>p.active);this.enemies=this.enemies.filter(e=>!e.dead);this.groups=this.groups.filter(g=>!g.cancelled&&this.time<g.arrival+.85);this.warnings=this.groups.filter(g=>!g.cancelled&&(!g.fired||g.kind==='laser'&&!g.resolved));
+  for(const f of this.effects)f.life-=dt;this.effects=this.effects.filter(f=>f.life>0).slice(-100);
+  if(this.energy>=this.threshold&&this.state==='playing'){this.energy-=this.threshold;this.level++;this.offer();}
+ }
+ autoShot(damage){const e=this.enemies.find(e=>!e.dead);if(e)this.launchFriendly(e.angle,damage,e.id,{auto:true});}
+ onProjectileHit(p,e){
+  const cascade=1+.12*this.m('cascade');
+  if(this.u('chain')){let from=e;const hit=[...p.hit];for(let i=0;i<this.u('chain');i++){const next=this.enemies.filter(q=>!q.dead&&!hit.includes(q.id)).sort((a,b)=>Math.hypot(a.x-from.x,a.y-from.y)-Math.hypot(b.x-from.x,b.y-from.y))[0];if(!next)break;hit.push(next.id);const crit=!p.crit&&this.rng()<this.u('crit')*.18;this.damageEnemy(next,p.damage*.7*cascade*(crit?3:1));this.effects.push({type:'chain',x:from.x,y:from.y,x2:next.x,y2:next.y,life:.25,max:.25});from=next;}}
+  if(this.u('blast')){const r=45+(this.u('blast')-1)*15;for(const q of this.enemies.slice())if(q.id!==e.id&&!q.dead&&Math.hypot(q.x-e.x,q.y-e.y)<=r)this.damageEnemy(q,p.damage*.65*cascade);this.effects.push({type:'blast',x:e.x,y:e.y,r,life:.4,max:.4});}
+ }
+ result(){return{id:this.id,balance:BALANCE,core:this.core,time:Math.floor(this.time),score:Math.floor(this.score),kills:this.kills,bosses:this.bossKills,combo:this.bestCombo,perfect:this.perfects,perfectCombo:this.bestPerfectCombo,wave:this.wave,date:new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Vladivostok'})};}
+ settle(){
+  if(this.state!=='dead'||this.rewarded||this.save.settled.includes(this.id))return null;this.rewarded=true;const s=this.save,r=this.result(),old={...(s.currentBests[this.mode]||{})};
+  // No reward for an immediate exit. One settlement per run; output is bounded by actual simulated play time.
+  const base=this.time<8?0:Math.floor(12+this.time*.42+Math.min(this.kills,this.time*2)*.5+this.bossKills*15);
+  const multiplier=(1+.1*this.m('shards'))*(this.mode==='horizon'?1.8:this.mode==='challenge'?1.4+.15*this.m('challenge'):1);
+  const shards=Math.min(10000,Math.round(base*multiplier));s.shards+=shards;s.settled.push(this.id);s.settled=s.settled.slice(-30);
+  s.totals.runs++;s.totals.kills+=this.kills;s.totals.bosses+=this.bossKills;s.totals.blocks+=this.blocks;s.totals.perfect+=this.perfects;s.totals.time=Math.max(s.totals.time,r.time);s.totals.combo=Math.max(s.totals.combo,r.combo);
+  for(const id of this.clearedBosses)if(!s.bosses.includes(id))s.bosses.push(id);
+  if((s.totals.time>=60||s.bosses.length)&&!s.modes.includes('challenge'))s.modes.push('challenge');
+  const best=s.currentBests[this.mode]||(s.currentBests[this.mode]={});const all=s.bests[this.mode]||(s.bests[this.mode]={});const newRecords=[];for(const key of ['time','score','combo','perfectCombo','kills','bosses','wave']){all[key]=Math.max(all[key]||0,r[key]);if(r[key]>(best[key]||0)){newRecords.push(key);best[key]=r[key];}}
+  s.records[this.mode].push(r);s.records[this.mode].sort((a,b)=>b.score-a.score);s.records[this.mode]=s.records[this.mode].slice(0,10);
+  const unlocked=claimAchievements(s);return{...r,shards,achievementShards:unlocked.reduce((n,a)=>n+a.reward,0),unlocked,newRecords,old};
+ }
+}
+function claimAchievements(s){const unlocked=[];for(const a of D.achievements)if(!s.achievements.includes(a.id)&&a.test(s)){s.achievements.push(a.id);s.shards+=a.reward;unlocked.push(a);}return unlocked;}
+function purchase(s,id){const t=D.tech.find(t=>t.id===id);if(!t)return false;const lv=s.tech[id]||0,price=D.cost(t,lv);if(lv>=t.max||s.shards<price)return false;s.shards-=price;s.tech[id]=lv+1;return true;}
+function canPrestige(s){return s.bosses.length>=4&&Object.values(s.tech).reduce((a,b)=>a+b,0)>=12;}
+function prestige(s){if(!canPrestige(s))return false;const gain=3+Math.floor(Object.values(s.tech).reduce((a,b)=>a+b,0)/10);s.prestige++;s.rare+=gain;s.tech={};s.shards=0;claimAchievements(s);return gain;}
+function purchasePrestige(s,id){const t=D.prestigeTech.find(t=>t.id===id);if(!t)return false;const level=s.prestigeTech[id]||0,price=t.cost+level;if(level>=t.max||s.rare<price)return false;s.rare-=price;s.prestigeTech[id]=level+1;if(id==='void'&&!s.modes.includes('horizon'))s.modes.push('horizon');return true;}
+const api={BALANCE,Engine,SaveStore,freshSave,validateSave,claimAchievements,purchase,canPrestige,prestige,purchasePrestige,clamp,angleDiff,pos,random,RAD,TAU};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreEngine=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+
+</script>
+<script>
+/* Presentation-only localization. Stable IDs, save keys and gameplay data stay unchanged. */
+(function(root){
+'use strict';
+const catalog={
+ "АВТОМАТИКА ПОДДЕРЖИВАЕТ ЗАЩИТУ, НО ЩИТОМ УПРАВЛЯЕТЕ ВЫ": "AUTOMATION SUPPORTS YOUR DEFENSE. YOU CONTROL THE SHIELD.",
+ "АДАПТИРУЙТЕСЬ": "ADAPT",
+ "АРХИВ ДОСТИЖЕНИЙ": "ACHIEVEMENT ARCHIVE",
+ "АРХИВ ПОПЫТОК": "RUN ARCHIVE",
+ "Аварийный контур": "Emergency Circuit",
+ "Аварийный контур: барьер активен 2 с.": "Emergency circuit: barrier active for 2 s.",
+ "Автоматический выстрел каждые 5 с. Уровень ускоряет на 0,6 с.": "Fires automatically every 5 s. Each extra level reduces the interval by 0.6 s.",
+ "Адаптивный реактор": "Adaptive Reactor",
+ "Атака": "Attack",
+ "БАЗА: 55° · 540°/С · 120 МС ДЛЯ ИДЕАЛЬНОГО ОТРАЖЕНИЯ": "BASE: 55° · 540°/S · 120 MS PERFECT REFLECT WINDOW",
+ "БЕЗ ТАЙМЕРОВ · БЕЗ РЕКЛАМЫ · БЕЗ ОЖИДАНИЯ": "NO TIMERS · NO ADS · NO WAITING",
+ "БОЕВЫЕ ПРОТОКОЛЫ": "COMBAT PROTOCOLS",
+ "БОСС НА ОРБИТЕ": "BOSS IN ORBIT",
+ "БОССОВ": "BOSSES",
+ "БОССОВ ЗА ПОПЫТКУ": "BOSSES IN ONE RUN",
+ "Базовые награды · полный прогресс": "Standard rewards · full progression",
+ "Базовый щит, 3 HP и ваша реакция. Все постоянные и престижные бонусы отключены. Осколки сохраняются.": "A basic shield, 3 HP, and your reflexes. All permanent and prestige bonuses are disabled. Shard rewards are kept.",
+ "Без права на ошибку": "No Room for Error",
+ "Боевой дрон: выстрел раз в 6 с, быстрее на 0,7 с за уровень.": "Combat drone: fires every 6 s. Each extra level reduces the interval by 0.7 s.",
+ "Больше угроз и выше темп. Открывается после 60 секунд выживания. Постоянные технологии активны.": "More threats and a faster pace. Unlocks after surviving 60 seconds. Permanent technologies are active.",
+ "Босс побеждён.": "Boss defeated.",
+ "Браузер не разрешил запись. Экспортируйте прогресс в настройках.": "Your browser blocked saving. Export your progress in Settings.",
+ "В архиве пока тихо.": "The archive is quiet for now.",
+ "ВОЛНА": "WAVE",
+ "ВРАГОВ": "ENEMIES",
+ "ВРЕМЯ": "TIME",
+ "ВСЕ СИСТЕМЫ НОМИНАЛЬНЫ": "ALL SYSTEMS NOMINAL",
+ "ВХОДЯЩИЙ ПОТОК": "INCOMING SIGNAL",
+ "Ваш горизонт": "Your Horizon",
+ "Веер из трёх снарядов.": "Fires a fan of three projectiles.",
+ "Вес редких карт +35%.": "Rare card weighting +35%.",
+ "Вес редких технологий +15%.": "Rare technology weighting +15%.",
+ "Включить звук": "Unmute audio",
+ "Восстанавливает 1 HP. Появляется при повреждении.": "Restores 1 HP. Only offered when the core is damaged.",
+ "Время перевести дух": "Time to Breathe",
+ "Всё начинается с одного отражения.": "It starts with a single reflection.",
+ "Вторая дуга напротив основной: +18° за уровень.": "Adds a second shield arc opposite the main one: +18° per level.",
+ "Вторая жизнь": "Second Life",
+ "Вторая жизнь: реактор восстановлен.": "Second life: reactor restored.",
+ "Выберите одну технологию. Действует до конца попытки.": "Choose one technology. It lasts for the rest of this run.",
+ "Выберите свой ритм": "Choose Your Rhythm",
+ "Выбран · перейти к запуску ↗": "Selected · ready to launch ↗",
+ "Выбрать режим ↗": "Select mode ↗",
+ "Выжить 60 секунд.": "Survive for 60 seconds.",
+ "Выключить звук": "Mute audio",
+ "Выполнить 20 идеальных отражений.": "Perform 20 perfect reflects.",
+ "Вязкое поле": "Viscous Field",
+ "ГИДРА": "HYDRA",
+ "Гидра: осталось секций —": "Hydra: sections remaining —",
+ "Гидра: постоянное эхо отражения до конца попытки": "Hydra: a reflection echo for the rest of this run",
+ "Гироскоп": "Gyroscope",
+ "Главное меню": "Main Menu",
+ "Горизонт": "Horizon",
+ "Горизонт событий": "Event Horizon",
+ "Громкость музыки": "Music volume",
+ "Громкость эффектов": "Sound effects volume",
+ "ДАТА": "DATE",
+ "ДО БОССА": "BOSS IN",
+ "ДО РЕКОРДА:": "TO YOUR BEST:",
+ "ДОСТИЖЕНИЯ": "ACHIEVEMENTS",
+ "Движется по орбите и меняет направление атаки.": "Orbits the core and attacks from changing directions.",
+ "Двойная орбита": "Twin Orbit",
+ "Держать рубеж": "Hold the Line",
+ "Десять лучших попыток по очкам. Результаты каждого режима хранятся отдельно.": "Your ten highest-scoring runs. Each mode has its own records.",
+ "Долгое прицеливание и быстрый выстрел.": "A long targeting warning followed by a fast shot.",
+ "Достижения": "Achievements",
+ "Дробовик": "Scattergun",
+ "Дуговой разряд": "Arc Discharge",
+ "ЕД. / ОРБИТА ЩИТА": "UNITS / SHIELD ORBIT",
+ "Ещё +": "Another +",
+ "Ещё раз ↗": "Try Again ↗",
+ "ЗА ВСЁ ВРЕМЯ:": "ALL TIME:",
+ "ЗАПУСТИТЬ РЕАКТОР": "LAUNCH REACTOR",
+ "ЗАЩИТНЫЙ КОНТУР / АКТИВЕН": "DEFENSE CIRCUIT / ACTIVE",
+ "За горизонтом": "Beyond the Horizon",
+ "За гранью": "Beyond the Edge",
+ "Завершено": "Complete",
+ "Завершить 25 попыток.": "Finish 25 runs.",
+ "Завершить первую попытку.": "Finish your first run.",
+ "Завершить попытку": "End Run",
+ "Завершить попытку?": "End this run?",
+ "Загрузить сохранение?": "Import this save?",
+ "Заменить варианты ·": "Reroll choices ·",
+ "Запустите реактор — первый рекорд уже ждёт.": "Launch the reactor. Your first record is waiting.",
+ "Заработок осколков +10%.": "Shard earnings +10%.",
+ "Защита": "Defense",
+ "Защитите последний реактор станции.": "Protect the station’s last reactor.",
+ "Защищайте ядро, собирайте энергию и создавайте свои комбинации. Постоянные технологии активны.": "Defend the core, collect energy, and build your own combinations. Permanent technologies are active.",
+ "Звук": "Audio",
+ "Звук и изображение": "Audio and visuals",
+ "Зеркальный барьер": "Mirror Barrier",
+ "Золотой импульс": "Golden Pulse",
+ "ИДЕАЛЬНО": "PERFECT",
+ "ИДЕАЛЬНЫХ": "PERFECTS",
+ "ИДЕАЛЬНЫХ ОТРАЖЕНИЙ": "PERFECT REFLECTS",
+ "ИЗМЕНИТЬ ↗": "CHANGE ↗",
+ "ИНЖЕНЕРНЫЙ ОТСЕК": "ENGINEERING BAY",
+ "Играть": "Play",
+ "Игровая арена: ядро и вращающийся защитный щит": "Game arena: the core and its rotating shield",
+ "Игровое меню": "Game menu",
+ "Идеальное отражение даёт барьер на 0,6 с за уровень.": "A perfect reflect grants a barrier for 0.6 s per level.",
+ "Импорт JSON": "Import JSON",
+ "Инженер ядра": "Core Engineer",
+ "Искажение пространства": "Spatial Distortion",
+ "Испытание": "Challenge",
+ "Испытание для реактора после перезагрузки. Ещё более плотный ритм с теми же правилами честных атак.": "A challenge for a rebooted reactor. A denser rhythm with the same fair attack rules.",
+ "Исследовать": "Research",
+ "К РЕКОРДУ": "ABOVE YOUR BEST",
+ "КАЖДАЯ ПОПЫТКА — НОВАЯ КОНФИГУРАЦИЯ.": "EVERY RUN. A NEW CONFIGURATION.",
+ "КОНТУР СДЕРЖИВАНИЯ": "CONTAINMENT CIRCUIT",
+ "Каждая цель — новый повод выйти на орбиту. Награда за достижение начисляется один раз.": "Every goal is a reason to return to orbit. Each achievement reward is granted once.",
+ "Каждое 5-е попадание не наносит урон; затем каждое 4-е.": "Negates every 5th hit. At level 2, every 4th hit.",
+ "Каждое 8-е попадание блокируется; второй уровень — каждое 7-е.": "Negates every 8th hit. At level 2, every 7th hit.",
+ "Каждые 4 с повреждает до 2 врагов на 0,35 за уровень.": "Every 4 s, deals 0.35 damage per level to up to 2 enemies.",
+ "Каждый 8-й блок очищает вражеские снаряды и наносит 1,5 урона всем врагам.": "Every 8th block clears hostile projectiles and deals 1.5 damage to every enemy.",
+ "Каждый блок выпускает дополнительный самонаводящийся снаряд с уроном 45%.": "Each block launches an extra homing projectile for 45% damage.",
+ "Каскадный разряд": "Cascade Discharge",
+ "Квантовая удача": "Quantum Luck",
+ "Кинетическая броня": "Kinetic Armor",
+ "Классический": "Classic",
+ "Композитная обшивка": "Composite Plating",
+ "Корпус": "Hull",
+ "Краткий протокол защиты": "Defense quick guide",
+ "Критическая масса": "Critical Mass",
+ "ЛАЗЕР": "LASER",
+ "ЛОКАЛЬНЫЕ РЕКОРДЫ": "LOCAL RECORDS",
+ "ЛОКАЛЬНЫЙ ПРОГРЕСС": "LOCAL PROGRESS",
+ "ЛУЧШЕЕ ВРЕМЯ": "BEST TIME",
+ "Лазер: щит не перекрыл предупреждающий луч": "Laser: the shield did not cover the warning beam",
+ "Лазерная платформа": "Laser Platform",
+ "Легендарная": "Legendary",
+ "МАГНИТНОЕ ПОЛЕ": "MAGNETIC FIELD",
+ "МАКС. ВОЛНА": "HIGHEST WAVE",
+ "МАТРИЦА ЗАВЕРШЕНА · +300": "MATRIX COMPLETE · +300",
+ "Магнитный подвес": "Magnetic Bearing",
+ "Максимальное здоровье +1 (до 5 HP).": "Maximum health +1 (up to 5 HP).",
+ "Малая турель": "Mini Turret",
+ "Малый спутник": "Small Satellite",
+ "Меньше частиц, без тряски. Полезно на мобильных устройствах.": "Fewer particles and no screen shake. Useful on mobile devices.",
+ "Мышь / касание": "Mouse / touch",
+ "Мышь / касание — направление. A / D — поворот. Пробел — пауза.": "Mouse / touch to aim. A / D to rotate. Space to pause.",
+ "НАСТРОЙКИ": "SETTINGS",
+ "НОВЫЙ РЕКОРД ВРЕМЕНИ": "NEW SURVIVAL RECORD",
+ "На расстоянии 130 ед. снаряды медленнее на 15% за уровень (до 45%).": "Within 130 units, incoming projectiles are 15% slower per level (up to 45%).",
+ "Награды испытаний +15%, входящий темп растёт на 5%.": "Challenge rewards +15%, incoming attack rate +5%.",
+ "Настройки": "Settings",
+ "Начальная скорость поворота +30°/с.": "Starting rotation speed +30°/s.",
+ "Начальная ширина щита +4°, максимум +12°.": "Starting shield width +4°, up to +12°.",
+ "Начальная энергия +5 за уровень. Новый след у щита.": "Starting energy +5 per level. Adds a new shield trail.",
+ "Начальный урон отражения +0,15.": "Starting reflect damage +0.15.",
+ "Не удалось прочитать сохранение:": "Could not read the save:",
+ "Невозможное возможно": "The Impossible Is Possible",
+ "Необязательное новое начало. Сбросит обычные технологии и осколки. Сохраняет рекорды, достижения, открытые режимы и особое дерево. Даёт 3 редких кристалла и ещё 1 за каждые 10 приобретённых уровней.": "An optional fresh start. Resets regular technologies and shards. Keeps records, achievements, unlocked modes, and the prestige tree. Grants 3 rare crystals, plus 1 for every 10 purchased technology levels.",
+ "Неподдерживаемая версия сохранения.": "Unsupported save version.",
+ "Нестабильная материя": "Unstable Matter",
+ "Нет доступа к хранилищу. Импорт не выполнен.": "Storage is unavailable. The save was not imported.",
+ "Неуязвимость после урона +0,1 с за уровень.": "Invulnerability after damage +0.1 s per level.",
+ "Новое начало": "A New Beginning",
+ "Новые условия, отдельные рекорды, тот же последний рубеж. «Чистый навык» доступен сразу.": "New conditions, separate records, the same last line of defense. Pure Skill is available from the start.",
+ "Новый личный рекорд записан в архив.": "A new personal best has been recorded.",
+ "Новый рекорд очков! Продолжайте держать рубеж.": "New high score! Keep holding the line.",
+ "Новый цикл начат. Получено кристаллов:": "A new cycle begins. Crystals earned:",
+ "ОБЗОР РЕАКТОРА": "REACTOR OVERVIEW",
+ "ОБЪЕКТ": "OBJECT",
+ "ОСКОЛКОВ": "SHARDS",
+ "ОТРАЖАЙТЕ": "REFLECT",
+ "ОЧКИ": "SCORE",
+ "ОЧКИ: +": "SCORE: +",
+ "ОЧКОВ": "POINTS",
+ "Обычная": "Common",
+ "Обычные технологии и осколки будут сброшены. Рекорды, достижения, режимы и дерево престижа сохранятся.": "Regular technologies and shards will be reset. Records, achievements, modes, and the prestige tree will be kept.",
+ "Один повторный выбор карт за попытку. Второй уровень: ещё один.": "One card reroll per run. Level 2 adds another reroll.",
+ "Один раз восстанавливает 1 HP после смертельного попадания.": "Once per run, restores 1 HP after a fatal hit.",
+ "Одиночные снаряды. Красный ромб.": "Single projectiles. A red diamond.",
+ "Орбитальный дрон": "Orbital Drone",
+ "Орбитальный спутник": "Orbital Satellite",
+ "Осадный автомат": "Siege Automaton",
+ "Осколки за бой начисляются после 8 секунд.": "Combat shards are awarded after 8 seconds.",
+ "Основная навигация": "Main navigation",
+ "Ответный импульс": "Retaliation Pulse",
+ "Откроется после 60 секунд": "Unlocks after 60 seconds",
+ "Открывает испытание «Горизонт»: темп +35%, осколки ×1,8.": "Unlocks the Horizon challenge: attack rate +35%, shards ×1.8.",
+ "Открывается в дереве престижа": "Unlocks in the prestige tree",
+ "Отмена": "Cancel",
+ "Отражения, предупреждения и события": "Reflects, warnings, and events",
+ "Отражённый снаряд пробивает ещё одного врага.": "Reflected projectiles pierce one additional enemy.",
+ "Отразить суммарно 100 атак.": "Reflect a total of 100 attacks.",
+ "Очередь из трёх снарядов.": "Fires a burst of three projectiles.",
+ "ПАРАМЕТРЫ СИСТЕМЫ": "SYSTEM SETTINGS",
+ "ПОДАВЛЕНИЕ": "SUPPRESSED",
+ "ПОДТВЕРЖДЕНИЕ": "CONFIRMATION",
+ "ПОЛУЧЕНО ✓": "UNLOCKED ✓",
+ "ПОПЫТОК": "RUNS",
+ "ПОСЛЕДНИЙ РУБЕЖ · АРКАДНЫЙ ROGUELITE": "THE LAST LINE · ARCADE ROGUELITE",
+ "ПОСТОЯННЫЕ ТЕХНОЛОГИИ": "PERMANENT TECHNOLOGIES",
+ "ПРЕВОСХОДИТЕ": "EXCEED",
+ "ПРЕДЕЛ КОРПУСА: 5 HP · МАСТЕРСТВО ВАЖНЕЕ БРОНИ": "HULL LIMIT: 5 HP · SKILL MATTERS MORE THAN ARMOR",
+ "ПРЕЖНИЙ РЕКОРД:": "PREVIOUS BEST:",
+ "ПРОТОКОЛ / 0": "PROTOCOL / 0",
+ "Память реактора": "Reactor Memory",
+ "Пауза": "Pause",
+ "Первый контакт": "First Contact",
+ "Перегрузка": "Overdrive",
+ "Перезагрузить реактор": "Reboot Reactor",
+ "Перезагрузить реактор.": "Reboot the reactor.",
+ "Перезагрузить реактор?": "Reboot the reactor?",
+ "Перезагрузка реактора": "Reactor Reboot",
+ "Победа над боссом восстанавливает 1 HP за уровень.": "Defeating a boss restores 1 HP per level.",
+ "Победить Гидру.": "Defeat Hydra.",
+ "Победить Сингулярность.": "Defeat Singularity.",
+ "Победить Стража.": "Defeat Guardian.",
+ "Победить Фантома.": "Defeat Phantom.",
+ "Поворачивайте щит мышью, пальцем, A / D или стрелками. Щит движется с ограниченной скоростью. Пробел / Esc — пауза. Зажать щит в одном месте недостаточно: подставьте его под траекторию за 120 мс до удара для идеального отражения. Пунктирные фиолетовые лучи Фантома с меткой «ЭХО» безопасны; сплошные цветные линии показывают настоящие атаки. Боссы движутся по орбите, обычные враги начинают разгоняться после 18-й секунды. Прицел зафиксирован: атака выходит из отмеченного заряда, даже если враг уже переместился. Игра останавливается при переключении окна.": "Aim the shield with your mouse, touch, A / D, or the arrow keys. The shield has a limited rotation speed. Space / Esc pauses the game. Holding still is not enough for a perfect reflect: move the shield across the trajectory within 120 ms of impact. Phantom’s dashed purple beams marked ECHO are harmless; solid colored lines mark real attacks. Bosses orbit the core, and regular enemies gradually start moving after 18 seconds. Aiming is locked: attacks launch from the marked charge even after the enemy moves away. The game pauses when you switch windows.",
+ "Подавитель": "Suppressor",
+ "Подавитель: атака прошла мимо щита": "Suppressor: the attack bypassed the shield",
+ "Подавление: щит замедлен, автоматика отключена на 3 с.": "Suppression: shield slowed and automation disabled for 3 s.",
+ "Подтвердить": "Confirm",
+ "Полевой ремонт": "Field Repairs",
+ "Полоса заряда, затем лазерный импульс.": "A charging beam followed by a laser pulse.",
+ "Попадание поражает ещё 1 врага на 70% урона. Разряды могут критовать.": "Hits chain to one extra enemy for 70% damage. Chain strikes can critically hit.",
+ "Попадания взрываются в радиусе 45 (+15) ед. с уроном 65%.": "Hits explode within 45 (+15) units for 65% damage.",
+ "Попытка завершена вручную": "Run ended manually",
+ "Попытка закончится с текущим результатом. Начисление наград происходит один раз.": "The run will end with your current result. Rewards are granted only once.",
+ "Порог следующего уровня −8% (максимум −24%).": "Energy needed for the next level −8% (up to −24%).",
+ "После гибели выпускает два малых объекта с предупреждением.": "On destruction, releases two small threats with warnings.",
+ "Превратите угрозу в свою силу.": "Turn every threat into your strength.",
+ "Предзаряд": "Precharge",
+ "Престиж": "Prestige",
+ "При 1 HP включает барьер на 2 с. Один раз за попытку.": "At 1 HP, activates a barrier for 2 s. Once per run.",
+ "При попадании замедляет щит и отключает автоматику на 3 с.": "On impact, slows the shield and disables automation for 3 s.",
+ "При потере HP всем врагам наносится 1,5 урона за уровень.": "Taking HP damage deals 1.5 damage per level to every enemy.",
+ "Призма истока": "Origin Prism",
+ "Приобрести 10 уровней технологий.": "Purchase 10 technology levels.",
+ "Прогресс сброшен. Резервная копия доступна в настройках.": "Progress reset. A backup is available in Settings.",
+ "Прогресс успешно восстановлен.": "Progress restored successfully.",
+ "Прогресс хранится в этом браузере. Экспортируйте JSON, чтобы перенести его на другое устройство. Перед импортом создаётся резервная копия текущего сохранения.": "Progress is stored in this browser. Export a JSON save to move it to another device. Your current save is backed up before an import.",
+ "Продолжите, когда будете готовы.": "Continue when you are ready.",
+ "Продолжить ↗": "Resume ↗",
+ "Противоположный сегмент щита шириной 12°.": "Adds a 12° shield segment opposite the main arc.",
+ "Протокол сверхновой": "Supernova Protocol",
+ "Протокол: Страж": "Protocol: Guardian",
+ "Процедурная композиция реактора": "Procedural reactor soundtrack",
+ "Пулемётчик": "Burst Gunner",
+ "РЕАКТОР В РЕЖИМЕ ОЖИДАНИЯ": "REACTOR ON STANDBY",
+ "РЕАКТОР В СЕТИ": "REACTOR ONLINE",
+ "РЕЖИМ:": "MODE:",
+ "РЕКОРД ОЧКОВ": "HIGH SCORE",
+ "Равные условия · отдельные рекорды": "Equal starting conditions · separate records",
+ "Разгон отражения": "Reflect Accelerator",
+ "Разгон частиц": "Particle Accelerator",
+ "Разделитель": "Splitter",
+ "Разогнанный реактор": "Overdriven Reactor",
+ "Разорвать цепь": "Break the Chain",
+ "Распределённое сознание": "Distributed Consciousness",
+ "Реактор": "Reactor",
+ "Реактор готов к перезагрузке.": "The reactor is ready to reboot.",
+ "Редкая": "Rare",
+ "Режимы": "Modes",
+ "Резерв вариантов": "Backup Choices",
+ "Резервная дуга": "Reserve Arc",
+ "Резервной копии пока нет. Экспортируйте текущее сохранение.": "No backup exists yet. Export your current save.",
+ "Резонанс серии": "Combo Resonance",
+ "Рекорды": "Records",
+ "Рекуператор": "Recuperator",
+ "Рекуперация": "Energy Recovery",
+ "Ремонтный рой": "Repair Swarm",
+ "Ритм атаки изменился.": "The attack rhythm has changed.",
+ "СЕКТОР 07 / СТАНЦИЯ «ИСТОК»": "SECTOR 07 / ORIGIN STATION",
+ "СЕРИЯ БЛОКОВ": "BLOCK STREAK",
+ "СЕРИЯ ИДЕАЛЬНЫХ": "PERFECT STREAK",
+ "СИГНАЛ ПОТЕРЯН ·": "SIGNAL LOST ·",
+ "СИНГУЛЯРНОСТЬ": "SINGULARITY",
+ "СИСТЕМА ГОТОВА": "SYSTEM READY",
+ "СОСТОЯНИЕ": "STATUS",
+ "СПИРАЛЬ": "SPIRAL",
+ "СТАБИЛЬНО": "STABLE",
+ "СТРАЖ": "GUARDIAN",
+ "Сборщик энергии": "Energy Collector",
+ "Сброс не выполнен: не удалось сохранить резервную копию.": "Reset cancelled: a backup could not be saved.",
+ "Сбросить прогресс": "Reset Progress",
+ "Сверхновая": "Supernova",
+ "Световой парус": "Light Sail",
+ "Сейчас:": "Current:",
+ "Серия идеальных отражений даёт +2 энергии за уровень.": "Perfect reflect streaks grant +2 energy per level.",
+ "Серия из 30 отражений.": "Reach a streak of 30 reflects.",
+ "Сигнатуры противников": "Enemy signatures",
+ "Сингулярность: замедление снарядов +10%": "Singularity: projectile slowdown +10%",
+ "Скачать игру": "Download Game",
+ "Скачать исходное сохранение": "Download Original Save",
+ "Скачать резервную копию": "Download Backup",
+ "Сквозь иллюзии": "Through the Illusions",
+ "Скорость поворота +65°/с.": "Rotation speed +65°/s.",
+ "След в системе": "A Mark on the System",
+ "Следующие 25 с: очки ×1,5 и энергия ×1,25 за уровень.": "For the next 25 s: score ×1.5 and energy ×1.25 per level.",
+ "Следующий шаг эволюции": "The Next Evolution",
+ "Снайпер": "Sniper",
+ "Снаряд прошёл мимо щита": "A projectile bypassed the shield",
+ "Снаряд прошёл через незащищённую сторону ядра": "A projectile reached an unprotected side of the core",
+ "Снова в бой": "Back into Battle",
+ "Соберите комфортное окружение. Настройки сохраняются автоматически.": "Make yourself comfortable. Settings are saved automatically.",
+ "Сохранение и прогресс": "Saves and progress",
+ "Сохранение не удалось прочитать. Исходные данные сохранены; экспортируйте их в настройках. Новый прогресс пока хранится в памяти.": "The save could not be read. The original data is preserved; export it in Settings. New progress is temporarily kept in memory.",
+ "Сочетайте технологии: разряды + критические попадания, взрывы + пробивание.": "Combine technologies: chain strikes + critical hits, explosions + piercing.",
+ "Спецтехнологии": "Special Technologies",
+ "Стабильный синтез": "Stable Synthesis",
+ "Стартовая энергия +10.": "Starting energy +10.",
+ "Стартовый дрон: выстрел каждые 9 с.": "Start with a drone that fires every 9 s.",
+ "Стереть весь прогресс?": "Erase all progress?",
+ "Страховка ошибки": "Safety Margin",
+ "Стрелок": "Shooter",
+ "Текущий прогресс будет заменён. Его резервная копия останется в этом браузере.": "Your current progress will be replaced. A backup will remain in this browser.",
+ "Текущий результат будет сохранён. Осколки за бой начисляются после 8 секунд.": "Your current result will be saved. Combat shards are awarded after 8 seconds.",
+ "Темп +16% · скорость снарядов +10% · осколки ×1,4": "Attack rate +16% · projectile speed +10% · shards ×1.4",
+ "Темп +35% · скорость снарядов +15% · осколки ×1,8": "Attack rate +35% · projectile speed +15% · shards ×1.8",
+ "Технологии": "Technologies",
+ "Технологии остаются с вами между попытками. Сильнее реактор — больше возможностей. Победа по-прежнему зависит от вас.": "Technologies stay with you between runs. A stronger reactor offers more options. Victory still depends on you.",
+ "Точка резонанса": "Resonance Point",
+ "Точная настройка": "Fine Tuning",
+ "Точный резонанс": "Precise Resonance",
+ "Укрепление: +1 HP к текущему максимуму (до 6)": "Fortification: +1 maximum HP for this run (up to 6)",
+ "Уменьшить эффекты": "Reduce visual effects",
+ "Уничтожение врага даёт ещё 3 энергии.": "Destroying an enemy grants 3 additional energy.",
+ "Урон идеального отражения +15%. Окно остаётся 120 мс.": "Perfect reflect damage +15%. The window stays at 120 ms.",
+ "Урон легендарного импульса +25%.": "Legendary pulse damage +25%.",
+ "Урон отражения +0,6.": "Reflect damage +0.6.",
+ "Усиленный корпус": "Reinforced Hull",
+ "Условия: победить всех 4 боссов и приобрести 12 уровней технологий.": "Requirements: defeat all 4 bosses and purchase 12 technology levels.",
+ "ФАЗА": "PHASE",
+ "ФАНТОМ": "PHANTOM",
+ "Фазовый пробой": "Phase Piercing",
+ "Файл слишком большой: максимум 2 МБ.": "File too large: maximum size is 2 MB.",
+ "Фантом: барьер после идеального отражения": "Phantom: a barrier after perfect reflects",
+ "ЦЕЛОСТНОСТЬ ЯДРА": "CORE INTEGRITY",
+ "ЦЕНТР УПРАВЛЕНИЯ": "CONTROL CENTER",
+ "Цепная молния и взрывы наносят на 12% больше урона.": "Chain lightning and explosions deal 12% more damage.",
+ "Чистый кристалл": "Pure Crystal",
+ "Чистый навык": "Pure Skill",
+ "Ширина щита +8°.": "Shield width +8°.",
+ "Широкий спектр": "Wide Spectrum",
+ "Щит": "Shield",
+ "Щит следует за курсором или пальцем. Поворачивайте его навстречу красным снарядам.": "The shield follows your cursor or finger. Turn it toward incoming red projectiles.",
+ "ЭНЕРГЕТИЧЕСКОЕ ЯДРО": "ENERGY CORE",
+ "ЭНЕРГИЯ · УРОВЕНЬ": "ENERGY · LEVEL",
+ "ЭНЕРГИЯ СТАБИЛИЗИРОВАНА · УРОВЕНЬ": "ENERGY STABILIZED · LEVEL",
+ "ЭХО": "ECHO",
+ "Эволюция ядра": "Core Evolution",
+ "Эксперименты": "Experiments",
+ "Экспорт JSON": "Export JSON",
+ "Электрическая корона": "Electric Corona",
+ "Энергия": "Energy",
+ "Энергия +5% за уровень во всех режимах, кроме «Чистого навыка».": "Energy +5% per level in every mode except Pure Skill.",
+ "Энергия за блок +25%.": "Energy per block +25%.",
+ "Энергия за отражение +10%.": "Energy per reflect +10%.",
+ "Эпическая": "Epic",
+ "Это удалит технологии, валюту, рекорды и достижения. Перед сбросом сохранится резервная копия.": "This will delete technologies, currency, records, and achievements. A backup will be saved before the reset.",
+ "Эхо отражения": "Reflection Echo",
+ "Я Д Р О": "R E A C T O R",
+ "ЯДРО": "REACTOR",
+ "ЯДРО ПОВРЕЖДЕНО": "CORE DAMAGED",
+ "ЯДРО — неоновая аркада о реакции, отражении и последнем рубеже. Автономная браузерная игра с развитием и четырьмя боссами.": "REACTOR — a neon arcade game of reflexes, reflection, and a last line of defense. An offline browser game with progression and four bosses.",
+ "Ядро погасло. Опыт остался.": "The Core Is Gone. Your Experience Remains.",
+ "блоков": "blocks",
+ "боссов,": "bosses,",
+ "главное меню": "main menu",
+ "ед.": "units",
+ "за достижения": "from achievements",
+ "замена": "reroll",
+ "исходное-сохранение.json": "original-save.json",
+ "кристаллов": "crystals",
+ "новая попытка": "new run",
+ "опасная сигнатура на орбите": "hostile signature in orbit",
+ "осколков": "shards",
+ "осколков ядра": "core shards",
+ "очков": "points",
+ "пауза": "pause",
+ "поворот": "rotate",
+ "прогресс.json": "progress.json",
+ "резервная-копия.json": "backup.json",
+ "с": "s",
+ "с.": "s",
+ "снаряд": "projectile",
+ "спасение": "revive",
+ "уровней.": "levels.",
+ "цель": "target",
+ "шанс тройного урона отражений и цепных разрядов.": "chance of triple damage for reflected projectiles and chain strikes.",
+ "Язык": "Language",
+ "Язык интерфейса": "Interface language",
+ "Выбор применяется сразу и сохраняется между запусками.": "Changes apply immediately and are remembered between sessions.",
+ "Сменить язык": "Change language",
+ "С": "S",
+ "Доступен с": "Available from",
+ "Русский": "Russian",
+ "Перекрёстный огонь": "Crossfire",
+ "Лазерный захват": "Laser Lock",
+ "Перегрузка орудий": "Weapon Overload",
+ "СТРАЖ: фаза": "GUARDIAN: phase",
+ "электронный саундтрек": "electronic soundtrack",
+ "Стандарт": "Standard",
+ "Базовые характеристики без модификаторов.": "Base stats without modifiers.",
+ "Зеркало": "Mirror",
+ "Идеальное отражение +25%, весь урон отражения −10%.": "Perfect reflect +25%, all reflect damage −10%.",
+ "Шторм": "Storm",
+ "Стартовая цепная молния, урон отражения −20%.": "Start with chain lightning, reflect damage −20%.",
+ "Бастион": "Bastion",
+ "Щит +10°, скорость поворота −18%.": "Shield +10°, rotation speed −18%.",
+ "КОНФИГУРАЦИЯ ЯДРА": "CORE CONFIGURATION",
+ "В чистом навыке используется стандартное ядро.": "Pure Skill always uses the standard core.",
+ "Перегрузка · E / ПКМ · 20 энергии": "Overload · E / RMB · 20 energy",
+ "Перегрузка ·": "Overload ·",
+ "Грозовой резонанс": "Storm Resonance",
+ "Цепные разряды могут наносить критический урон.": "Chain strikes can deal critical damage.",
+ "Каскад взрывов": "Explosion Cascade",
+ "Каждое пробитое попадание создаёт взрыв.": "Every piercing hit creates an explosion.",
+ "Зеркальный каскад": "Mirror Cascade",
+ "Эхо наследует усиленный урон отражения.": "Echoes inherit boosted reflect damage.",
+ "Безупречный контур": "Flawless Circuit",
+ "Идеальные серии одновременно дают энергию и барьер.": "Perfect streaks grant both energy and a barrier.",
+ "Синергия:": "Synergy:",
+ "ПОСЛЕДНИЕ 1,8 СЕКУНДЫ": "LAST 1.8 SECONDS",
+ "Повтор последнего попадания": "Replay of the final hit",
+ "Щит не успел повернуться. Начинайте поворот раньше.": "The shield could not turn in time. Start rotating earlier.",
+ "Вы защищали другое направление. Следите за ближайшим ударом.": "You defended another direction. Watch the next incoming impact.",
+ "Вы защищали ложный луч. Пунктир с меткой ЭХО безопасен.": "You defended a decoy beam. Dashed ECHO lines are harmless.",
+ "УЯЗВИМ ·": "VULNERABLE ·",
+ "Перегрузка: E, правая кнопка мыши или кнопка над шкалой энергии. Стоимость 20 энергии, перезарядка 8 с; очищает снаряды в радиусе 140, не даёт очков и не лечит ядро. Броня босса открывается на 2,1 с после идеального отражения или на 0,65 с после каждого четвёртого блока. Игра останавливается при переключении окна.": "Overload: E, right mouse button, or the button above the energy bar. Costs 20 energy, with an 8 s cooldown; clears projectiles within 140 units, grants no points, and does not heal the core. Boss armor opens for 2.1 s after a perfect reflect, or 0.65 s after every fourth block. The game pauses when switching windows.",
+ "Геймпад": "Gamepad",
+ "Геймпад недоступен в этом браузере.": "Gamepad access is unavailable in this browser.",
+ "Подключите геймпад и нажмите на нём любую кнопку.": "Connect a gamepad and press any button on it.",
+ "Геймпад подключён:": "Gamepad connected:",
+ "Нестандартная раскладка: доступны стики, кнопки зависят от браузера.": "Nonstandard layout: sticks are available; buttons depend on the browser.",
+ "Геймпад отключён. Игра на паузе.": "Gamepad disconnected. Game paused.",
+ "Стик · A / ✕ · Start": "Stick · A / ✕ · Start",
+ "Оба стика и крестовина — направление щита. LB/RB (L1/R1) — вращение. A / ✕, X / □ или RT / R2 — Перегрузка. Start / Options — пауза. В меню: стик или крестовина — выбор, A / ✕ — подтвердить, B / ○ — назад. На ползунках громкости: влево/вправо — изменение.": "Either stick or the D-pad aims the shield. LB/RB (L1/R1) rotates it. A / ✕, X / □, or RT / R2 activates Overload. Start / Options pauses. Menus: stick or D-pad to navigate, A / ✕ to confirm, B / ○ to go back. On volume sliders: left/right to adjust.",
+ "Подключите контроллер по Bluetooth или USB к телефону или компьютеру. Если браузер не видит контроллер, откройте игру отдельной вкладкой. Для включения звука может потребоваться одно касание экрана или щелчок мышью.": "Connect your controller over Bluetooth or USB to your phone or computer. If the browser cannot see it, open the game in its own tab. Audio may require a single screen tap or mouse click to start.",
+ "Геймпад: стик — щит, A / ✕ — Перегрузка, Start — пауза, B / ○ — назад.": "Gamepad: stick to aim, A / ✕ for Overload, Start to pause, B / ○ to go back.",
+ "Рекорды текущих правил отделены от архива. Старый прогресс сохранён.": "Current-balance records are separate from the archive. Your old progress is preserved.",
+ "Текущие правила ·": "Current rules ·",
+ "Архив": "Archive",
+ "БАЛАНС": "BALANCE",
+ "Неизвестно": "Unknown",
+ "В этом разделе пока нет результатов.": "There are no results in this section yet.",
+ "Лучшие показатели за всё время сохранены.": "Your all-time bests have been preserved.",
+ "Сравнение и уведомления используют только текущие правила.": "Comparisons and notifications use the current rules only.",
+ "Здоровье ядра": "Core health",
+ "Боевая энергия": "Combat energy",
+ "Предыдущий кадр": "Previous frame",
+ "Следующий кадр": "Next frame",
+ "Повтор / пауза": "Play / pause",
+ "Мёртвая зона стиков": "Stick deadzone",
+ "От 10% до 40%. Увеличьте при дрейфе.": "From 10% to 40%. Increase if the stick drifts."
+};
+let language='ru';
+const messages={...catalog};
+for(const [key,value] of Object.entries(catalog)){
+ const upper=key.toUpperCase();if(!(upper in messages))messages[upper]=value.toUpperCase();
+}
+const escapeRegex=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const matcher=new RegExp(Object.keys(messages).sort((a,b)=>b.length-a.length).map(escapeRegex).join('|'),'gu');
+const letter=c=>Boolean(c)&&/\p{L}/u.test(c);
+function setLanguage(value){language=value==='en'?'en':'ru';return language;}
+function getLanguage(){return language;}
+function t(value){
+ const input=String(value??'');if(language==='ru'||!/[\u0400-\u04ff]/.test(input))return input;
+ if(Object.hasOwn(messages,input))return messages[input];
+ return input.replace(matcher,(key,index,source)=>{
+  // Never replace a translated word inside another word or a stable identifier.
+  if(letter(key[0])&&letter(source[index-1])||letter(key.at(-1))&&letter(source[index+key.length]))return key;
+  return messages[key];
+ });
+}
+function html(markup){
+ if(language==='ru')return markup;
+ return String(markup).replace(/<[^>]*>|[^<]+/g,part=>{
+  if(part[0]!=='<')return t(part);
+  return part.replace(/\b(aria-label|title)="([^"]*)"/g,(_,name,value)=>`${name}="${t(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"`);
+ });
+}
+function translateShell(doc){
+ doc.documentElement.lang=language;doc.title=t('CORE — ЯДРО');
+ for(const el of doc.querySelectorAll('[data-i18n]'))el.textContent=t(el.dataset.i18n);
+ for(const attr of ['aria-label','title','content'])for(const el of doc.querySelectorAll(`[data-i18n-${attr}]`))el.setAttribute(attr,t(el.getAttribute(`data-i18n-${attr}`)));
+ for(const el of doc.querySelectorAll('[data-language]')){
+  const selected=el.dataset.language===language;el.classList.toggle('selected',selected);el.setAttribute('aria-pressed',String(selected));
+ }
+}
+const api={t,html,setLanguage,getLanguage,translateShell,catalog};
+if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreI18n=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+
+</script>
+<script>
+/* Original procedural score: PULSE CIRCUIT. No recordings, external assets, or borrowed melodies. */
+(function(root){
+'use strict';
+const BPM=126,STEP=60/BPM/4,MAX_VOICES=88;
+const midi=n=>440*Math.pow(2,(n-69)/12);
+const CHORDS=[{root:38,notes:[0,3,7,14]},{root:34,notes:[0,4,7,11]},{root:41,notes:[0,4,7,14]},{root:36,notes:[0,4,7,9]},{root:38,notes:[0,3,7,10]},{root:43,notes:[0,4,7,9]},{root:34,notes:[0,4,7,14]},{root:36,notes:[0,4,7,14]}];
+const ARP=[0,2,1,3,2,1,3,2,0,3,2,1,3,1,2,3];
+function scoreStep(index,mode='combat'){
+ const s=index%16,bar=Math.floor(index/16)%16,chord=CHORDS[Math.floor(bar/2)],boss=mode==='boss',soft=mode==='paused'||mode==='result',menu=mode==='menu',events=[];
+ const add=(kind,data={})=>events.push({kind,offset:0,...data});
+ if(s%4===0&&(!soft||s===0))add('kick',{level:soft?.32:menu?.64:.82});
+ if(!soft&&s%8===4)add('snare',{level:menu?.1:.17});
+ if(!soft&&(s%2===0||boss&&s%8===7))add('hat',{level:s%4===2?.046:.026,open:s%8===6});
+ if([0,3,6,8,11,14].includes(s)){
+  const note=chord.root+(s===14&&bar%2?7:s===11&&bar%4===3?12:0),duck=s%4===0?.48:1;
+  add('synth',{note,duration:STEP*1.6,wave:'sawtooth',level:.19*duck,cutoff:soft?420:boss?1800:950,attack:.006,release:.07,pluck:true});
+  add('synth',{note:note-12,duration:STEP*1.55,wave:'sine',level:.12*duck,attack:.009,release:.08});
+ }
+ if(!soft||s%2===0){const note=chord.root+24+chord.notes[ARP[s]]+(bar>=8&&s%4===3?12:0);add('synth',{note,duration:STEP*(s%4===3?2.3:1.6),wave:'triangle',level:soft?.027:menu?.063:.083,cutoff:boss?6500:3500,attack:.005,release:.15,pluck:true,pan:Math.sin(index*.7)*.35,wet:true});}
+ if(s===0)for(const [i,interval]of chord.notes.entries())add('synth',{note:chord.root+12+interval,duration:STEP*15,wave:'sawtooth',level:soft?.014:.023,cutoff:soft?900:2100,attack:.22,release:.48,detune:i%2?6:-6,pan:(i-1.5)*.24,wet:true});
+ if(!soft&&bar>=4&&[2,8,11,14].includes(s)){
+  const phrase=[[2,3,2,1],[3,4,2,3],[2,1,3,4],[3,2,1,0]],tone=phrase[bar%4][[2,8,11,14].indexOf(s)],part=tone===4?12:chord.notes[tone],note=chord.root+24+part;
+  add('synth',{note,duration:STEP*(s===8?2.7:1.6),wave:'triangle',level:boss?.1:menu?.052:.078,cutoff:5200,attack:.012,release:.22,pan:.13,wet:true});
+ }
+ if(boss&&s===15)add('noise',{duration:.055,level:.036,cutoff:3800,filter:'bandpass'});
+ return events;
+}
+function effectPlan(name,enemy='',options={}){
+ const out=[],add=(note,offset=0,duration=.1,level=.1,wave='triangle',extra={})=>out.push({kind:'synth',note,offset,duration,level,wave,attack:.003,release:.06,...extra});
+ const noise=(duration,level,cutoff,offset=0)=>out.push({kind:'noise',duration,level,cutoff,filter:'bandpass',offset});
+ if(name==='block'){add(74+Math.min(4,Math.floor((options.combo||0)/12)),0,.07,.17,'triangle',{endNote:79});add(86,.015,.05,.045,'sine');}
+ else if(name==='perfect'){[74,77,81,86].forEach((n,i)=>add(n,i*.028,.13,.115-i*.016,'triangle',{cutoff:7000}));noise(.055,.032,6500,.025);}
+ else if(name==='hurt'){add(43,0,.23,.23,'sawtooth',{endNote:31,cutoff:1100});noise(.14,.13,600);}
+ else if(name==='kill'){add(62,0,.075,.075,'square',{endNote:50,cutoff:1900});noise(.075,.042,2100);}
+ else if(['level','choose','buy','record','bossWin','revive'].includes(name)){
+  const notes=name==='buy'?[74,81]:name==='choose'?[69,74,81]:name==='level'?[62,69,74,77]:name==='bossWin'?[62,69,74,78,81]:name==='record'?[74,78,81,86]:[62,67,74,79];
+  notes.forEach((n,i)=>add(n,i*.055,name==='bossWin'?.32:.2,.11,'triangle',{cutoff:5500}));
+ }else if(name==='boss'||name==='guardianPhase'){
+  add(38,0,.62,.19,'sawtooth',{cutoff:900,endNote:38});add(50,.1,.46,.1,'triangle');add(62,.23,.32,.07,'sawtooth',{cutoff:1900});noise(.25,.05,850);
+ }else if(name==='warning'){add(81,0,.075,.085,'sine');add(options.kind==='laser'?86:84,.12,.11,.08,'triangle');}
+ else if(name==='armor'||name==='emergency'){add(62,0,.18,.12,'triangle');add(69,.04,.22,.085,'sine');}
+ else if(name==='pulse'){add(38,0,.45,.24,'sawtooth',{cutoff:1600,endNote:26});noise(.28,.11,1800);[74,81,86].forEach((n,i)=>add(n,.06+i*.035,.22,.065));}
+ else if(name==='suppress'){add(58,0,.25,.13,'square',{endNote:46,cutoff:1100});}
+ else if(name==='death'){add(50,0,.55,.17,'sawtooth',{endNote:26,cutoff:1000});add(62,.04,.65,.085,'triangle',{endNote:38});noise(.35,.07,750);}
+ else if(name==='fire'){const types=['shooter','gunner','sniper','shotgun','laser','orbital','splitter','suppressor','boss'],i=Math.max(0,types.indexOf(enemy));add(48+i*2,0,.045,.035,'triangle',{endNote:43+i*2,cutoff:1500});}
+ return out;
+}
+class AudioSystem{
+ constructor(getSettings=()=>({music:.16,sfx:.55}),options={}){this.getSettings=getSettings;this.contextFactory=options.contextFactory||(()=>new(root.AudioContext||root.webkitAudioContext)());this.ctx=null;this.next=0;this.step=0;this.mode='menu';this.voices=new Set();this.settingsSnapshot={};this.failed=false;}
+ unlock(){
+  if(this.failed)return;
+  try{if(!this.ctx){this.ctx=this.contextFactory();this.setup();this.next=this.ctx.currentTime+.025;}
+   if(['suspended','interrupted'].includes(this.ctx.state))Promise.resolve(this.ctx.resume()).catch(()=>{});this.syncVolumes();
+  }catch(e){this.failed=true;if(this.ctx&&typeof this.ctx.close==='function')Promise.resolve(this.ctx.close()).catch(()=>{});this.ctx=null;}
+ }
+ setup(){
+  const c=this.ctx;this.music=c.createGain();this.sfx=c.createGain();this.master=c.createGain();this.master.gain.value=.82;
+  this.compressor=c.createDynamicsCompressor();this.compressor.threshold.value=-8;this.compressor.knee.value=12;this.compressor.ratio.value=4;this.compressor.attack.value=.003;this.compressor.release.value=.16;
+  this.musicFilter=c.createBiquadFilter();this.musicFilter.type='lowpass';this.musicFilter.frequency.value=6500;this.musicFilter.Q.value=.5;
+  this.music.connect(this.musicFilter);this.musicFilter.connect(this.compressor);this.sfx.connect(this.compressor);this.compressor.connect(this.master);this.master.connect(c.destination);
+  this.delaySend=c.createGain();this.delaySend.gain.value=.2;this.delay=c.createDelay(1);this.delay.delayTime.value=60/BPM*.75;this.feedback=c.createGain();this.feedback.gain.value=.23;
+  this.echoFilter=c.createBiquadFilter();this.echoFilter.type='lowpass';this.echoFilter.frequency.value=2600;this.delaySend.connect(this.delay);this.delay.connect(this.echoFilter);this.echoFilter.connect(this.music);this.echoFilter.connect(this.feedback);this.feedback.connect(this.delay);
+  const rate=c.sampleRate||44100;this.noise=c.createBuffer(1,Math.ceil(rate*.6),rate);const data=this.noise.getChannelData(0);let seed=17;for(let i=0;i<data.length;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;data[i]=seed/2147483648-1;}
+ }
+ syncVolumes(){
+  if(!this.ctx||!this.music)return;const s=this.getSettings(),now=this.ctx.currentTime;
+  for(const [key,multiplier]of [['music',1.1],['sfx',.88]]){const raw=Number(s[key]),value=Number.isFinite(raw)?Math.max(0,Math.min(1,raw)):0;if(this.settingsSnapshot[key]!==value){this[key].gain.cancelScheduledValues(now);this[key].gain.setTargetAtTime(value*multiplier,now,.018);this.settingsSnapshot[key]=value;}}
+ }
+ setMode(mode){if(this.mode===mode)return;this.mode=mode;if(this.musicFilter)this.musicFilter.frequency.setTargetAtTime(mode==='paused'?1300:mode==='result'?2500:mode==='boss'?10000:mode==='menu'?5000:7200,this.ctx.currentTime,.22);}
+ suspend(){if(this.ctx&&typeof this.ctx.suspend==='function')Promise.resolve(this.ctx.suspend()).catch(()=>{});}
+ resume(){if(this.ctx&&['suspended','interrupted'].includes(this.ctx.state))Promise.resolve(this.ctx.resume()).catch(()=>{});}
+ render(event,when,music=true){
+  if(!this.ctx||this.ctx.state!=='running'||this.voices.size>=MAX_VOICES)return;
+  const c=this.ctx,start=Math.max(c.currentTime,when),kind=event.kind;
+  if(kind==='kick'){this.render({kind:'synth',note:45,endNote:28,duration:.2,release:.04,wave:'sine',level:event.level,attack:.002},start,music);this.render({kind:'noise',duration:.014,level:event.level*.05,filter:'highpass',cutoff:900},start,music);return;}
+  if(kind==='snare'){for(let i=0;i<3;i++)this.render({kind:'noise',duration:.075,level:event.level*(i? .45:1),filter:'bandpass',cutoff:1850},start+i*.011,music);this.render({kind:'synth',note:53,endNote:47,wave:'triangle',duration:.085,level:event.level*.4},start,music);return;}
+  if(kind==='hat'){this.render({kind:'noise',duration:event.open?.105:.033,level:event.level,filter:'highpass',cutoff:7200},start,music);return;}
+  const duration=Math.max(.012,Math.min(3,event.duration||.1)),release=event.release??(kind==='noise'?.015:.07),end=start+duration+release;
+  const source=kind==='noise'?c.createBufferSource():c.createOscillator(),gain=c.createGain(),filter=c.createBiquadFilter(),nodes=[source,gain,filter];
+  filter.type=event.filter||'lowpass';filter.Q.value=kind==='noise'?.7:.65;
+  const cutoff=event.cutoff||14000;filter.frequency.setValueAtTime(cutoff,start);if(event.pluck)filter.frequency.exponentialRampToValueAtTime(Math.max(180,cutoff*.2),start+duration);
+  if(kind==='noise'){source.buffer=this.noise;}else{source.type=event.wave||'triangle';source.frequency.setValueAtTime(midi(event.note),start);if(Number.isFinite(event.endNote))source.frequency.exponentialRampToValueAtTime(midi(event.endNote),start+duration);source.detune.value=event.detune||0;}
+  const attack=Math.min(duration*.7,event.attack||.004),peak=Math.max(.0001,Math.min(1,event.level||.1));
+  gain.gain.setValueAtTime(.0001,start);gain.gain.exponentialRampToValueAtTime(peak,start+attack);gain.gain.exponentialRampToValueAtTime(Math.max(.0001,peak*(event.pluck?.28:.68)),start+duration);gain.gain.exponentialRampToValueAtTime(.0001,end);
+  source.connect(filter);filter.connect(gain);let output=gain;
+  if(event.pan&&typeof c.createStereoPanner==='function'){const pan=c.createStereoPanner();pan.pan.value=event.pan;gain.connect(pan);output=pan;nodes.push(pan);}
+  output.connect(music?this.music:this.sfx);if(music&&event.wet)output.connect(this.delaySend);
+  const voice={source,nodes};this.voices.add(voice);source.onended=()=>{for(const node of nodes)node.disconnect();this.voices.delete(voice);};source.start(start);source.stop(end+.015);
+ }
+ play(name,enemy='',options={}){if(!this.ctx||this.ctx.state!=='running'||!this.getSettings().sfx)return;const at=this.ctx.currentTime;for(const e of effectPlan(name,enemy,options))this.render(e,at+e.offset,false);}
+ update(mode=this.mode){
+  if(!this.ctx||this.ctx.state!=='running')return;this.syncVolumes();this.setMode(mode);
+  const now=this.ctx.currentTime;if(this.next<now-.2){this.next=now+.025;this.step=Math.ceil(this.step/16)*16;}
+  if(!this.getSettings().music){this.next=now+.025;return;}
+  let count=0;while(this.next<now+.105&&count++<4){for(const event of scoreStep(this.step,this.mode))this.render(event,this.next+event.offset,true);this.step++;this.next+=STEP;}
+ }
+}
+const api={AudioSystem,scoreStep,effectPlan,BPM,STEP,MAX_VOICES,midi};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreAudio=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+
+</script>
+<script>
+/* Standard Gamepad API input. No network, permissions prompt, or gameplay timing changes. */
+(function(root){
+'use strict';
+const clamp=v=>Number.isFinite(v)?Math.max(-1,Math.min(1,v)):0;
+class Controller{
+ constructor(read){this.read=read||(()=>typeof navigator!=='undefined'&&typeof navigator.getGamepads==='function'?navigator.getGamepads():null);this.key=null;this.buttons=[];this.baseline=true;this.navigation='';this.repeatAt=0;this.deadzone=.22;}
+ reset(){this.baseline=true;this.navigation='';this.repeatAt=0;}
+ poll(now=0,menu=false){
+  let pads;try{pads=this.read();}catch(e){pads=null;}
+  const empty={available:pads!==null&&pads!==undefined,connected:false,active:false,axis:0,angle:undefined,confirm:false,overload:false,back:false,pause:false,nav:null};
+  const list=Array.from(pads||[]).filter(p=>p&&p.connected!==false);
+  const pad=list.find(p=>`${p.index}:${p.id}`===this.key)||list[0];
+  if(!pad){const changed=this.key!==null;this.key=null;this.buttons=[];this.reset();return{...empty,changed};}
+  const key=`${pad.index}:${pad.id}`,changed=key!==this.key;if(changed){this.key=key;this.reset();}
+  const standard=pad.mapping==='standard',buttons=Array.from(pad.buttons||[],b=>typeof b==='number'?b>.6:Boolean(b?.pressed||b?.value>.6));
+  const down=i=>Boolean(buttons[i]),edge=i=>!this.baseline&&down(i)&&!this.buttons[i];
+  const axes=Array.from(pad.axes||[],clamp);let x=axes[0]||0,y=axes[1]||0;
+  if(standard&&Math.hypot(axes[2]||0,axes[3]||0)>Math.hypot(x,y)){x=axes[2]||0;y=axes[3]||0;}
+  const magnitude=Math.hypot(x,y);let angle=magnitude>=this.deadzone?Math.atan2(y,x):undefined,axis=0,nav=null;
+  if(standard){const dx=Number(down(15))-Number(down(14)),dy=Number(down(13))-Number(down(12));if(dx||dy){x=dx;y=dy;angle=Math.atan2(dy,dx);}axis=Number(down(5))-Number(down(4));}
+  if(menu){const direction=Math.max(Math.abs(x),Math.abs(y))>.5?(Math.abs(x)>Math.abs(y)?x>0?'right':'left':y>0?'down':'up'):'';
+   if(direction!==this.navigation){this.navigation=direction;this.repeatAt=now+320;if(!this.baseline)nav=direction||null;}
+   else if(direction&&now>=this.repeatAt){nav=direction;this.repeatAt=now+140;}
+  }else this.navigation='';
+  const result={...empty,connected:true,changed,id:String(pad.id||'Gamepad'),index:pad.index,standard,angle,axis,active:angle!==undefined||axis!==0,nav,confirm:standard&&edge(0),overload:standard&&(edge(0)||edge(2)||edge(7)),back:standard&&edge(1),pause:standard&&edge(9)};
+  this.buttons=buttons;this.baseline=false;return result;
+ }
+}
+const api={Controller};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreGamepad=api;
+})(typeof globalThis!=='undefined'?globalThis:this);
+
+</script>
+<script>
+(function(){
+'use strict';
+const I=CoreI18n,t=I.t,h=I.html;
+const D=CoreData,C=CoreEngine,$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let browserStorage;try{browserStorage=window.localStorage;}catch(e){browserStorage={getItem(){throw e;},setItem(){throw e;}};}
+const store=new C.SaveStore(browserStorage);let save=store.data,page='home',mode='classic',engine=null,runResult=null,shopTab='Корпус',recordsTab='classic',recordsScope='current',isRunning=false,previousFocus=null;
+I.setLanguage(save.settings.language);
+const stage=$('#stage'),canvas=$('#arena'),ctx=canvas.getContext('2d'),screen=$('#screen'),modal=$('#modal');
+let width=0,height=0,dpr=1,scale=1,cx=0,cy=0,lastTime=0,elapsed=0,lastHud=-1,shake=0,notifiedBest=false;
+const keys=new Set(),input={angle:undefined},labels=[];
+const controller=new CoreGamepad.Controller();let padState={available:false,connected:false},inputOwner='pointer',windowFocused=true;
+const modes={classic:{name:'Классический',desc:'Защищайте ядро, собирайте энергию и создавайте свои комбинации. Постоянные технологии активны.',bonus:'Базовые награды · полный прогресс'},challenge:{name:'Испытание',desc:'Больше угроз и выше темп. Открывается после 60 секунд выживания. Постоянные технологии активны.',bonus:'Темп +16% · скорость снарядов +10% · осколки ×1,4'},skill:{name:'Чистый навык',desc:'Базовый щит, 3 HP и ваша реакция. Все постоянные и престижные бонусы отключены. Осколки сохраняются.',bonus:'Равные условия · отдельные рекорды'},horizon:{name:'Горизонт',desc:'Испытание для реактора после перезагрузки. Ещё более плотный ритм с теми же правилами честных атак.',bonus:'Темп +35% · скорость снарядов +15% · осколки ×1,8'}};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=n=>Math.floor(n||0).toLocaleString(I.getLanguage()==='en'?'en-US':'ru-RU');
+const time=n=>Math.floor((n||0)/60).toString().padStart(2,'0')+':'+Math.floor((n||0)%60).toString().padStart(2,'0');
+const button=(action,text,cls='secondary',extra='')=>`<button class="${cls}" data-action="${action}" ${extra}>${text}</button>`;
+function persist(){store.write();$('#wallet').textContent=num(save.shards);}
+function toast(text,kind=''){const el=document.createElement('div');el.className='toast '+kind;el.dataset.rawMessage=text;el.textContent=t(text);$('#toasts').append(el);setTimeout(()=>el.remove(),5500);}
+const markupCache=new WeakMap();let replayPlaying=true,replayClock=0;
+function setMarkup(el,value){if(markupCache.get(el)!==value){el.innerHTML=value;markupCache.set(el,value);}}
+function uiIcon(symbol){const paths={'gamepad':'M7 7h10c3 0 5 10 3 11-2 1-4-3-5-3H9c-1 0-3 4-5 3C2 17 4 7 7 7Z M6 11h5m-2.5-2.5v5M16 10v1m2 2v1','↻':'M19 8a8 8 0 1 0 1 8 M19 3v5h-5','◔':'M18 5a9 9 0 0 1 0 14 M12 3v18','✚':'M12 4v16M4 12h16','ϟ':'m14 2-9 12h6l-1 8 9-12h-6Z','⇢':'M3 8h14m-4-4 4 4-4 4M3 17h18m-4-4 4 4-4 4','◒':'M12 3a9 9 0 1 0 0 18V3Z','∞':'M12 12c-8-12-12 10-4 4l8-8c8-6 12 16-4 4','△':'m12 3 10 18H2Z','◎':'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8','⌖':'M12 2v20M2 12h20M5 5h14v14H5Z','⋈':'m3 5 18 14V5L3 19Z','↗':'M5 19 19 5M9 5h10v10','☼':'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10M12 1v3m0 16v3M1 12h3m16 0h3'};return `<svg class="svg-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[symbol]||'m12 3 9 5v8l-9 5-9-5V8Z M8 12h8m-4-4v8'}"/></svg>`;}
+const audio=new CoreAudio.AudioSystem(()=>save.settings);
+function header(title,eyebrow,desc,chip=''){return `<div class="page-head"><div><div class="eyebrow">${eyebrow}</div><h2>${title}</h2><p>${desc}</p></div>${chip?`<div class="balance-chip">${chip}</div>`:''}</div>`;}
+const cores=[{id:'standard',name:'Стандарт',desc:'Базовые характеристики без модификаторов.'},{id:'mirror',name:'Зеркало',desc:'Идеальное отражение +25%, весь урон отражения −10%.'},{id:'storm',name:'Шторм',desc:'Стартовая цепная молния, урон отражения −20%.'},{id:'bastion',name:'Бастион',desc:'Щит +10°, скорость поворота −18%.'}];
+function corePicker(){return `<div class="core-picker"><small>КОНФИГУРАЦИЯ ЯДРА</small><div>${cores.map(c=>`<button data-core="${c.id}" class="${(save.settings.core||'standard')===c.id?'selected':''}" title="${c.desc}" ${mode==='skill'?'disabled':''}>${c.name}</button>`).join('')}</div><p>${mode==='skill'?'В чистом навыке используется стандартное ядро.':cores.find(c=>c.id===(save.settings.core||'standard')).desc}</p></div>`;}
+function controllerStatus(){return !padState.available?'Геймпад недоступен в этом браузере.':!padState.connected?'Подключите геймпад и нажмите на нём любую кнопку.':padState.standard?'Геймпад подключён: '+padState.id:'Нестандартная раскладка: доступны стики, кнопки зависят от браузера.';}
+function updateControllerStatus(){const icon=$('#controller-icon');if(icon){icon.classList.toggle('connected',padState.connected);icon.setAttribute('title',t(controllerStatus()));icon.setAttribute('aria-label',t(controllerStatus()));}const status=$('#controller-status');if(status)status.textContent=t(controllerStatus());}
+function controllerItems(){const roots=!modal.classList.contains('hidden')?[modal]:[screen];const items=roots.flatMap(el=>[...el.querySelectorAll('button:not([disabled]),input[type="range"],input[type="checkbox"]')]);if(modal.classList.contains('hidden')&&!isRunning)items.push(...$$('.nav-button'));return items.filter(el=>!el.disabled&&(typeof el.getClientRects!=='function'||el.getClientRects().length));}
+function spatialChoice(items,selected,nav){const a=selected.getBoundingClientRect(),ax=a.left+a.width/2,ay=a.top+a.height/2;const list=items.filter(el=>el!==selected).map(el=>{const b=el.getBoundingClientRect(),dx=b.left+b.width/2-ax,dy=b.top+b.height/2-ay;const main=nav==='right'?dx:nav==='left'?-dx:nav==='down'?dy:-dy,cross=nav==='right'||nav==='left'?Math.abs(dy):Math.abs(dx);return {el,main,score:main+cross*2.5};}).filter(v=>v.main>1).sort((a,b)=>a.score-b.score);return list[0]?.el||items[(items.indexOf(selected)+(nav==='left'||nav==='up'?-1:1)+items.length)%items.length];}
+function controllerMenu(nav,confirm){const items=controllerItems();if(!items.length)return;let selected=items.includes(document.activeElement)?document.activeElement:null;
+ if(!selected)selected=items.find(el=>el.dataset.action==='start'||el.dataset.action==='resume'||el.dataset.action==='restart')||items[0];
+ if(nav){if(selected.tagName==='INPUT'&&selected.type==='range'&&(nav==='left'||nav==='right')){selected.value=Math.max(Number(selected.min||0),Math.min(Number(selected.max||100),Number(selected.value)+(nav==='right'?5:-5)));selected.dispatchEvent(new Event('input',{bubbles:true}));return;}
+ const direction=nav==='left'||nav==='up'?-1:1;selected=spatialChoice(items,selected,nav);for(const el of items)el.classList.remove('pad-focus');selected.classList.add('pad-focus');selected.focus({preventScroll:true});selected.scrollIntoView?.({block:'nearest',inline:'nearest'});}
+ if(confirm)selected.click();
+}
+function controllerBack(){if(confirmCallback&&confirmationInfo){actions.cancel();return;}if(isRunning&&engine?.state==='upgrade')return;if(isRunning&&engine?.state==='playing')pause();else if(isRunning&&engine?.state==='paused')resume();else goPage('home');}
+function pollController(ms){if(!windowFocused||document.hidden)return null;const menu=!isRunning||engine?.state!=='playing';controller.deadzone=save.settings.deadzone||.22;const next=controller.poll(ms,menu),changed=next.changed;
+ if(changed&&inputOwner==='gamepad'&&isRunning&&engine?.state==='playing'){input.angle=undefined;pause();toast('Геймпад отключён. Игра на паузе.');}
+ const statusChanged=changed||next.available!==padState.available||next.standard!==padState.standard;padState=next;if(statusChanged)updateControllerStatus();if(next.confirm||next.pause||next.back||next.overload||next.nav)inputOwner='gamepad';
+ if(next.pause){audio.unlock();if(engine?.state==='playing'&&isRunning)pause();else if(engine?.state==='paused'&&isRunning&&!confirmationInfo)resume();return null;}
+ if(next.back){audio.unlock();controllerBack();return null;}
+ if(menu){if(next.confirm||next.nav)audio.unlock();if(next.nav||next.confirm)controllerMenu(next.nav,next.confirm);return null;}
+ if(next.overload){audio.unlock();engine?.overload();inputOwner='gamepad';}
+ return next;
+}
+function home(){const best=save.currentBests[mode]||{};return `<div class="home"><div class="eyebrow">ПОСЛЕДНИЙ РУБЕЖ · АРКАДНЫЙ ROGUELITE</div><h1>CORE</h1><div class="title-sub">ЯДРО</div><p class="hero-copy"><b>Всё начинается с одного отражения.</b><br>Защитите последний реактор станции.<br>Превратите угрозу в свою силу.</p><div class="hero-tags"><span>ОТРАЖАЙТЕ</span><span>АДАПТИРУЙТЕСЬ</span><span>ПРЕВОСХОДИТЕ</span></div><div class="station-card">ОБЪЕКТ <strong>ЭНЕРГЕТИЧЕСКОЕ ЯДРО</strong>СОСТОЯНИЕ <span style="color:var(--mint)">СТАБИЛЬНО</span><br>ЗАЩИТНЫЙ КОНТУР / АКТИВЕН</div><div class="orbit-label">МАГНИТНОЕ ПОЛЕ<br>65 ЕД. / ОРБИТА ЩИТА</div><div class="home-bottom"><div class="launch-group"><div class="mode-label"><span>РЕЖИМ: ${modes[mode].name.toUpperCase()}</span><button class="text-button" data-page="modes">ИЗМЕНИТЬ ↗</button></div><button class="launch" data-action="start"><span>ЗАПУСТИТЬ РЕАКТОР</span><kbd>ENTER</kbd><span class="launch-arrow">↗</span></button>${corePicker()}<div class="control-tip"><span>↗ Мышь / касание</span><span><kbd>A</kbd> <kbd>D</kbd> поворот</span><span><kbd>␣</kbd> пауза</span><span>${uiIcon('gamepad')} Стик · A / ✕ · Start</span></div></div><div><div class="best-preview"><div class="mini-stat"><small>ЛУЧШЕЕ ВРЕМЯ</small><strong>${time(best.time)}</strong></div><div class="mini-stat"><small>ОЧКИ · ${C.BALANCE}</small><strong>${num(best.score)}</strong></div><div class="mini-stat"><small>ПОПЫТОК</small><strong>${num(save.totals.runs)}</strong></div></div><div class="home-note">КАЖДАЯ ПОПЫТКА — НОВАЯ КОНФИГУРАЦИЯ.</div></div></div></div>`;}
+function techPage(){const categories=['Корпус','Щит','Реактор','Эксперименты','Престиж'];return `<div class="page">${header('Эволюция ядра','ИНЖЕНЕРНЫЙ ОТСЕК','Технологии остаются с вами между попытками. Сильнее реактор — больше возможностей. Победа по-прежнему зависит от вас.',`◈ ${num(save.shards)}`)}<div class="tabs">${categories.map(x=>`<button class="tab ${shopTab===x?'active':''}" data-shop-tab="${x}">${x}</button>`).join('')}</div>${shopTab==='Престиж'?prestigePage():`<div class="cards">${D.tech.filter(t=>t.category===shopTab).map(t=>{const lv=save.tech[t.id]||0,max=lv>=t.max,price=D.cost(t,lv);return `<article class="tech-card"><div class="card-icon">${uiIcon(t.icon)}</div><div class="card-head"><h3>${t.name}</h3><span class="card-level">${lv} / ${t.max}</span></div><p>${t.desc}</p><div class="level-bars">${Array.from({length:t.max},(_,i)=>`<span class="${i<lv?'filled':''}"></span>`).join('')}</div><button class="buy-button" data-buy="${t.id}" ${max||save.shards<price?'disabled':''}><span>${max?'Завершено':'Исследовать'}</span><span>${max?'✓':'◈ '+num(price)}</span></button></article>`;}).join('')}</div><div class="section-sub">${shopTab==='Корпус'?'ПРЕДЕЛ КОРПУСА: 5 HP · МАСТЕРСТВО ВАЖНЕЕ БРОНИ':shopTab==='Щит'?'БАЗА: 55° · 540°/С · 120 МС ДЛЯ ИДЕАЛЬНОГО ОТРАЖЕНИЯ':shopTab==='Реактор'?'БЕЗ ТАЙМЕРОВ · БЕЗ РЕКЛАМЫ · БЕЗ ОЖИДАНИЯ':'АВТОМАТИКА ПОДДЕРЖИВАЕТ ЗАЩИТУ, НО ЩИТОМ УПРАВЛЯЕТЕ ВЫ'}</div>`}</div>`;}
+function prestigePage(){const allowed=C.canPrestige(save);return `<div class="prestige-banner"><h3>Перезагрузка реактора</h3><p>Необязательное новое начало. Сбросит обычные технологии и осколки. Сохраняет рекорды, достижения, открытые режимы и особое дерево. Даёт 3 редких кристалла и ещё 1 за каждые 10 приобретённых уровней.</p><p>${allowed?'Реактор готов к перезагрузке.':'Условия: победить всех 4 боссов и приобрести 12 уровней технологий.'} Сейчас: ${save.bosses.length}/4 боссов, ${Object.values(save.tech).reduce((a,b)=>a+b,0)}/12 уровней.</p>${button('prestige','Перезагрузить реактор','secondary',allowed?'':'disabled')} <span class="badge">✧ ${save.rare} кристаллов</span></div><div class="cards">${D.prestigeTech.map(t=>{const lv=save.prestigeTech[t.id]||0,price=t.cost+lv;return `<article class="tech-card"><div class="card-icon">${uiIcon(t.icon)}</div><div class="card-head"><h3>${t.name}</h3><span class="card-level">${lv}/${t.max}</span></div><p>${t.desc}</p><button class="buy-button" data-prestige-buy="${t.id}" ${lv>=t.max||save.rare<price?'disabled':''}><span>${lv>=t.max?'Завершено':'Исследовать'}</span><span>✧ ${price}</span></button></article>`;}).join('')}</div>`;}
+function achievementsPage(){return `<div class="page">${header('След в системе','АРХИВ ДОСТИЖЕНИЙ','Каждая цель — новый повод выйти на орбиту. Награда за достижение начисляется один раз.',`${save.achievements.length} / ${D.achievements.length}`)}<div class="cards">${D.achievements.map(a=>{const unlocked=save.achievements.includes(a.id);return `<article class="achievement-card ${unlocked?'':'locked'}"><div class="card-icon">${uiIcon(a.icon)}</div><div class="card-head"><h3>${a.name}</h3>${unlocked?'<span class="unlocked-tag">ПОЛУЧЕНО ✓</span>':''}</div><p>${a.desc}</p><span class="reward">◈ ${a.reward} осколков</span></article>`;}).join('')}</div></div>`;}
+function recordsPage(){const archive=recordsScope==='archive',rows=(archive?save.recordsArchive:save.records)[recordsTab]||[],best=(archive?save.bests:save.currentBests)[recordsTab]||{};return `<div class="page">${header('Ваш горизонт','ЛОКАЛЬНЫЕ РЕКОРДЫ','Рекорды текущих правил отделены от архива. Старый прогресс сохранён.')}<div class="button-row"><button class="${archive?'secondary':'primary'}" data-record-scope="current">Текущие правила · ${C.BALANCE}</button><button class="${archive?'primary':'secondary'}" data-record-scope="archive">Архив</button></div><div class="tabs">${Object.entries(modes).filter(([k])=>save.modes.includes(k)).map(([k,v])=>`<button class="tab ${recordsTab===k?'active':''}" data-record-tab="${k}">${v.name}</button>`).join('')}</div><div class="record-stats"><div class="mini-stat"><small>ВРЕМЯ</small><strong>${time(best.time)}</strong></div><div class="mini-stat"><small>СЕРИЯ БЛОКОВ</small><strong>${num(best.combo)}</strong></div><div class="mini-stat"><small>СЕРИЯ ИДЕАЛЬНЫХ</small><strong>${num(best.perfectCombo)}</strong></div><div class="mini-stat"><small>МАКС. ВОЛНА</small><strong>${num(best.wave)}</strong></div></div>${rows.length?`<div class="table-wrap"><table class="records-table"><thead><tr><th>№</th><th>ОЧКИ</th><th>ВРЕМЯ</th><th>ЯДРО</th><th>БАЛАНС</th><th>ВРАГОВ</th><th>ДАТА</th></tr></thead><tbody>${rows.map((row,i)=>`<tr><td>${i+1}</td><td>${num(row.score)}</td><td>${time(row.time)}</td><td>${cores.find(c=>c.id===row.core)?.name||'Неизвестно'}</td><td>${esc(row.balance==='legacy'?'Архив':row.balance)}</td><td>${num(row.kills)}</td><td>${esc(row.date)}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty-state">В этом разделе пока нет результатов.</div>'}<p>${archive?'Лучшие показатели за всё время сохранены.':'Сравнение и уведомления используют только текущие правила.'}</p><div class="section-sub">ЗА ВСЁ ВРЕМЯ: ${num(save.totals.runs)} ПОПЫТОК · ${num(save.totals.kills)} ВРАГОВ · ${num(save.totals.bosses)} БОССОВ</div></div>`;}
+function modesPage(){return `<div class="page">${header('Выберите свой ритм','БОЕВЫЕ ПРОТОКОЛЫ','Новые условия, отдельные рекорды, тот же последний рубеж. «Чистый навык» доступен сразу.')}<div class="modes-grid">${Object.entries(modes).map(([id,m],i)=>{const open=save.modes.includes(id);return `<article class="mode-card ${mode===id?'selected':''}"><span class="mode-number">ПРОТОКОЛ / 0${i+1}</span><h3>${m.name}</h3><p>${m.desc}</p><span class="mode-bonus">${m.bonus}</span><button class="${mode===id?'primary':'secondary'}" data-mode="${id}" ${open?'':'disabled'}>${!open?id==='horizon'?'Открывается в дереве престижа':'Откроется после 60 секунд':mode===id?'Выбран · перейти к запуску ↗':'Выбрать режим ↗'}</button></article>`;}).join('')}</div></div>`;}
+function settingsPage(){return `<div class="page">${header('Точная настройка','ПАРАМЕТРЫ СИСТЕМЫ','Соберите комфортное окружение. Настройки сохраняются автоматически.')}${store.warning?`<div class="notice">${esc(store.warning)}</div>`:''}<section class="settings-section"><h3>Язык интерфейса</h3><div class="setting-row"><span>Выбор применяется сразу и сохраняется между запусками.</span><div class="language-switch"><button data-language="ru" aria-pressed="${I.getLanguage()==='ru'}" class="${I.getLanguage()==='ru'?'selected':''}">Русский</button><button data-language="en" aria-pressed="${I.getLanguage()==='en'}" class="${I.getLanguage()==='en'?'selected':''}">English</button></div></div></section><section class="settings-section"><h3>Геймпад</h3><label class="setting-row"><span>Мёртвая зона стиков<small>От 10% до 40%. Увеличьте при дрейфе.</small></span><input type="range" min="10" max="40" value="${Math.round((save.settings.deadzone||.22)*100)}" data-setting="deadzone" aria-label="Мёртвая зона стиков"></label><p id="controller-status">${esc(controllerStatus())}</p><p>Оба стика и крестовина — направление щита. LB/RB (L1/R1) — вращение. A / ✕, X / □ или RT / R2 — Перегрузка. Start / Options — пауза. В меню: стик или крестовина — выбор, A / ✕ — подтвердить, B / ○ — назад. На ползунках громкости: влево/вправо — изменение.</p><p>Подключите контроллер по Bluetooth или USB к телефону или компьютеру. Если браузер не видит контроллер, откройте игру отдельной вкладкой. Для включения звука может потребоваться одно касание экрана или щелчок мышью.</p></section><section class="settings-section"><h3>Звук и изображение</h3><label class="setting-row"><span>Громкость эффектов<small>Отражения, предупреждения и события</small></span><input type="range" min="0" max="100" value="${save.settings.sfx*100}" data-setting="sfx" aria-label="Громкость эффектов"></label><label class="setting-row"><span>Громкость музыки<small>PULSE CIRCUIT · электронный саундтрек · 126 BPM</small></span><input type="range" min="0" max="100" value="${save.settings.music*100}" data-setting="music" aria-label="Громкость музыки"></label><label class="setting-row"><span>Уменьшить эффекты<small>Меньше частиц, без тряски. Полезно на мобильных устройствах.</small></span><input type="checkbox" data-setting="reduced" ${save.settings.reduced?'checked':''}></label></section><section class="settings-section"><h3>Сохранение и прогресс</h3><p>Прогресс хранится в этом браузере. Экспортируйте JSON, чтобы перенести его на другое устройство. Перед импортом создаётся резервная копия текущего сохранения.</p><div class="button-row">${button('export','↓ Экспорт JSON')}${button('import','↑ Импорт JSON')}${store.protected?button('export-raw','Скачать исходное сохранение'):''}${button('backup','Скачать резервную копию')}</div><div class="button-row">${button('reset','Сбросить прогресс','danger-button')}</div></section><section class="settings-section"><h3>Краткий протокол защиты</h3><p>Поворачивайте щит мышью, пальцем, A / D или стрелками. Щит движется с ограниченной скоростью. Пробел / Esc — пауза. Зажать щит в одном месте недостаточно: подставьте его под траекторию за 120 мс до удара для идеального отражения. Пунктирные фиолетовые лучи Фантома с меткой «ЭХО» безопасны; сплошные цветные линии показывают настоящие атаки. Боссы движутся по орбите, обычные враги начинают разгоняться после 18-й секунды. Прицел зафиксирован: атака выходит из отмеченного заряда, даже если враг уже переместился. Игра останавливается при переключении окна.</p><p>Перегрузка: E, правая кнопка мыши или кнопка над шкалой энергии. Стоимость 20 энергии, перезарядка 8 с; очищает снаряды в радиусе 140, не даёт очков и не лечит ядро. Броня босса открывается на 2,1 с после идеального отражения или на 0,65 с после каждого четвёртого блока. Игра останавливается при переключении окна.</p><h3 style="margin-top:25px">Сигнатуры противников</h3><div class="codex-list">${D.enemies.map(e=>`<div class="codex-item"><span class="codex-icon" style="color:${e.color}">${uiIcon(['◇','⬡','△','⬟','⌖','↗','⋈','◎'][D.enemies.indexOf(e)])}</span><div><strong>${e.name}</strong><small>${e.desc}<br>Доступен с ${e.unlock} с.</small></div></div>`).join('')}</div></section></div>`;}
+const pageNames={home:'ОБЗОР РЕАКТОРА',upgrades:'ПОСТОЯННЫЕ ТЕХНОЛОГИИ',achievements:'ДОСТИЖЕНИЯ',records:'АРХИВ ПОПЫТОК',modes:'БОЕВЫЕ ПРОТОКОЛЫ',settings:'НАСТРОЙКИ'};
+function renderPage(){const render={home,upgrades:techPage,achievements:achievementsPage,records:recordsPage,modes:modesPage,settings:settingsPage};I.translateShell(document);screen.innerHTML=h(render[page]());$('#page-label').textContent=t(pageNames[page]);$$('.nav-button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));$('#wallet').textContent=num(save.shards);$('#sound-toggle').textContent=save.settings.sfx||save.settings.music?'♫':'♪';$('#sound-toggle').setAttribute('aria-label',save.settings.sfx||save.settings.music?t('Выключить звук'):t('Включить звук'));screen.scrollTop=0;updateControllerStatus();}
+function changeLanguage(language){
+ if(!['ru','en'].includes(language))return;
+ save.settings.language=language;I.setLanguage(language);persist();I.translateShell(document);updateControllerStatus();
+ for(const el of $('#toasts').children)el.textContent=t(el.dataset.rawMessage||el.textContent);
+ $('#sound-toggle').setAttribute('aria-label',save.settings.sfx||save.settings.music?t('Выключить звук'):t('Включить звук'));
+ if(!isRunning){renderPage();if(confirmationInfo&&confirmCallback){const info=confirmationInfo;confirmDialog(info.title,info.desc,confirmCallback,confirmCancel);}return;}
+ renderHudShell();updateHud();
+ if(confirmationInfo&&confirmCallback){const info=confirmationInfo;confirmDialog(info.title,info.desc,confirmCallback,confirmCancel);}
+ else if(engine.state==='paused')showPause();else if(engine.state==='upgrade')showUpgrade();else if(engine.state==='dead')showResult();
+}
+function navigate(next){if(!pageNames[next])return;if(isRunning&&engine?.state!=='dead'){if(engine.state==='playing')pause();confirmDialog('Завершить попытку?','Попытка закончится с текущим результатом. Начисление наград происходит один раз.',()=>{finishRun();goPage(next);},()=>{if(engine.state==='upgrade')showUpgrade();else showPause();});return;}goPage(next);}
+function goPage(next){isRunning=false;page=next;$('#app').classList.remove('game-active');$('#hud').classList.add('hidden');$('#game-footer').classList.add('hidden');$('#boss-hud').classList.add('hidden');hideModal();renderPage();resize();}
+function showModal(html){previousFocus=document.activeElement;modal.innerHTML=h(html);modal.classList.remove('hidden');requestAnimationFrame(()=>modal.querySelector('button:not([disabled])')?.focus({preventScroll:true}));}
+function hideModal(){modal.classList.add('hidden');modal.innerHTML='';confirmationInfo=null;if(previousFocus?.isConnected)previousFocus.focus({preventScroll:true});}
+let confirmCallback=null,confirmCancel=null,confirmationInfo=null;
+function confirmDialog(title,desc,callback,cancel){confirmationInfo={title,desc};confirmCallback=callback;confirmCancel=cancel;showModal(`<div class="dialog"><div class="eyebrow">ПОДТВЕРЖДЕНИЕ</div><h2>${title}</h2><p>${desc}</p><div class="button-row">${button('confirm','Подтвердить','primary')}${button('cancel','Отмена')}</div></div>`);}
+function start(){audio.unlock();engine=new C.Engine(save,{mode});runResult=null;isRunning=true;notifiedBest=false;input.angle=undefined;keys.clear();labels.length=0;$('#app').classList.add('game-active');screen.innerHTML='';hideModal();$('#hud').classList.remove('hidden');$('#game-footer').classList.remove('hidden');$('#boss-hud').classList.add('hidden');$('#page-label').textContent=t(modes[mode].name.toUpperCase());renderHudShell();resize();updateHud();canvas.focus({preventScroll:true});if(save.totals.runs===0)toast('Щит следует за курсором или пальцем. Поворачивайте его навстречу красным снарядам.');}
+function renderHudShell(){$('#hud').innerHTML=h('<div class="hud-left"><div><small>ЦЕЛОСТНОСТЬ ЯДРА</small><div id="health" class="health" role="meter" aria-label="Здоровье ядра" aria-valuemin="0"></div></div><div><small>ВРЕМЯ</small><div id="run-time" class="value">00:00</div></div></div><div class="hud-right"><div><small>ОЧКИ <span id="multiplier"></span></small><div id="run-score" class="value">0</div></div><button class="hud-pause" data-action="pause" aria-label="Пауза">Ⅱ</button></div>');
+ $('#game-footer').innerHTML=h('<button id="overload-button" class="secondary overload-button" data-action="overload">Перегрузка · E / ПКМ · 20 энергии</button><div class="energy-head"><span id="energy-level"></span><span id="energy-count"></span></div><div id="energy-track" class="energy-track" role="progressbar" aria-label="Боевая энергия" aria-valuemin="0"><div id="energy-fill" class="energy-fill"></div></div><div class="game-info"><span id="wave-label"></span><span class="active-build" id="active-build"></span><span id="boss-countdown"></span></div>');$('#page-label').textContent=t(modes[mode].name.toUpperCase());}
+function pause(){if(!engine||engine.state!=='playing')return;engine.state='paused';keys.clear();showPause();}
+function showPause(){showModal(`<div class="dialog"><div class="eyebrow">РЕАКТОР В РЕЖИМЕ ОЖИДАНИЯ</div><h2>Время перевести дух</h2><p>Продолжите, когда будете готовы.<br>Мышь / касание — направление. A / D — поворот. Пробел — пауза.</p><p class="pad-help">Геймпад: стик — щит, A / ✕ — Перегрузка, Start — пауза, B / ○ — назад.</p><div class="build-list">${D.upgrades.filter(u=>engine.u(u.id)).map(u=>`<span>${uiIcon(u.icon)} ${u.name} ${engine.u(u.id)}</span>`).join('')}</div><div class="pause-stats">${time(engine.time)} &nbsp; / &nbsp; ${num(engine.score)} очков</div><div class="button-row">${button('resume','Продолжить ↗','primary')}${button('end','Завершить попытку')}</div></div>`);}
+function resume(){if(engine?.state==='paused'){engine.state='playing';hideModal();canvas.focus({preventScroll:true});}}
+function showUpgrade(){const e=engine;showModal(`<div class="dialog"><div class="eyebrow">ЭНЕРГИЯ СТАБИЛИЗИРОВАНА · УРОВЕНЬ ${e.level}</div><h2>Следующий шаг эволюции</h2><p>Выберите одну технологию. Действует до конца попытки.</p><div class="upgrade-options">${e.choices.map((u,i)=>`<button class="upgrade-card rarity-${u.rarity}" data-upgrade="${u.id}"><div class="card-icon">${uiIcon(u.icon)}</div><span class="rarity-label">${D.rarity[u.rarity].toUpperCase()}</span><h3>${u.name}</h3><p>${u.desc}</p>${e.synergies(u.id).filter(x=>!e.synergies().some(y=>y.name===x.name)).map(x=>`<div class="synergy-hint">✦ ${x.name}: ${x.desc}</div>`).join('')}<span class="card-level">${u.category} · ${e.u(u.id)+1}/${u.max} <span style="float:right">[${i+1}]</span></span></button>`).join('')}</div><div class="key-hint">Сочетайте технологии: разряды + критические попадания, взрывы + пробивание.</div>${e.rerolls?`<div class="button-row">${button('reroll',`Заменить варианты · ${e.rerolls}`)}</div>`:''}</div>`);}
+function finishRun(){if(!engine)return;if(engine.state!=='dead'){engine.state='dead';engine.deathReason='Попытка завершена вручную';}const settled=engine.settle();if(settled){runResult=settled;persist();for(const a of settled.unlocked)toast(`${a.name} · +${a.reward} осколков`,'gold');if(settled.newRecords.length){toast('Новый личный рекорд записан в архив.','gold');audio.play('record');}}showResult();}
+function showResult(){replayClock=0;replayPlaying=true;const r=runResult;if(!r)return;const oldScore=r.old.score||0;showModal(`<div class="dialog"><div class="eyebrow">СИГНАЛ ПОТЕРЯН · ${modes[mode].name.toUpperCase()}</div><h2>Ядро погасло. Опыт остался.</h2><div class="result-hero">${time(r.time)}</div><span class="record-label">${r.newRecords.includes('time')?'НОВЫЙ РЕКОРД ВРЕМЕНИ':`ПРЕЖНИЙ РЕКОРД: ${time(r.old.time)}`}</span><p>${esc(engine.deathReason)}</p>${engine.lastHit&&engine.hp<=0?`<div class="death-review"><small>ПОСЛЕДНИЕ 1,8 СЕКУНДЫ</small><canvas id="death-replay" width="560" height="360" aria-label="Повтор последнего попадания"></canvas><p>${engine.lastHit.hint}</p><div class="replay-controls"><button class="secondary" data-action="replay-prev" aria-label="Предыдущий кадр">←</button><button class="secondary" data-action="replay-toggle">Повтор / пауза</button><button class="secondary" data-action="replay-next" aria-label="Следующий кадр">→</button><span id="replay-time" class="replay-time"></span></div></div>`:''}<div class="result-grid"><div><small>ОЧКИ</small><strong>${num(r.score)}</strong></div><div><small>ВРАГОВ</small><strong>${r.kills}</strong></div><div><small>ИДЕАЛЬНЫХ</small><strong>${r.perfect}</strong></div><div><small>СЕРИЯ БЛОКОВ</small><strong>${r.combo}</strong></div><div><small>БОССОВ</small><strong>${r.bosses}</strong></div><div><small>ВОЛНА</small><strong>${r.wave}</strong></div></div><span class="record-label">${r.score>oldScore?`ОЧКИ: +${num(r.score-oldScore)} К РЕКОРДУ`:`ДО РЕКОРДА: ${num(Math.max(0,oldScore-r.score))} ОЧКОВ`}</span><div class="result-reward">◈ +${r.shards} осколков ядра${r.achievementShards?`<small>Ещё +${r.achievementShards} за достижения</small>`:''}${r.time<8?'<small>Осколки за бой начисляются после 8 секунд.</small>':''}</div><div class="button-row">${button('restart','Ещё раз ↗','primary')}${button('shop','Технологии')}${button('home','Главное меню')}</div><div class="key-hint">ENTER — новая попытка</div></div>`);}
+function updateHud(){if(!engine||!isRunning)return;const e=engine;const ob=$('#overload-button');if(ob){ob.disabled=e.state!=='playing'||e.energy<20||e.overloadCooldown>0;ob.textContent=t(e.overloadCooldown>0?'Перегрузка · '+Math.ceil(e.overloadCooldown)+' с':'Перегрузка · E / ПКМ · 20 энергии');}setMarkup($('#health'),Array.from({length:e.maxHp},(_,i)=>`<span class="${i>=e.hp?'empty':''}"></span>`).join(''));$('#health').setAttribute('aria-valuenow',e.hp);$('#health').setAttribute('aria-valuemax',e.maxHp);$('#health').setAttribute('aria-label',t('Здоровье ядра'));const et=$('#energy-track');if(et){et.setAttribute('aria-valuenow',Math.min(e.threshold,Math.floor(e.energy)));et.setAttribute('aria-valuemax',e.threshold);et.setAttribute('aria-label',t('Боевая энергия'));}$('#run-time').textContent=time(e.time);$('#run-score').textContent=num(e.score);$('#multiplier').textContent='×'+Math.min(5,1+Math.floor(e.combo/8)*.25+e.perfectCombo*.1).toFixed(1);$('#energy-level').textContent=t(`ЭНЕРГИЯ · УРОВЕНЬ ${e.level}`);$('#energy-count').textContent=`${Math.floor(e.energy)} / ${e.threshold}`;$('#energy-fill').style.width=Math.min(100,e.energy/e.threshold*100)+'%';$('#wave-label').textContent=t('ВОЛНА '+String(e.wave).padStart(2,'0'));$('#active-build').textContent=e.suppressed>0?t('ПОДАВЛЕНИЕ '+e.suppressed.toFixed(1)+' С'):D.upgrades.filter(u=>e.u(u.id)).map(u=>t(u.name)+' '+e.u(u.id)).join(' · ');$('#active-build').setAttribute('title',$('#active-build').textContent);$('#boss-countdown').textContent=t(e.boss?'БОСС НА ОРБИТЕ':`ДО БОССА ${time(Math.max(0,e.nextBoss-e.time))}`);
+ if(e.boss){const def=D.bosses[e.boss.spec];$('#boss-hud').classList.remove('hidden');setMarkup($('#boss-hud'),h(`<div class="boss-name" style="color:${def.color}"><span>${engine.time<(e.boss.vulnerableUntil||0)?'УЯЗВИМ · ':''}${def.name} · ФАЗА ${e.boss.phase}${e.boss.pattern?' · '+e.boss.pattern:''}</span><span>${Math.ceil(e.boss.hp)} / ${e.boss.maxHp}</span></div><div class="boss-track"><div class="boss-fill" style="width:${Math.max(0,e.boss.hp/e.boss.maxHp*100)}%;background:${def.color}"></div></div>`));}else $('#boss-hud').classList.add('hidden');}
+function handleEvents(){for(const ev of engine.drain()){
+ audio.play(ev.type,ev.enemy,{combo:engine.combo,kind:ev.kind});
+ if(ev.type==='overflow'){labels.push({text:'МАТРИЦА ЗАВЕРШЕНА · +300',color:'#ffd27a',life:1.5,max:1.5});audio.play('level');}if(ev.type==='level')showUpgrade();if(ev.type==='death')finishRun();if(ev.type==='hurt'){shake=save.settings.reduced?0:10;labels.push({text:'ЯДРО ПОВРЕЖДЕНО',color:'#ff7a91',life:1.1,max:1.1});}
+ if(ev.type==='perfect')labels.push({text:'ИДЕАЛЬНО',color:'#ffdf98',life:.65,max:.65});
+ if(ev.type==='wave'&&ev.wave>1)labels.push({text:'ВОЛНА '+String(ev.wave).padStart(2,'0'),color:'#8db4c6',life:1.2,max:1.2});
+ if(ev.type==='boss'){resize();toast(`${ev.name} · опасная сигнатура на орбите`,'purple');shake=save.settings.reduced?0:5;}
+ if(ev.type==='bossWin'){resize();toast('Босс побеждён. '+ev.reward,'gold');}
+ if(ev.type==='suppress')toast('Подавление: щит замедлен, автоматика отключена на 3 с.','purple');
+ if(ev.type==='revive')toast('Вторая жизнь: реактор восстановлен.','gold');
+ if(ev.type==='emergency')toast('Аварийный контур: барьер активен 2 с.');
+ if(ev.type==='guardianPhase')toast(`СТРАЖ: фаза ${ev.phase} · ${ev.pattern}`,'purple');
+ if(ev.type==='synergy'){toast('Синергия: '+ev.name,'purple');engine.effects.push({type:'pulse',life:.65,max:.65});audio.play('level');}
+ if(ev.type==='section')toast(`Гидра: осталось секций — ${ev.remaining}. Ритм атаки изменился.`,'purple');
+ }if(!notifiedBest&&engine.score>(save.currentBests[mode]?.score||0)&&(save.currentBests[mode]?.score||0)>0){notifiedBest=true;toast('Новый рекорд очков! Продолжайте держать рубеж.','gold');audio.play('record');}}
+function downloadJSON(raw,name){const blob=new Blob([raw],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=t(name);document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+const actions={
+ 'replay-toggle':()=>{replayPlaying=!replayPlaying;},'replay-prev':()=>{replayPlaying=false;replayClock=Math.max(0,replayClock-.08);},'replay-next':()=>{replayPlaying=false;replayClock=Math.min(1.8,replayClock+.08);},start,restart:start,pause,resume,overload:()=>{if(engine?.overload())updateHud();},home:()=>goPage('home'),shop:()=>goPage('upgrades'),
+ reroll:()=>{if(engine?.reroll())showUpgrade();},
+ end:()=>confirmDialog('Завершить попытку?','Текущий результат будет сохранён. Осколки за бой начисляются после 8 секунд.',finishRun,showPause),
+ confirm:()=>{const callback=confirmCallback;confirmCallback=null;confirmCancel=null;hideModal();callback?.();},
+ cancel:()=>{const callback=confirmCancel;confirmCallback=null;confirmCancel=null;hideModal();if(callback)callback();else if(isRunning&&engine?.state==='paused')showPause();},
+ export:()=>downloadJSON(JSON.stringify(save,null,2),'CORE-прогресс.json'),
+ 'export-raw':()=>downloadJSON(store.original(),'CORE-исходное-сохранение.json'),
+ backup:()=>{let raw=null;try{raw=window.localStorage.getItem(store.key+'-backup');}catch(e){}if(raw)downloadJSON(raw,'CORE-резервная-копия.json');else toast('Резервной копии пока нет. Экспортируйте текущее сохранение.');},
+ import:()=>$('#import-file').click(),
+ prestige:()=>{if(!C.canPrestige(save))return;confirmDialog('Перезагрузить реактор?','Обычные технологии и осколки будут сброшены. Рекорды, достижения, режимы и дерево престижа сохранятся.',()=>{const gain=C.prestige(save);persist();renderPage();toast(`Новый цикл начат. Получено кристаллов: ${gain}.`,'purple');});},
+ reset:()=>confirmDialog('Стереть весь прогресс?','Это удалит технологии, валюту, рекорды и достижения. Перед сбросом сохранится резервная копия.',()=>{try{const old=store.original();window.localStorage.setItem(store.key+'-backup',old);window.localStorage.setItem(store.key,JSON.stringify({...C.freshSave(),settings:{...C.freshSave().settings,language:I.getLanguage()}}));store.data=C.freshSave();store.data.settings.language=I.getLanguage();save=store.data;store.protected=false;store.warning='';mode='classic';renderPage();persist();toast('Прогресс сброшен. Резервная копия доступна в настройках.');}catch(e){toast('Сброс не выполнен: не удалось сохранить резервную копию.');}})
+};
+document.addEventListener('click',event=>{const b=event.target.closest('button,a');if(!b)return;audio.unlock();if(b.matches('a.brand')){event.preventDefault();navigate('home');return;}if(b.disabled)return;if(event.detail>0)inputOwner='pointer';
+ if(b.dataset.language){changeLanguage(b.dataset.language);return;}
+ if(b.dataset.core){save.settings.core=b.dataset.core;persist();renderPage();return;}
+ if(b.dataset.page)navigate(b.dataset.page);
+ if(b.dataset.action)actions[b.dataset.action]?.();
+ if(b.dataset.shopTab){shopTab=b.dataset.shopTab;renderPage();}
+ if(b.dataset.recordScope){recordsScope=b.dataset.recordScope;renderPage();}
+ if(b.dataset.recordTab){recordsTab=b.dataset.recordTab;renderPage();}
+ if(b.dataset.mode){mode=b.dataset.mode;goPage('home');}
+ if(b.dataset.buy){if(C.purchase(save,b.dataset.buy)){audio.play('buy');const unlocked=C.claimAchievements(save);unlocked.forEach(a=>toast(`${a.name} · +${a.reward} осколков`,'gold'));persist();renderPage();}}
+ if(b.dataset.prestigeBuy){if(C.purchasePrestige(save,b.dataset.prestigeBuy)){audio.play('buy');persist();renderPage();}}
+ if(b.dataset.upgrade){if(engine?.choose(b.dataset.upgrade)){hideModal();canvas.focus({preventScroll:true});updateHud();}}
+});
+document.addEventListener('input',event=>{const setting=event.target.dataset.setting;if(!setting)return;audio.unlock();save.settings[setting]=setting==='reduced'?event.target.checked:Number(event.target.value)/100;persist();audio.syncVolumes();});
+let soundMemory=null;$('#sound-toggle').addEventListener('click',()=>{if(save.settings.sfx||save.settings.music){soundMemory={sfx:save.settings.sfx,music:save.settings.music};save.settings.sfx=0;save.settings.music=0;}else Object.assign(save.settings,soundMemory||{sfx:.55,music:.16});persist();audio.syncVolumes();$('#sound-toggle').textContent=save.settings.sfx||save.settings.music?'♫':'♪';$('#sound-toggle').setAttribute('aria-label',save.settings.sfx||save.settings.music?t('Выключить звук'):t('Включить звук'));if(page==='settings'&&!isRunning)renderPage();});
+$('#import-file').addEventListener('change',async event=>{const file=event.target.files[0];event.target.value='';if(!file)return;if(file.size>2e6){toast('Файл слишком большой: максимум 2 МБ.');return;}try{const raw=await file.text();C.validateSave(JSON.parse(raw));confirmDialog('Загрузить сохранение?','Текущий прогресс будет заменён. Его резервная копия останется в этом браузере.',()=>{try{save=store.import(raw);I.setLanguage(save.settings.language);mode='classic';persist();renderPage();toast('Прогресс успешно восстановлен.');}catch(e){toast(e.message);}});}catch(e){toast('Не удалось прочитать сохранение: '+e.message);}});
+function pointer(event){if(!isRunning||engine?.state!=='playing')return;const rect=canvas.getBoundingClientRect(),x=event.clientX-rect.left-cx,y=event.clientY-rect.top-cy;if(Math.hypot(x,y)>8){input.angle=Math.atan2(y,x);inputOwner='pointer';}}
+canvas.addEventListener('pointermove',event=>{if(event.pointerType==='mouse'||event.buttons)pointer(event);});canvas.addEventListener('contextmenu',event=>event.preventDefault());canvas.addEventListener('pointerdown',event=>{audio.unlock();if(event.button===2){engine?.overload();event.preventDefault();return;}pointer(event);canvas.setPointerCapture?.(event.pointerId);event.preventDefault();});
+document.addEventListener('keydown',event=>{
+ if(event.target.matches('input,select,textarea'))return;
+ if(event.target.closest('button')&&[' ','Enter'].includes(event.key))return;
+ if(event.key==='Tab'&&!modal.classList.contains('hidden')){const focusable=[...modal.querySelectorAll('button:not([disabled]),input')];if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}return;}
+ const key=event.key.toLowerCase();if(['a','d','ф','в','arrowleft','arrowright'].includes(key)){inputOwner='keyboard';input.angle=undefined;}if((key==='e'||key==='у')&&isRunning&&!event.repeat){event.preventDefault();engine?.overload();return;}if([' ','arrowleft','arrowright','a','d','ф','в'].includes(key)&&isRunning)event.preventDefault();if(event.repeat&&[' ','escape','enter'].includes(key))return;audio.unlock();
+ if(key===' '||key==='escape'){if(engine?.state==='playing'&&isRunning)pause();else if(engine?.state==='paused'&&isRunning&&modal.querySelector('[data-action="resume"]'))resume();return;}
+ if(key==='enter'&&modal.classList.contains('hidden')&&page==='home'&&!isRunning){start();return;}
+ if(key==='enter'&&!event.target.closest('button')&&engine?.state==='dead'&&isRunning&&modal.querySelector('[data-action="restart"]')){event.preventDefault();start();return;}
+ if(['1','2','3'].includes(key)&&engine?.state==='upgrade'){const u=engine.choices[Number(key)-1];if(u){engine.choose(u.id);hideModal();updateHud();}return;}
+ keys.add(key);
+});document.addEventListener('keyup',event=>keys.delete(event.key.toLowerCase()));
+function focusLost(){windowFocused=false;controller.reset();keys.clear();input.angle=undefined;if(isRunning&&engine?.state==='playing')pause();}
+window.addEventListener('blur',focusLost);window.addEventListener('focus',()=>{windowFocused=true;controller.reset();});document.addEventListener('visibilitychange',()=>{if(document.hidden){focusLost();audio.suspend();}else{windowFocused=true;controller.reset();audio.resume();}});
+function resize(){const rect=stage.getBoundingClientRect();width=Math.max(1,rect.width);height=Math.max(1,rect.height);dpr=Math.min(2,window.devicePixelRatio||1);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.width=width+'px';canvas.style.height=height+'px';const compact=width>height&&height<480,top=compact?64:engine?.boss?138:90,bottom=compact?70:115;scale=Math.max(.08,Math.min(width/650,Math.max(40,height-top-bottom)/590));cx=width/2;cy=top+Math.max(40,height-top-bottom)/2;}
+window.addEventListener('resize',resize);new ResizeObserver(resize).observe(stage);
+// Procedural 2D renderer. Nothing is downloaded: stars, machines, particles, reactor and UI marks.
+const starRandom=C.random(42);const stars=Array.from({length:125},()=>({x:starRandom(),y:starRandom(),r:starRandom()*1.05+.25,a:starRandom()*.6+.15}));
+function line(x,y,x2,y2,color,w=1){ctx.strokeStyle=color;ctx.lineWidth=w;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x2,y2);ctx.stroke();}
+function circle(x,y,r,color,w=1,start=0,end=C.TAU){if(r<=0)return;ctx.strokeStyle=color;ctx.lineWidth=w;ctx.beginPath();ctx.arc(x,y,r,start,end);ctx.stroke();}
+function polygon(x,y,r,sides,angle,color,fill){ctx.beginPath();for(let i=0;i<sides;i++){const a=angle+i*C.TAU/sides;const px=x+Math.cos(a)*r,py=y+Math.sin(a)*r;i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill();}ctx.strokeStyle=color;ctx.lineWidth=1.3;ctx.stroke();}
+function textAt(txt,x,y,color='#688b9c',size=8,align='left'){const matrix=ctx.getTransform(),factor=Math.hypot(matrix.a,matrix.b)/dpr,readable=isRunning?Math.max(size,11/Math.max(.08,factor)):size;ctx.font=`${readable}px ui-monospace,Consolas,monospace`;ctx.textAlign=align;ctx.fillStyle=color;ctx.fillText(t(txt),x,y);}
+function glow(color,blur){if(!save.settings.reduced){ctx.shadowColor=color;ctx.shadowBlur=blur;}else ctx.shadowBlur=0;}
+function drawCore(t,hp=3,maxHp=3,shieldAngle=t*.2-1,widthArc=55*C.RAD,secondary=0,invuln=0,barrier=0){
+ const pulse=1+Math.sin(t*2)*.025;
+ const g=ctx.createRadialGradient(0,0,8,0,0,145);g.addColorStop(0,'#5ee4ff21');g.addColorStop(.4,'#3acaff0c');g.addColorStop(1,'#37a5ff00');ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,145,0,C.TAU);ctx.fill();
+ circle(0,0,65,'#264757',.7);ctx.setLineDash([2,7]);circle(0,0,84,'#2b4552',.7);ctx.setLineDash([]);
+ ctx.save();ctx.rotate(-t*.18);circle(0,0,46,'#3f96ad77',.8,.1,1.7);circle(0,0,46,'#3f96ad77',.8,2.1,3.9);circle(0,0,46,'#3f96ad77',.8,4.3,5.9);ctx.restore();
+ glow('#65dfff',25);const coreGradient=ctx.createRadialGradient(-7,-8,2,0,0,27);coreGradient.addColorStop(0,'#d8fbff');coreGradient.addColorStop(.25,'#7ce9ff');coreGradient.addColorStop(.7,'#2a91c3');coreGradient.addColorStop(1,'#123547');
+ ctx.globalAlpha=invuln>0?.5+Math.sin(t*45)*.3:1;polygon(0,0,28*pulse,6,t*.14,'#8deaff',coreGradient);ctx.shadowBlur=0;polygon(0,0,18,6,-t*.2,'#b2f5ff99');polygon(0,0,10,3,t*.4,'#d9ffff');ctx.globalAlpha=1;
+ for(let i=0;i<maxHp;i++){const a=-Math.PI/2+(i-(maxHp-1)/2)*.22;circle(0,0,37,i<hp?'#75dcf0':'#344e60',2,a-.055,a+.055);}
+ if(hp<2){line(-12,-17,2,-1,'#ff7c9477',2);line(2,-1,-5,12,'#ff7c9477',2);}
+ if(barrier>0){glow('#aa97ff',15);circle(0,0,56,'#baa8ffa0',2);ctx.shadowBlur=0;}
+ if(isRunning&&engine&&(engine.pt.memory||0)>0){ctx.globalAlpha=.35;circle(0,0,72,'#b9a1ff',2,shieldAngle-widthArc/2-.25,shieldAngle+widthArc/2-.25);ctx.globalAlpha=1;}glow('#65ffd6',22);ctx.lineCap='round';circle(0,0,65,'#68f5d4',8,shieldAngle-widthArc/2,shieldAngle+widthArc/2);circle(0,0,65,'#e5fff7',2,shieldAngle-widthArc/2,shieldAngle+widthArc/2);ctx.shadowBlur=0;ctx.lineCap='butt';
+ for(const a of [shieldAngle-widthArc/2,shieldAngle+widthArc/2]){const p=C.pos(a,65);circle(p.x,p.y,2.2,'#c1ffed',1);}
+ if(secondary>0){glow('#70edcb',10);circle(0,0,65,'#6cdcbf',5,shieldAngle+Math.PI-secondary/2,shieldAngle+Math.PI+secondary/2);ctx.shadowBlur=0;}
+}
+function drawEnemy(e,t){const def=e.type==='boss'?D.bosses[e.spec]:D.enemies.find(x=>x.id===e.type)||D.enemies[0],color=def.color;
+ if(e.orbitVelocity&&!save.settings.reduced){const direction=Math.sign(e.orbitVelocity);for(let i=1;i<=3;i++){const p=C.pos(e.angle-direction*i*.035,e.r);circle(p.x,p.y,1.7-i*.3,color+(i===1?'66':i===2?'44':'22'),1);}}
+ ctx.save();ctx.translate(e.x,e.y);ctx.rotate(e.angle+Math.PI/2);const s=e.size;
+ if(e.type==='boss'){
+  glow(color,12);
+  if(e.spec===0){polygon(0,0,33,8,t*.1,color,'#241e1b');polygon(0,0,23,4,Math.PI/4,color);for(const x of [-27,27]){ctx.strokeStyle=color;ctx.lineWidth=3;ctx.strokeRect(x-5,-11,10,24);}polygon(0,0,12,6,t*.4,color,color+'22');}
+  if(e.spec===1){for(let i=0;i<e.sections;i++){const a=i*C.TAU/3-t*.2,p=C.pos(a,20);line(0,0,p.x,p.y,color,3);polygon(p.x,p.y,16,6,-a,color,'#1f1630');polygon(p.x,p.y,7,3,a,'#e2ccff');}circle(0,0,7,'#d6c3ff',2);}
+  if(e.spec===2){polygon(0,0,36,4,0,color,'#0e2230');polygon(0,0,25,4,Math.PI/4,color);ctx.setLineDash([4,5]);circle(0,0,45,color+'66');ctx.setLineDash([]);polygon(0,0,10,4,t*.5,'#dcf7ff',color+'44');}
+  if(e.spec===3){ctx.fillStyle='#03060d';ctx.beginPath();ctx.arc(0,0,29,0,C.TAU);ctx.fill();for(let i=0;i<4;i++)circle(0,0,20+i*6,color+(i%2?'bb':'44'),i===1?3:1,t*.7+i,t*.7+i+4.5);circle(0,0,12,'#fff0ff',2);}
+ }else{
+  glow(color,7);polygon(0,0,s,def.sides,e.type==='sniper'?0:Math.PI/4,color,color+'15');ctx.shadowBlur=0;
+  if(e.type==='shooter'){polygon(0,0,5,4,0,color);line(0,s,0,s+5,color,2);}
+  if(e.type==='gunner')for(const x of [-5,0,5])line(x,7,x,18,color,2);
+  if(e.type==='sniper'){line(0,-20,0,21,color,1.5);polygon(0,0,5,3,0,color);}
+  if(e.type==='shotgun')for(const a of [-.35,0,.35]){const p=C.pos(a+Math.PI/2,18);line(0,0,p.x,p.y,color,2);}
+  if(e.type==='laser'){polygon(0,0,7,4,Math.PI/4,color);line(-18,-5,-18,8,color,2);line(18,-5,18,8,color,2);}
+  if(e.type==='orbital'){line(-20,2,-10,-8,color,2);line(20,2,10,-8,color,2);circle(0,0,4,color,1.5);}
+  if(e.type==='splitter'){polygon(-5,0,7,6,0,color);polygon(5,0,7,6,0,color);}
+  if(e.type==='suppressor'){circle(0,0,6,color,1.4);line(-10,0,10,0,color);line(0,-10,0,10,color);}
+ }
+ ctx.shadowBlur=0;ctx.restore();if(e.hp<e.maxHp&&e.type!=='boss'){line(e.x-12,e.y-23,e.x+12,e.y-23,'#2c3d4a',2);line(e.x-12,e.y-23,e.x-12+24*e.hp/e.maxHp,e.y-23,color,2);}}
+function drawWarnings(e){for(const g of e.warnings){const remaining=g.arrival-e.time,progress=C.clamp((e.time-g.created)/(g.arrival-g.created),0,1),p=C.pos(g.angle-g.curve,g.radius),q=C.pos(g.angle,80),owner=e.enemies.find(x=>x.id===g.owner);const col=g.kind==='laser'?'#ff6389':owner?.type==='boss'?D.bosses[owner.spec].color:D.enemies.find(x=>x.id===owner?.type)?.color||'#f6a58a';
+ ctx.globalAlpha=.2+progress*.45;ctx.setLineDash(g.kind==='laser'?[]:[5,6]);
+ if(g.curve){ctx.beginPath();for(let i=0;i<=20;i++){const r=65+(g.radius-65)*i/20,a=g.angle-g.curve*i/20,point=C.pos(a,r);i?ctx.lineTo(point.x,point.y):ctx.moveTo(point.x,point.y);}ctx.strokeStyle=col;ctx.lineWidth=1;ctx.stroke();}else line(q.x,q.y,p.x,p.y,col,g.kind==='laser'?1+progress*2:1);
+ ctx.setLineDash([]);ctx.globalAlpha=.45+progress*.4;polygon(p.x,p.y,5+progress*3,4,Math.PI/4,col,col+'18');circle(p.x,p.y,11,col+'55',.7);
+ if(owner&&Math.hypot(owner.x-p.x,owner.y-p.y)>20){ctx.globalAlpha=.16;ctx.setLineDash([2,6]);line(owner.x,owner.y,p.x,p.y,col,.7);ctx.setLineDash([]);}
+ ctx.globalAlpha=1;const indicator=C.pos(g.angle,102);circle(indicator.x,indicator.y,4,col,1.2,-Math.PI/2,-Math.PI/2+C.TAU*progress);
+ if(remaining<.85){const pp=C.pos(g.angle,115);textAt(g.kind==='laser'?'ЛАЗЕР':g.curve?'СПИРАЛЬ':'!',pp.x,pp.y,col,7,'center');}
+}}
+function drawProjectile(p){const col=p.friendly?p.crit?'#e0a0ff':'#7deedc':p.suppress?'#b4e899':'#ff687e';ctx.lineCap='round';if(p.trail.length){ctx.beginPath();ctx.moveTo(p.trail[0].x,p.trail[0].y);for(const q of p.trail)ctx.lineTo(q.x,q.y);ctx.lineTo(p.x,p.y);ctx.strokeStyle=col+'55';ctx.lineWidth=p.friendly?2:2.5;ctx.stroke();}glow(col,p.friendly?9:12);ctx.fillStyle=col;ctx.beginPath();ctx.arc(p.x,p.y,p.friendly?2.7:3.7,0,C.TAU);ctx.fill();ctx.shadowBlur=0;ctx.fillStyle='#fff0ee';ctx.beginPath();ctx.arc(p.x,p.y,1.3,0,C.TAU);ctx.fill();ctx.lineCap='butt';}
+function drawEffect(f,t){const v=1-f.life/f.max;ctx.globalAlpha=Math.min(1,f.life/f.max*2);
+ if(f.type==='chain'){ctx.beginPath();ctx.moveTo(f.x,f.y);for(let i=1;i<=6;i++){ctx.lineTo(f.x+(f.x2-f.x)*i/6+Math.sin(i*7+t*15)*5,f.y+(f.y2-f.y)*i/6+Math.cos(i*4+t*10)*5);}ctx.strokeStyle='#c2a5ff';ctx.lineWidth=1.5;ctx.stroke();}
+ if(['destroy','block','perfect','hit'].includes(f.type)){const color=f.type==='perfect'?'#ffdf9e':f.type==='destroy'?'#f9a0aa':'#86f7e5';circle(f.x,f.y,3+v*(f.type==='destroy'?35:24),color,1);if(!save.settings.reduced){const count=width<600?6:12;for(let i=0;i<count;i++){const a=i*C.TAU/count+Math.sin(i*43)*.5,rr=(7+v*40)*(1+Math.sin(i)*.3);line(f.x+Math.cos(a)*rr,f.y+Math.sin(a)*rr,f.x+Math.cos(a)*(rr+4),f.y+Math.sin(a)*(rr+4),color,1.3);}}}
+ if(f.type==='pulse')circle(0,0,v*(f.r||350),'#cc97ff',3);
+ if(f.type==='blast')circle(f.x,f.y,v*f.r,'#ffc896',2);
+ if(f.type==='hurt')circle(0,0,27+v*45,'#ff7891',2);
+ if(f.type==='laser'){const p=C.pos(f.angle,f.r||280);glow('#ff759b',12);line(0,0,p.x,p.y,'#ff5c8b',6*(1-v));line(0,0,p.x,p.y,'#fff1ff',2);ctx.shadowBlur=0;}
+ if(f.type==='feint'){ctx.globalAlpha*=.35;ctx.setLineDash([3,9]);const p=C.pos(f.angle,260),q=C.pos(f.angle,110);line(q.x,q.y,p.x,p.y,'#ae83e8');textAt('ЭХО',p.x,p.y,'#a287c5',8,'center');ctx.setLineDash([]);}
+ if(f.type==='wave'){ctx.setLineDash([5,15]);circle(0,0,110+v*190,'#c18aee',1,f.angle+t,f.angle+t+5.8);ctx.setLineDash([]);}
+ ctx.globalAlpha=1;}
+function arenaRings(t,ambient=false){
+ circle(0,0,260,'#243d4c',.7);ctx.setLineDash([2,10]);circle(0,0,211,'#1d3544',.6);ctx.setLineDash([]);circle(0,0,310,'#1d303e',.5);
+ ctx.save();ctx.rotate(t*.013);for(let i=0;i<72;i++){const a=i*C.TAU/72,p=C.pos(a,310),q=C.pos(a,i%6===0?318:313);line(p.x,p.y,q.x,q.y,i%6===0?'#3c5c6c':'#243c4b',.7);}ctx.restore();
+ for(let i=0;i<4;i++){const a=i*Math.PI/2,from=C.pos(a,91),to=C.pos(a,294);ctx.setLineDash([2,9]);line(from.x,from.y,to.x,to.y,'#27404b66',.5);ctx.setLineDash([]);}
+ if(ambient){textAt('01 / ВХОДЯЩИЙ ПОТОК',-265,-160,'#4f788a',6);textAt('КОНТУР СДЕРЖИВАНИЯ',-118,289,'#4f788a',6);const a=-.58,p=C.pos(a,260),q=C.pos(a,88);line(p.x,p.y,q.x,q.y,'#ff788c30');circle(p.x,p.y,4,'#c77886',1);}
+}
+function render(t){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);ctx.fillStyle='#080e17';ctx.fillRect(0,0,width,height);
+ for(const s of stars){ctx.globalAlpha=s.a*(.65+Math.sin(t*.4+s.x*20)*.2);ctx.fillStyle='#9ec6d8';ctx.fillRect(s.x*width,s.y*height,s.r,s.r);}ctx.globalAlpha=1;
+ const ambient=!isRunning;let drawScale=scale,drawX=cx,drawY=cy;
+ if(ambient){drawX=width*(width<600?.71:.69);drawY=height*(width<600?.47:.46);drawScale=width<600?Math.min(width/570,.8):Math.min(width/680,height/650)*.9;}
+ const bg=ctx.createRadialGradient(drawX,drawY,1,drawX,drawY,300*drawScale);bg.addColorStop(0,'#24546622');bg.addColorStop(.5,'#1b425411');bg.addColorStop(1,'#0b141d00');ctx.fillStyle=bg;ctx.fillRect(0,0,width,height);
+ ctx.save();ctx.translate(drawX+(shake?Math.sin(t*109)*shake:0),drawY+(shake?Math.cos(t*127)*shake*.6:0));ctx.scale(drawScale,drawScale);arenaRings(t,ambient);
+ if(ambient){
+  drawCore(t,3,3,t*.17-1.1,55*C.RAD);const a=-.7-t*.025,p=C.pos(a,253);drawEnemy({type:'shooter',angle:a,x:p.x,y:p.y,size:13,hp:1,maxHp:1},t);const a2=2.65+t*.016,p2=C.pos(a2,260);drawEnemy({type:'sniper',angle:a2,x:p2.x,y:p2.y,size:13,hp:1,maxHp:1},t);
+  for(let i=0;i<4;i++){const a=-.6+i*1.4,r=90+((t*30+i*63)%160),p=C.pos(a,r);ctx.globalAlpha=.6;circle(p.x,p.y,2,i%2?'#77dfe0':'#ff7c8a',1);ctx.globalAlpha=1;}
+ }else if(engine){
+  const e=engine;drawWarnings(e);for(const enemy of e.enemies){drawEnemy(enemy,t);if(enemy.type==='boss'&&e.time<(enemy.vulnerableUntil||0))circle(enemy.x,enemy.y,enemy.size+8,'#ffd27a',2);}for(const p of e.projectiles)drawProjectile(p);drawCore(t,e.hp,e.maxHp,e.angle,e.width,e.secondary,e.invuln,e.barrier);
+  if(e.u('drone')||e.m('satellite')){const p=C.pos(t*1.3,115);polygon(p.x,p.y,6,3,t,'#a5c4ff','#20354c');circle(p.x,p.y,12,'#789ac344',.6);}
+  if(e.u('turret')){const p=C.pos(-t*.5,43);polygon(p.x,p.y,4,4,t,'#f2da9f');}
+  if(e.u('slow')){ctx.setLineDash([4,14]);circle(0,0,130,'#919bf944');ctx.setLineDash([]);}
+  for(const f of e.effects)drawEffect(f,t);
+  if(e.suppressed>0){ctx.setLineDash([5,7]);circle(0,0,94,'#9cd88d55');ctx.setLineDash([]);textAt('ПОДАВЛЕНИЕ',0,115,'#b2d897',8,'center');}
+ }
+ ctx.restore();
+ if(isRunning){for(const l of labels){ctx.globalAlpha=Math.min(1,l.life/l.max*2);textAt(l.text,width/2,cy-98*scale-(1-l.life/l.max)*14,l.color,width<600?9:11,'center');ctx.globalAlpha=1;}}
+}
+function drawDeathReplay(dt){const c=$('#death-replay');if(!c||!engine?.replay.length)return;if(replayPlaying)replayClock=(replayClock+dt)%2.5;const frames=engine.replay,at=frames[0].time+Math.min(1.8,replayClock),f=frames.filter(f=>f.time<=at).at(-1)||frames[0],g=c.getContext('2d');g.fillStyle='#080e17';g.fillRect(0,0,560,360);g.save();g.translate(280,180);g.scale(2,2);g.strokeStyle='#355969';g.lineWidth=1;g.beginPath();g.arc(0,0,65,0,C.TAU);g.stroke();g.fillStyle='#78dfff';g.beginPath();g.arc(0,0,24,0,C.TAU);g.fill();g.strokeStyle='#70f5d1';g.lineWidth=7;g.beginPath();g.arc(0,0,65,f.angle-(f.width||engine.width)/2,f.angle+(f.width||engine.width)/2);g.stroke();if(f.secondary){g.beginPath();g.arc(0,0,65,f.angle+Math.PI-f.secondary/2,f.angle+Math.PI+f.secondary/2);g.stroke();}if(f.barrier){g.strokeStyle='#c7a2ff';g.beginPath();g.arc(0,0,55,0,C.TAU);g.stroke();}for(const p of f.bullets){g.fillStyle='#ff687e';g.beginPath();g.arc(p.x,p.y,3.7,0,C.TAU);g.fill();}for(const a of f.beams){g.strokeStyle='#ff687e88';g.lineWidth=2;g.beginPath();g.moveTo(0,0);g.lineTo(Math.cos(a)*140,Math.sin(a)*140);g.stroke();}for(const a of f.feints||[]){g.setLineDash([3,5]);g.strokeStyle='#b48aff';g.beginPath();g.moveTo(0,0);g.lineTo(Math.cos(a)*140,Math.sin(a)*140);g.stroke();g.setLineDash([]);}if(f.time>=engine.lastHit.time-.08){const a=engine.lastHit.angle;g.strokeStyle='#ffd27a';g.lineWidth=2;g.beginPath();g.moveTo(Math.cos(a)*25,Math.sin(a)*25);g.lineTo(Math.cos(a)*95,Math.sin(a)*95);g.stroke();}g.restore();const el=$('#replay-time');if(el)el.textContent=(f.time-engine.lastHit.time).toFixed(2)+' '+t('с');}
+function frame(ms){const dt=Math.min(.05,lastTime?(ms-lastTime)/1000:0);lastTime=ms;elapsed+=dt;shake=Math.max(0,shake-dt*23);const pad=pollController(ms);audio.update(!isRunning?'menu':engine?.state==='paused'||engine?.state==='upgrade'?'paused':engine?.state==='dead'?'result':engine?.boss?'boss':'combat');if(isRunning&&engine){const axis=Number(keys.has('d')||keys.has('в')||keys.has('arrowright'))-Number(keys.has('a')||keys.has('ф')||keys.has('arrowleft'));let turnAxis=axis;if(axis){inputOwner='keyboard';input.angle=undefined;}else if(pad?.active){inputOwner='gamepad';if(pad.axis){turnAxis=pad.axis;input.angle=engine.angle;}else if(Number.isFinite(pad.angle))input.angle=pad.angle;}engine.update(dt,{axis:turnAxis,angle:input.angle});if(inputOwner==='gamepad'&&turnAxis)input.angle=engine.angle;handleEvents();if(ms-lastHud>85){updateHud();lastHud=ms;}}for(const l of labels)l.life-=dt;for(let i=labels.length-1;i>=0;i--)if(labels[i].life<=0)labels.splice(i,1);render(elapsed);if(engine?.state==='dead')drawDeathReplay(dt);requestAnimationFrame(frame);}
+renderPage();resize();if(store.warning)toast(store.warning,'gold');requestAnimationFrame(frame);
+})();
+
+</script>
+</body>
+</html>

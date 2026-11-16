@@ -374,7 +374,8 @@ const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const angleDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 const pos=(a,r)=>({x:Math.cos(a)*r,y:Math.sin(a)*r});
 // A shared polar track keeps simulation and arena geometry in agreement.
-function orbitRadius(angle,time,base=265){const cycle=((time%48)+48)%48,blend=cycle>10&&cycle<38?Math.sin((cycle-10)/28*Math.PI)**2:0,rotation=time*.065;return base+blend*(1+Math.min(1.25,Math.max(0,time)/240))*(18*Math.cos(2*(angle-rotation))+6*Math.sin(3*(angle+rotation*.6)));}
+function orbitInstability(time){const x=clamp((time-120)/480,0,1);return x*x*(3-2*x);}
+function orbitRadius(angle,time,base=265){const cycle=((time%48)+48)%48,blend=cycle>10&&cycle<38?Math.sin((cycle-10)/28*Math.PI)**2:0,rotation=time*.065;const depth=orbitInstability(time),fold=angle-rotation;const breathing=.8+.2*Math.sin(time*Math.PI/24)**2;return base+depth*breathing*(32*Math.cos(2*fold)+16*Math.sin(3*fold)) +(1-depth)*blend*(1+Math.min(1.25,Math.max(0,time)/240))*(18*Math.cos(2*(angle-rotation))+6*Math.sin(3*(angle+rotation*.6)));}
 function random(seed){let s=seed>>>0;return()=>((s=(Math.imul(s,1664525)+1013904223)>>>0)/4294967296);}
 function dailyKey(date=new Date()){return date.toISOString().slice(0,10);}
 function dailySeed(key){let hash=2166136261;for(const ch of key)hash=Math.imul(hash^ch.charCodeAt(0),16777619);return hash>>>0;}
@@ -658,7 +659,7 @@ function purchase(s,id){const t=D.tech.find(t=>t.id===id);if(!t)return false;con
 function canPrestige(s){return s.bosses.length>=4&&Object.values(s.tech).reduce((a,b)=>a+b,0)>=12;}
 function prestige(s){if(!canPrestige(s))return false;const gain=3+Math.floor(Object.values(s.tech).reduce((a,b)=>a+b,0)/10);s.prestige++;s.rare+=gain;s.tech={};s.shards=0;claimAchievements(s);return gain;}
 function purchasePrestige(s,id){const t=D.prestigeTech.find(t=>t.id===id);if(!t)return false;const level=s.prestigeTech[id]||0,price=t.cost+level;if(level>=t.max||s.rare<price)return false;s.rare-=price;s.prestigeTech[id]=level+1;if(id==='void'&&!s.modes.includes('horizon'))s.modes.push('horizon');return true;}
-const api={dailyKey,dailySeed,BALANCE,Engine,SaveStore,freshSave,validateSave,claimAchievements,purchase,canPrestige,prestige,purchasePrestige,clamp,angleDiff,pos,random,orbitRadius,RAD,TAU};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreEngine=api;
+const api={dailyKey,dailySeed,BALANCE,Engine,SaveStore,freshSave,validateSave,claimAchievements,purchase,canPrestige,prestige,purchasePrestige,clamp,angleDiff,pos,random,orbitRadius,orbitInstability,RAD,TAU};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreEngine=api;
 })(typeof globalThis!=='undefined'?globalThis:this);
 </script>
 <script>/* Presentation-only localization. Stable IDs, save keys and gameplay data stay unchanged. */
@@ -1837,9 +1838,29 @@ function drawEffect(f,t){const v=1-f.life/f.max;ctx.globalAlpha=Math.min(1,f.lif
  if(f.type==='wave'){ctx.setLineDash([5,15]);circle(0,0,110+v*190,'#c18aee',1,f.angle+t,f.angle+t+5.8);ctx.setLineDash([]);}
  ctx.globalAlpha=1;}
 function orbitStroke(time,base,color,lineWidth=1,start=0,end=C.TAU){ctx.beginPath();const count=Math.max(3,Math.ceil((end-start)*32));for(let i=0;i<=count;i++){const a=start+(end-start)*i/count,p=C.pos(a,C.orbitRadius(a,time,base));i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);}ctx.strokeStyle=color;ctx.lineWidth=lineWidth;ctx.stroke();}
+// A half-twisted ribbon around the shared enemy path; its edges exchange at the seam.
+function orbitRibbon(time,base,depth){
+ if(depth<=0)return;
+ const count=128,rotation=time*.065,halfWidth=depth*17;
+ ctx.save();
+ for(let i=0;i<count;i++){
+  const points=[];
+  for(const [step,side] of [[i,-1],[i+1,-1],[i+1,1],[i,1]]){
+   const u=step/count*C.TAU,a=u+rotation;
+   const r=C.orbitRadius(a,time,base)+side*halfWidth*Math.cos(u/2);
+   points.push(C.pos(a,r));
+  }
+  const front=Math.sin((i+.5)/count*C.TAU/2);
+  ctx.beginPath();points.forEach((p,j)=>j?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();
+  ctx.fillStyle='rgba(112,111,255,'+(depth*(.035+.07*front))+')';ctx.fill();
+  for(const pair of [[0,1],[3,2]]){const a=points[pair[0]],b=points[pair[1]];line(a.x,a.y,b.x,b.y,'rgba(146,158,255,'+(depth*.48)+')',.8);}
+ }
+ ctx.restore();
+}
 function arenaRings(t,ambient=false){const clock=ambient?t:engine.time,spin=clock*.065;
  const floor=ctx.createRadialGradient(0,0,80,0,0,320);floor.addColorStop(0,'#112b3420');floor.addColorStop(.78,'#14293844');floor.addColorStop(1,'#05091100');ctx.fillStyle=floor;ctx.beginPath();ctx.arc(0,0,320,0,C.TAU);ctx.fill();
  for(let i=0;i<12;i++){const a=i*C.TAU/12+spin;orbitStroke(clock,284,'#294858',6,a+.03,a+.43);orbitStroke(clock,286,'#7ca8bd44',1,a+.04,a+.42);const p=C.pos(a,C.orbitRadius(a,clock,294));polygon(p.x,p.y,3,4,a,'#78bac888','#152c39');}
+ if(!ambient){const depth=C.orbitInstability(clock);orbitRibbon(clock,265,depth*(save.settings.reduced?.45:1));orbitRibbon(clock,248,depth*(save.settings.reduced?.3:.65));}
  orbitStroke(clock,265,'#69b8cc99',1.2);orbitStroke(clock,248,'#36596977',.8);ctx.setLineDash([2,10]);circle(0,0,211,'#1d3544',.6);ctx.setLineDash([]);orbitStroke(clock,310,'#274855',.6);
  if(!save.settings.reduced){orbitStroke(clock,303,'#65ffd655',1.5,spin+Math.PI,spin+Math.PI+.4);orbitStroke(clock,303,'#76a4ff44',1.5,-spin,-spin+.5);}
  for(let i=0;i<72;i++){const a=i*C.TAU/72-spin*.4,p=C.pos(a,C.orbitRadius(a,clock,310)),q=C.pos(a,C.orbitRadius(a,clock,i%6===0?318:313));line(p.x,p.y,q.x,q.y,i%6===0?'#4a7484':'#243c4b',.7);}

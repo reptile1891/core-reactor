@@ -241,9 +241,29 @@ function drawEffect(f,t){const v=1-f.life/f.max;ctx.globalAlpha=Math.min(1,f.lif
  if(f.type==='wave'){ctx.setLineDash([5,15]);circle(0,0,110+v*190,'#c18aee',1,f.angle+t,f.angle+t+5.8);ctx.setLineDash([]);}
  ctx.globalAlpha=1;}
 function orbitStroke(time,base,color,lineWidth=1,start=0,end=C.TAU){ctx.beginPath();const count=Math.max(3,Math.ceil((end-start)*32));for(let i=0;i<=count;i++){const a=start+(end-start)*i/count,p=C.pos(a,C.orbitRadius(a,time,base));i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y);}ctx.strokeStyle=color;ctx.lineWidth=lineWidth;ctx.stroke();}
+// A half-twisted ribbon around the shared enemy path; its edges exchange at the seam.
+function orbitRibbon(time,base,depth){
+ if(depth<=0)return;
+ const count=128,rotation=time*.065,halfWidth=depth*17;
+ ctx.save();
+ for(let i=0;i<count;i++){
+  const points=[];
+  for(const [step,side] of [[i,-1],[i+1,-1],[i+1,1],[i,1]]){
+   const u=step/count*C.TAU,a=u+rotation;
+   const r=C.orbitRadius(a,time,base)+side*halfWidth*Math.cos(u/2);
+   points.push(C.pos(a,r));
+  }
+  const front=Math.sin((i+.5)/count*C.TAU/2);
+  ctx.beginPath();points.forEach((p,j)=>j?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();
+  ctx.fillStyle='rgba(112,111,255,'+(depth*(.035+.07*front))+')';ctx.fill();
+  for(const pair of [[0,1],[3,2]]){const a=points[pair[0]],b=points[pair[1]];line(a.x,a.y,b.x,b.y,'rgba(146,158,255,'+(depth*.48)+')',.8);}
+ }
+ ctx.restore();
+}
 function arenaRings(t,ambient=false){const clock=ambient?t:engine.time,spin=clock*.065;
  const floor=ctx.createRadialGradient(0,0,80,0,0,320);floor.addColorStop(0,'#112b3420');floor.addColorStop(.78,'#14293844');floor.addColorStop(1,'#05091100');ctx.fillStyle=floor;ctx.beginPath();ctx.arc(0,0,320,0,C.TAU);ctx.fill();
  for(let i=0;i<12;i++){const a=i*C.TAU/12+spin;orbitStroke(clock,284,'#294858',6,a+.03,a+.43);orbitStroke(clock,286,'#7ca8bd44',1,a+.04,a+.42);const p=C.pos(a,C.orbitRadius(a,clock,294));polygon(p.x,p.y,3,4,a,'#78bac888','#152c39');}
+ if(!ambient){const depth=C.orbitInstability(clock);orbitRibbon(clock,265,depth*(save.settings.reduced?.45:1));orbitRibbon(clock,248,depth*(save.settings.reduced?.3:.65));}
  orbitStroke(clock,265,'#69b8cc99',1.2);orbitStroke(clock,248,'#36596977',.8);ctx.setLineDash([2,10]);circle(0,0,211,'#1d3544',.6);ctx.setLineDash([]);orbitStroke(clock,310,'#274855',.6);
  if(!save.settings.reduced){orbitStroke(clock,303,'#65ffd655',1.5,spin+Math.PI,spin+Math.PI+.4);orbitStroke(clock,303,'#76a4ff44',1.5,-spin,-spin+.5);}
  for(let i=0;i<72;i++){const a=i*C.TAU/72-spin*.4,p=C.pos(a,C.orbitRadius(a,clock,310)),q=C.pos(a,C.orbitRadius(a,clock,i%6===0?318:313));line(p.x,p.y,q.x,q.y,i%6===0?'#4a7484':'#243c4b',.7);}

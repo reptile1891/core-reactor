@@ -8,7 +8,8 @@ const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const angleDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 const pos=(a,r)=>({x:Math.cos(a)*r,y:Math.sin(a)*r});
 // A shared polar track keeps simulation and arena geometry in agreement.
-function orbitRadius(angle,time,base=265){const cycle=((time%48)+48)%48,blend=cycle>10&&cycle<38?Math.sin((cycle-10)/28*Math.PI)**2:0,rotation=time*.065;return base+blend*(1+Math.min(1.25,Math.max(0,time)/240))*(18*Math.cos(2*(angle-rotation))+6*Math.sin(3*(angle+rotation*.6)));}
+function orbitInstability(time){const x=clamp((time-120)/480,0,1);return x*x*(3-2*x);}
+function orbitRadius(angle,time,base=265){const cycle=((time%48)+48)%48,blend=cycle>10&&cycle<38?Math.sin((cycle-10)/28*Math.PI)**2:0,rotation=time*.065;const depth=orbitInstability(time),fold=angle-rotation;const breathing=.8+.2*Math.sin(time*Math.PI/24)**2;return base+depth*breathing*(32*Math.cos(2*fold)+16*Math.sin(3*fold)) +(1-depth)*blend*(1+Math.min(1.25,Math.max(0,time)/240))*(18*Math.cos(2*(angle-rotation))+6*Math.sin(3*(angle+rotation*.6)));}
 function random(seed){let s=seed>>>0;return()=>((s=(Math.imul(s,1664525)+1013904223)>>>0)/4294967296);}
 function dailyKey(date=new Date()){return date.toISOString().slice(0,10);}
 function dailySeed(key){let hash=2166136261;for(const ch of key)hash=Math.imul(hash^ch.charCodeAt(0),16777619);return hash>>>0;}
@@ -292,5 +293,5 @@ function purchase(s,id){const t=D.tech.find(t=>t.id===id);if(!t)return false;con
 function canPrestige(s){return s.bosses.length>=4&&Object.values(s.tech).reduce((a,b)=>a+b,0)>=12;}
 function prestige(s){if(!canPrestige(s))return false;const gain=3+Math.floor(Object.values(s.tech).reduce((a,b)=>a+b,0)/10);s.prestige++;s.rare+=gain;s.tech={};s.shards=0;claimAchievements(s);return gain;}
 function purchasePrestige(s,id){const t=D.prestigeTech.find(t=>t.id===id);if(!t)return false;const level=s.prestigeTech[id]||0,price=t.cost+level;if(level>=t.max||s.rare<price)return false;s.rare-=price;s.prestigeTech[id]=level+1;if(id==='void'&&!s.modes.includes('horizon'))s.modes.push('horizon');return true;}
-const api={dailyKey,dailySeed,BALANCE,Engine,SaveStore,freshSave,validateSave,claimAchievements,purchase,canPrestige,prestige,purchasePrestige,clamp,angleDiff,pos,random,orbitRadius,RAD,TAU};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreEngine=api;
+const api={dailyKey,dailySeed,BALANCE,Engine,SaveStore,freshSave,validateSave,claimAchievements,purchase,canPrestige,prestige,purchasePrestige,clamp,angleDiff,pos,random,orbitRadius,orbitInstability,RAD,TAU};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreEngine=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

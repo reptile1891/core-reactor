@@ -380,7 +380,7 @@ const catalog={
  "поворот": "rotate",
  "прогресс.json": "progress.json",
  "резервная-копия.json": "backup.json",
- "с": "s",
+ "с": " s",
  "с.": "s",
  "снаряд": "projectile",
  "спасение": "revive",
@@ -538,7 +538,15 @@ const catalog={
  "Взрыв": "Blast",
  "Лазерные попадания: раньше переключайтесь на сплошной луч.": "Laser hits: switch to the solid beam earlier.",
  "Сначала следите за Подавителями: их попадания замедляют щит.": "Watch suppressors first: their hits slow the shield.",
- "Следите за ближайшим ударом и сохраняйте энергию для Перегрузки.": "Watch the nearest impact and save energy for Overload."
+ "Следите за ближайшим ударом и сохраняйте энергию для Перегрузки.": "Watch the nearest impact and save energy for Overload.",
+ "Усиление вашей сборки": "Strengthen your build",
+ "Новая возможность": "New ability",
+ "В сборке": "In your build",
+ "Сочетание": "Pairs with",
+ "Что изменить": "What to change",
+ "Золотая метка — место последнего удара · зелёная дуга — ваш щит": "Gold marker: final hit location · green arc: your shield",
+ "СНАРЯД": "PROJECTILE",
+ "Уровень": "Level"
 };
 let language='ru';
 const messages={...catalog};

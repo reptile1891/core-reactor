@@ -64,3 +64,5 @@
 .command-home .home-reactor{background:radial-gradient(ellipse at 85% 85%,#db8b3724,transparent 68%)}
 
 @media(max-height:480px) and (orientation:landscape){.command-home .hero-copy,.command-home .control-tip{display:none}.command-home h1{font-size:68px;margin-top:14px}.command-home .title-rule{margin-top:9px}.command-home .title-sub{margin-top:8px}.command-home .home-reactor{min-height:250px}.command-home .launch{min-height:48px}.command-home .mode-label{margin:8px 0}.command-home .home-intro{align-self:start}}
+
+.game-active .topbar{background:linear-gradient(90deg,#0b1b29,#0a121c);border-bottom-color:#6edfff38}.game-active .boss-track{box-shadow:0 0 12px #84dfff20}.game-active .energy-track{background:#142c39}.game-active .energy-fill{box-shadow:0 0 12px #ffc47755}.game-active .health span:not(.empty){box-shadow:0 0 8px #70f5d144}

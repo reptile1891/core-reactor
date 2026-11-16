@@ -4,6 +4,8 @@ function loadout(type){const s=C.freshSave();if(type==='moderate')s.tech={hp:1,w
 function play(type,seed,options={}){
  const s=loadout(type),e=new C.Engine(s,{seed,mode:options.mode||'classic',core:options.core||'standard'}),rng=C.random(seed+976),misses=new Map();let desired=e.angle,pendingAngle=desired,reactAt=0,lastGroup=-1,maxObjects=0,earliestPerfect=0;
  for(let i=0;i<720*60&&e.state!=='dead';i++){
+  if(e.state==='route'){e.chooseRoute(options.route||'standard');continue;}
+  if(e.state==='specialization'){e.chooseSpecialization(D.specializations[e.pendingSpec][seed%2].id);continue;}
   if(e.state==='upgrade'){
    const priority=['heal','wide','damage','chain','double','crit','barrier','slow','turn','pulse','blast','drone','turret','salvage','energy'];
    const choices=e.choices.slice().sort((a,b)=>priority.indexOf(a.id)-priority.indexOf(b.id));e.choose(choices[0].id);continue;
@@ -25,7 +27,7 @@ const stats=['none','moderate','max'].map(type=>{const rs=results.filter(r=>r.ty
 const idle=play('max',11,{unattended:true,limit:180}),expert=play('none',2026,{expert:true,limit:360});
 console.table(stats);console.log('Max upgrades, no input:',idle);console.log('Base stats, precise defender:',expert);
 assert.ok(stats[0].median>=20&&stats[0].median<=90,'new player survival outside broad target');assert.ok(stats[1].median>stats[0].median,'moderate progression should help');assert.ok(idle.dead&&idle.time<100,'automatic abilities must not play the game alone');assert.ok(expert.bosses>=4,'skilled base-stat play must be able to reach and defeat all four bosses');assert.ok(Math.max(...results.map(r=>r.maxObjects))<130,'unbounded entities');
-const report={date:'2026-11-14',method:'90 seeded simulations, reaction delay 220–420 ms; 18% direction errors per incoming group. This is a synthetic defender, not human playtesting.',stats,idle,expert,results};
+const report={date:'2026-11-16',method:'90 seeded simulations, reaction delay 220–420 ms; 18% direction errors per incoming group. This is a synthetic defender, not human playtesting.',stats,idle,expert,results};
 require('node:fs').writeFileSync('tests/balance-results.json',JSON.stringify(report,null,2));
 console.log('Balance checks passed.');
 }

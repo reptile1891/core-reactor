@@ -7,30 +7,30 @@
       "runs": 30,
       "median": 44,
       "min": 22.3,
-      "max": 95.3,
-      "mean": 47.2,
-      "meanBosses": 0,
-      "peakObjects": 19
+      "max": 92.4,
+      "mean": 48.3,
+      "meanBosses": 0.1,
+      "peakObjects": 21
     },
     {
       "loadout": "moderate",
       "runs": 30,
-      "median": 59.2,
+      "median": 63.7,
       "min": 26.3,
-      "max": 95.5,
-      "mean": 58.5,
+      "max": 94.6,
+      "mean": 58.1,
       "meanBosses": 0.2,
-      "peakObjects": 23
+      "peakObjects": 19
     },
     {
       "loadout": "max",
       "runs": 30,
-      "median": 108,
+      "median": 110.2,
       "min": 46.2,
-      "max": 218,
-      "mean": 106.1,
-      "meanBosses": 1,
-      "peakObjects": 25
+      "max": 162.4,
+      "mean": 100.7,
+      "meanBosses": 0.8,
+      "peakObjects": 24
     }
   ],
   "idle": {
@@ -52,12 +52,12 @@
     "seed": 2026,
     "time": 360,
     "hp": 5,
-    "kills": 266,
+    "kills": 261,
     "bosses": 5,
-    "perfect": 1,
-    "level": 22,
-    "score": 85661,
-    "maxObjects": 24,
+    "perfect": 0,
+    "level": 21,
+    "score": 80166,
+    "maxObjects": 29,
     "dead": false,
     "bossIds": [
       "guardian",
@@ -87,11 +87,11 @@
       "seed": 2,
       "time": 64.2,
       "hp": 0,
-      "kills": 22,
+      "kills": 23,
       "bosses": 0,
       "perfect": 0,
       "level": 5,
-      "score": 3735,
+      "score": 3641,
       "maxObjects": 18,
       "dead": true,
       "bossIds": []
@@ -113,13 +113,13 @@
     {
       "type": "none",
       "seed": 4,
-      "time": 67.1,
+      "time": 64.2,
       "hp": 0,
-      "kills": 22,
+      "kills": 21,
       "bosses": 0,
-      "perfect": 1,
+      "perfect": 0,
       "level": 5,
-      "score": 3661,
+      "score": 3283,
       "maxObjects": 16,
       "dead": true,
       "bossIds": []
@@ -295,16 +295,18 @@
     {
       "type": "none",
       "seed": 17,
-      "time": 67.1,
+      "time": 84.4,
       "hp": 0,
-      "kills": 22,
-      "bosses": 0,
-      "perfect": 1,
-      "level": 5,
-      "score": 3350,
-      "maxObjects": 11,
+      "kills": 33,
+      "bosses": 1,
+      "perfect": 4,
+      "level": 6,
+      "score": 6548,
+      "maxObjects": 21,
       "dead": true,
-      "bossIds": []
+      "bossIds": [
+        "guardian"
+      ]
     },
     {
       "type": "none",
@@ -337,16 +339,18 @@
     {
       "type": "none",
       "seed": 20,
-      "time": 68,
+      "time": 86.6,
       "hp": 0,
-      "kills": 21,
-      "bosses": 0,
-      "perfect": 1,
-      "level": 6,
-      "score": 4647,
+      "kills": 32,
+      "bosses": 1,
+      "perfect": 5,
+      "level": 8,
+      "score": 8406,
       "maxObjects": 18,
       "dead": true,
-      "bossIds": []
+      "bossIds": [
+        "guardian"
+      ]
     },
     {
       "type": "none",
@@ -379,13 +383,13 @@
     {
       "type": "none",
       "seed": 23,
-      "time": 64.2,
+      "time": 65.2,
       "hp": 0,
       "kills": 22,
       "bosses": 0,
-      "perfect": 0,
+      "perfect": 1,
       "level": 5,
-      "score": 3341,
+      "score": 3726,
       "maxObjects": 14,
       "dead": true,
       "bossIds": []
@@ -407,13 +411,13 @@
     {
       "type": "none",
       "seed": 25,
-      "time": 56.1,
+      "time": 55.8,
       "hp": 0,
-      "kills": 21,
+      "kills": 22,
       "bosses": 0,
       "perfect": 0,
       "level": 5,
-      "score": 3278,
+      "score": 3378,
       "maxObjects": 14,
       "dead": true,
       "bossIds": []
@@ -421,7 +425,7 @@
     {
       "type": "none",
       "seed": 26,
-      "time": 56,
+      "time": 56.3,
       "hp": 0,
       "kills": 21,
       "bosses": 0,
@@ -435,13 +439,13 @@
     {
       "type": "none",
       "seed": 27,
-      "time": 65.2,
+      "time": 66.6,
       "hp": 0,
-      "kills": 21,
+      "kills": 22,
       "bosses": 0,
       "perfect": 0,
       "level": 4,
-      "score": 2738,
+      "score": 2927,
       "maxObjects": 13,
       "dead": true,
       "bossIds": []
@@ -463,13 +467,13 @@
     {
       "type": "none",
       "seed": 29,
-      "time": 95.3,
+      "time": 92.4,
       "hp": 0,
-      "kills": 41,
+      "kills": 37,
       "bosses": 1,
       "perfect": 4,
       "level": 7,
-      "score": 7535,
+      "score": 7070,
       "maxObjects": 16,
       "dead": true,
       "bossIds": [
@@ -511,9 +515,9 @@
       "hp": 0,
       "kills": 22,
       "bosses": 0,
-      "perfect": 0,
+      "perfect": 1,
       "level": 6,
-      "score": 3535,
+      "score": 3746,
       "maxObjects": 17,
       "dead": true,
       "bossIds": []
@@ -556,7 +560,7 @@
       "perfect": 0,
       "level": 5,
       "score": 3280,
-      "maxObjects": 17,
+      "maxObjects": 16,
       "dead": true,
       "bossIds": []
     },
@@ -605,35 +609,37 @@
     {
       "type": "moderate",
       "seed": 9,
-      "time": 66.6,
+      "time": 67.4,
       "hp": 0,
       "kills": 20,
       "bosses": 0,
-      "perfect": 2,
+      "perfect": 3,
       "level": 6,
-      "score": 3625,
-      "maxObjects": 21,
+      "score": 3689,
+      "maxObjects": 19,
       "dead": true,
       "bossIds": []
     },
     {
       "type": "moderate",
       "seed": 10,
-      "time": 65.2,
+      "time": 90.9,
       "hp": 0,
-      "kills": 22,
-      "bosses": 0,
-      "perfect": 0,
-      "level": 5,
-      "score": 3077,
-      "maxObjects": 13,
+      "kills": 38,
+      "bosses": 1,
+      "perfect": 4,
+      "level": 7,
+      "score": 6986,
+      "maxObjects": 14,
       "dead": true,
-      "bossIds": []
+      "bossIds": [
+        "guardian"
+      ]
     },
     {
       "type": "moderate",
       "seed": 11,
-      "time": 56.8,
+      "time": 57.1,
       "hp": 0,
       "kills": 22,
       "bosses": 0,
@@ -689,13 +695,13 @@
     {
       "type": "moderate",
       "seed": 15,
-      "time": 59.9,
+      "time": 63.7,
       "hp": 0,
       "kills": 22,
       "bosses": 0,
       "perfect": 0,
       "level": 5,
-      "score": 3545,
+      "score": 3469,
       "maxObjects": 17,
       "dead": true,
       "bossIds": []
@@ -717,14 +723,14 @@
     {
       "type": "moderate",
       "seed": 17,
-      "time": 91.8,
+      "time": 91,
       "hp": 0,
-      "kills": 34,
+      "kills": 35,
       "bosses": 1,
-      "perfect": 4,
-      "level": 7,
-      "score": 6730,
-      "maxObjects": 18,
+      "perfect": 2,
+      "level": 6,
+      "score": 6499,
+      "maxObjects": 14,
       "dead": true,
       "bossIds": [
         "guardian"
@@ -761,14 +767,14 @@
     {
       "type": "moderate",
       "seed": 20,
-      "time": 90.7,
+      "time": 82.4,
       "hp": 0,
-      "kills": 34,
+      "kills": 29,
       "bosses": 1,
-      "perfect": 3,
-      "level": 8,
-      "score": 6905,
-      "maxObjects": 23,
+      "perfect": 2,
+      "level": 7,
+      "score": 6017,
+      "maxObjects": 19,
       "dead": true,
       "bossIds": [
         "guardian"
@@ -811,54 +817,50 @@
       "bosses": 0,
       "perfect": 3,
       "level": 6,
-      "score": 3837,
-      "maxObjects": 15,
+      "score": 3737,
+      "maxObjects": 14,
       "dead": true,
       "bossIds": []
     },
     {
       "type": "moderate",
       "seed": 24,
-      "time": 94.8,
+      "time": 65.2,
       "hp": 0,
-      "kills": 41,
-      "bosses": 1,
-      "perfect": 4,
-      "level": 8,
-      "score": 7714,
+      "kills": 22,
+      "bosses": 0,
+      "perfect": 1,
+      "level": 6,
+      "score": 3543,
       "maxObjects": 17,
       "dead": true,
-      "bossIds": [
-        "guardian"
-      ]
+      "bossIds": []
     },
     {
       "type": "moderate",
       "seed": 25,
-      "time": 86,
+      "time": 64.3,
       "hp": 0,
-      "kills": 32,
-      "bosses": 1,
-      "perfect": 5,
-      "level": 7,
-      "score": 6913,
+      "kills": 21,
+      "bosses": 0,
+      "perfect": 0,
+      "level": 5,
+      "score": 3493,
       "maxObjects": 15,
       "dead": true,
-      "bossIds": [
-        "guardian"
-      ]
+      "bossIds": []
     },
     {
       "type": "moderate",
       "seed": 26,
-      "time": 59.2,
+      "time": 64.7,
       "hp": 0,
-      "kills": 20,
+      "kills": 19,
       "bosses": 0,
       "perfect": 0,
       "level": 5,
-      "score": 2994,
-      "maxObjects": 20,
+      "score": 2919,
+      "maxObjects": 14,
       "dead": true,
       "bossIds": []
     },
@@ -879,28 +881,30 @@
     {
       "type": "moderate",
       "seed": 28,
-      "time": 70.4,
+      "time": 85.4,
       "hp": 0,
-      "kills": 22,
-      "bosses": 0,
-      "perfect": 2,
-      "level": 5,
-      "score": 3608,
+      "kills": 30,
+      "bosses": 1,
+      "perfect": 4,
+      "level": 6,
+      "score": 6293,
       "maxObjects": 13,
       "dead": true,
-      "bossIds": []
+      "bossIds": [
+        "guardian"
+      ]
     },
     {
       "type": "moderate",
       "seed": 29,
-      "time": 95.5,
+      "time": 94.6,
       "hp": 0,
-      "kills": 42,
+      "kills": 41,
       "bosses": 1,
-      "perfect": 3,
-      "level": 7,
-      "score": 7318,
-      "maxObjects": 17,
+      "perfect": 4,
+      "level": 8,
+      "score": 7893,
+      "maxObjects": 18,
       "dead": true,
       "bossIds": [
         "guardian"
@@ -909,13 +913,13 @@
     {
       "type": "moderate",
       "seed": 30,
-      "time": 65.2,
+      "time": 64.2,
       "hp": 0,
       "kills": 22,
       "bosses": 0,
-      "perfect": 1,
+      "perfect": 0,
       "level": 5,
-      "score": 3244,
+      "score": 3087,
       "maxObjects": 17,
       "dead": true,
       "bossIds": []
@@ -937,30 +941,31 @@
     {
       "type": "max",
       "seed": 2,
-      "time": 116.4,
+      "time": 146,
       "hp": 0,
-      "kills": 65,
-      "bosses": 1,
-      "perfect": 2,
-      "level": 11,
-      "score": 11072,
-      "maxObjects": 18,
+      "kills": 92,
+      "bosses": 2,
+      "perfect": 12,
+      "level": 13,
+      "score": 16610,
+      "maxObjects": 24,
       "dead": true,
       "bossIds": [
-        "guardian"
+        "guardian",
+        "hydra"
       ]
     },
     {
       "type": "max",
       "seed": 3,
-      "time": 110.8,
+      "time": 106.2,
       "hp": 0,
-      "kills": 52,
+      "kills": 48,
       "bosses": 1,
-      "perfect": 4,
-      "level": 9,
-      "score": 9197,
-      "maxObjects": 18,
+      "perfect": 3,
+      "level": 8,
+      "score": 8383,
+      "maxObjects": 19,
       "dead": true,
       "bossIds": [
         "guardian"
@@ -983,17 +988,18 @@
     {
       "type": "max",
       "seed": 5,
-      "time": 124.7,
+      "time": 147.6,
       "hp": 0,
-      "kills": 61,
-      "bosses": 1,
-      "perfect": 8,
-      "level": 10,
-      "score": 10668,
-      "maxObjects": 21,
+      "kills": 80,
+      "bosses": 2,
+      "perfect": 15,
+      "level": 12,
+      "score": 15217,
+      "maxObjects": 23,
       "dead": true,
       "bossIds": [
-        "guardian"
+        "guardian",
+        "hydra"
       ]
     },
     {
@@ -1005,7 +1011,7 @@
       "bosses": 0,
       "perfect": 0,
       "level": 6,
-      "score": 3194,
+      "score": 3156,
       "maxObjects": 18,
       "dead": true,
       "bossIds": []
@@ -1018,8 +1024,8 @@
       "kills": 19,
       "bosses": 0,
       "perfect": 0,
-      "level": 6,
-      "score": 2817,
+      "level": 5,
+      "score": 2767,
       "maxObjects": 18,
       "dead": true,
       "bossIds": []
@@ -1029,11 +1035,11 @@
       "seed": 8,
       "time": 52.5,
       "hp": 0,
-      "kills": 17,
+      "kills": 18,
       "bosses": 0,
       "perfect": 0,
       "level": 5,
-      "score": 2483,
+      "score": 2583,
       "maxObjects": 16,
       "dead": true,
       "bossIds": []
@@ -1041,93 +1047,29 @@
     {
       "type": "max",
       "seed": 9,
-      "time": 218,
+      "time": 112.9,
       "hp": 0,
-      "kills": 154,
-      "bosses": 3,
-      "perfect": 18,
-      "level": 15,
-      "score": 26990,
-      "maxObjects": 24,
+      "kills": 56,
+      "bosses": 1,
+      "perfect": 5,
+      "level": 9,
+      "score": 9545,
+      "maxObjects": 20,
       "dead": true,
       "bossIds": [
-        "guardian",
-        "hydra",
-        "phantom"
+        "guardian"
       ]
     },
     {
       "type": "max",
       "seed": 10,
-      "time": 98.5,
-      "hp": 0,
-      "kills": 44,
-      "bosses": 1,
-      "perfect": 6,
-      "level": 9,
-      "score": 9263,
-      "maxObjects": 22,
-      "dead": true,
-      "bossIds": [
-        "guardian"
-      ]
-    },
-    {
-      "type": "max",
-      "seed": 11,
-      "time": 115.4,
-      "hp": 0,
-      "kills": 55,
-      "bosses": 1,
-      "perfect": 8,
-      "level": 10,
-      "score": 9603,
-      "maxObjects": 25,
-      "dead": true,
-      "bossIds": [
-        "guardian"
-      ]
-    },
-    {
-      "type": "max",
-      "seed": 12,
-      "time": 116.6,
+      "time": 118.8,
       "hp": 0,
       "kills": 61,
       "bosses": 1,
-      "perfect": 2,
-      "level": 8,
-      "score": 9366,
-      "maxObjects": 19,
-      "dead": true,
-      "bossIds": [
-        "guardian"
-      ]
-    },
-    {
-      "type": "max",
-      "seed": 13,
-      "time": 64.7,
-      "hp": 0,
-      "kills": 21,
-      "bosses": 0,
-      "perfect": 1,
-      "level": 5,
-      "score": 2933,
-      "maxObjects": 14,
-      "dead": true,
-      "bossIds": []
-    },
-    {
-      "type": "max",
-      "seed": 14,
-      "time": 114.9,
-      "hp": 0,
-      "kills": 58,
-      "bosses": 1,
-      "perfect": 2,
+      "perfect": 5,
       "level": 10,
-      "score": 10358,
+      "score": 10910,
       "maxObjects": 21,
       "dead": true,
       "bossIds": [
@@ -1136,15 +1078,76 @@
     },
     {
       "type": "max",
-      "seed": 15,
-      "time": 108,
+      "seed": 11,
+      "time": 115.8,
       "hp": 0,
-      "kills": 48,
+      "kills": 56,
       "bosses": 1,
-      "perfect": 5,
-      "level": 9,
-      "score": 8711,
+      "perfect": 2,
+      "level": 8,
+      "score": 9057,
+      "maxObjects": 17,
+      "dead": true,
+      "bossIds": [
+        "guardian"
+      ]
+    },
+    {
+      "type": "max",
+      "seed": 12,
+      "time": 144.5,
+      "hp": 0,
+      "kills": 91,
+      "bosses": 2,
+      "perfect": 14,
+      "level": 10,
+      "score": 15346,
+      "maxObjects": 21,
+      "dead": true,
+      "bossIds": [
+        "guardian",
+        "hydra"
+      ]
+    },
+    {
+      "type": "max",
+      "seed": 13,
+      "time": 64.7,
+      "hp": 0,
+      "kills": 22,
+      "bosses": 0,
+      "perfect": 1,
+      "level": 5,
+      "score": 3008,
+      "maxObjects": 14,
+      "dead": true,
+      "bossIds": []
+    },
+    {
+      "type": "max",
+      "seed": 14,
+      "time": 69.9,
+      "hp": 0,
+      "kills": 24,
+      "bosses": 0,
+      "perfect": 0,
+      "level": 6,
+      "score": 3697,
       "maxObjects": 18,
+      "dead": true,
+      "bossIds": []
+    },
+    {
+      "type": "max",
+      "seed": 15,
+      "time": 112.5,
+      "hp": 0,
+      "kills": 55,
+      "bosses": 1,
+      "perfect": 4,
+      "level": 9,
+      "score": 9616,
+      "maxObjects": 23,
       "dead": true,
       "bossIds": [
         "guardian"
@@ -1153,30 +1156,28 @@
     {
       "type": "max",
       "seed": 16,
-      "time": 85.5,
+      "time": 67.1,
       "hp": 0,
-      "kills": 31,
-      "bosses": 1,
-      "perfect": 3,
-      "level": 7,
-      "score": 6608,
-      "maxObjects": 15,
+      "kills": 22,
+      "bosses": 0,
+      "perfect": 1,
+      "level": 6,
+      "score": 3695,
+      "maxObjects": 14,
       "dead": true,
-      "bossIds": [
-        "guardian"
-      ]
+      "bossIds": []
     },
     {
       "type": "max",
       "seed": 17,
-      "time": 119.8,
+      "time": 118.6,
       "hp": 0,
       "kills": 61,
       "bosses": 1,
-      "perfect": 7,
+      "perfect": 12,
       "level": 10,
-      "score": 10467,
-      "maxObjects": 19,
+      "score": 11182,
+      "maxObjects": 18,
       "dead": true,
       "bossIds": [
         "guardian"
@@ -1213,34 +1214,34 @@
     {
       "type": "max",
       "seed": 20,
-      "time": 146.2,
+      "time": 125.6,
       "hp": 0,
-      "kills": 92,
-      "bosses": 2,
-      "perfect": 7,
-      "level": 11,
-      "score": 15792,
-      "maxObjects": 24,
+      "kills": 62,
+      "bosses": 1,
+      "perfect": 3,
+      "level": 9,
+      "score": 9868,
+      "maxObjects": 21,
       "dead": true,
       "bossIds": [
-        "guardian",
-        "hydra"
+        "guardian"
       ]
     },
     {
       "type": "max",
       "seed": 21,
-      "time": 124.7,
+      "time": 152.4,
       "hp": 0,
-      "kills": 66,
-      "bosses": 1,
-      "perfect": 2,
+      "kills": 88,
+      "bosses": 2,
+      "perfect": 7,
       "level": 11,
-      "score": 11263,
+      "score": 15445,
       "maxObjects": 24,
       "dead": true,
       "bossIds": [
-        "guardian"
+        "guardian",
+        "hydra"
       ]
     },
     {
@@ -1260,47 +1261,13 @@
     {
       "type": "max",
       "seed": 23,
-      "time": 198.1,
+      "time": 142.5,
       "hp": 0,
-      "kills": 133,
-      "bosses": 3,
-      "perfect": 19,
-      "level": 15,
-      "score": 24715,
-      "maxObjects": 24,
-      "dead": true,
-      "bossIds": [
-        "guardian",
-        "hydra",
-        "phantom"
-      ]
-    },
-    {
-      "type": "max",
-      "seed": 24,
-      "time": 104.3,
-      "hp": 0,
-      "kills": 44,
-      "bosses": 1,
-      "perfect": 4,
-      "level": 8,
-      "score": 7674,
-      "maxObjects": 23,
-      "dead": true,
-      "bossIds": [
-        "guardian"
-      ]
-    },
-    {
-      "type": "max",
-      "seed": 25,
-      "time": 152.3,
-      "hp": 0,
-      "kills": 91,
+      "kills": 80,
       "bosses": 2,
-      "perfect": 10,
-      "level": 12,
-      "score": 16376,
+      "perfect": 12,
+      "level": 13,
+      "score": 15822,
       "maxObjects": 24,
       "dead": true,
       "bossIds": [
@@ -1310,46 +1277,28 @@
     },
     {
       "type": "max",
-      "seed": 26,
-      "time": 106.3,
+      "seed": 24,
+      "time": 67.1,
       "hp": 0,
-      "kills": 41,
+      "kills": 22,
+      "bosses": 0,
+      "perfect": 0,
+      "level": 5,
+      "score": 3083,
+      "maxObjects": 13,
+      "dead": true,
+      "bossIds": []
+    },
+    {
+      "type": "max",
+      "seed": 25,
+      "time": 110.2,
+      "hp": 0,
+      "kills": 49,
       "bosses": 1,
       "perfect": 8,
-      "level": 10,
-      "score": 8166,
-      "maxObjects": 18,
-      "dead": true,
-      "bossIds": [
-        "guardian"
-      ]
-    },
-    {
-      "type": "max",
-      "seed": 27,
-      "time": 84.4,
-      "hp": 0,
-      "kills": 27,
-      "bosses": 1,
-      "perfect": 2,
-      "level": 7,
-      "score": 5577,
-      "maxObjects": 19,
-      "dead": true,
-      "bossIds": [
-        "guardian"
-      ]
-    },
-    {
-      "type": "max",
-      "seed": 28,
-      "time": 96.9,
-      "hp": 0,
-      "kills": 36,
-      "bosses": 1,
-      "perfect": 5,
-      "level": 9,
-      "score": 7344,
+      "level": 11,
+      "score": 9947,
       "maxObjects": 22,
       "dead": true,
       "bossIds": [
@@ -1358,15 +1307,15 @@
     },
     {
       "type": "max",
-      "seed": 29,
-      "time": 138.4,
+      "seed": 26,
+      "time": 145.6,
       "hp": 0,
-      "kills": 78,
+      "kills": 82,
       "bosses": 2,
-      "perfect": 10,
-      "level": 11,
-      "score": 14140,
-      "maxObjects": 23,
+      "perfect": 7,
+      "level": 12,
+      "score": 14869,
+      "maxObjects": 24,
       "dead": true,
       "bossIds": [
         "guardian",
@@ -1375,14 +1324,62 @@
     },
     {
       "type": "max",
-      "seed": 30,
-      "time": 166.8,
+      "seed": 27,
+      "time": 96.3,
       "hp": 0,
-      "kills": 104,
+      "kills": 38,
+      "bosses": 1,
+      "perfect": 5,
+      "level": 9,
+      "score": 7230,
+      "maxObjects": 22,
+      "dead": true,
+      "bossIds": [
+        "guardian"
+      ]
+    },
+    {
+      "type": "max",
+      "seed": 28,
+      "time": 102.5,
+      "hp": 0,
+      "kills": 41,
+      "bosses": 1,
+      "perfect": 7,
+      "level": 10,
+      "score": 8270,
+      "maxObjects": 19,
+      "dead": true,
+      "bossIds": [
+        "guardian"
+      ]
+    },
+    {
+      "type": "max",
+      "seed": 29,
+      "time": 119.6,
+      "hp": 0,
+      "kills": 65,
+      "bosses": 1,
+      "perfect": 2,
+      "level": 9,
+      "score": 10370,
+      "maxObjects": 19,
+      "dead": true,
+      "bossIds": [
+        "guardian"
+      ]
+    },
+    {
+      "type": "max",
+      "seed": 30,
+      "time": 162.4,
+      "hp": 0,
+      "kills": 100,
       "bosses": 2,
-      "perfect": 13,
-      "level": 13,
-      "score": 17730,
+      "perfect": 8,
+      "level": 12,
+      "score": 16780,
       "maxObjects": 24,
       "dead": true,
       "bossIds": [

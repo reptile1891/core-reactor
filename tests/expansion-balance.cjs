@@ -1,0 +1,4 @@
+'use strict';
+const assert=require('node:assert/strict'),{play}=require('./simulate.cjs'),fs=require('node:fs');
+const rows=[];for(const route of ['standard','overheat','interference'])for(const core of ['standard','bastion']){const novice=[];for(let seed=1;seed<=10;seed++)novice.push(play('moderate',seed,{route,core}));const expert=play('none',2026,{route,core,expert:true,limit:360});assert.ok(expert.bosses>=4,route+'/'+core+' blocks skilled play');assert.ok(expert.maxObjects<130);rows.push({route,core,median:novice.map(r=>r.time).sort((a,b)=>a-b)[5],expertBosses:expert.bosses,peakObjects:Math.max(expert.maxObjects,...novice.map(r=>r.maxObjects))});}
+console.table(rows);fs.writeFileSync('tests/expansion-balance.json',JSON.stringify(rows,null,2));console.log('66 sector/core simulations passed. Synthetic defenders are not human playtests.');

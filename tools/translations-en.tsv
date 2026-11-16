@@ -448,3 +448,66 @@
 Повтор / пауза	Play / pause
 Мёртвая зона стиков	Stick deadzone
 От 10% до 40%. Увеличьте при дрейфе.	From 10% to 40%. Increase if the stick drifts.
+
+Ремонтник	Repair drone
+Восстанавливает 0,35 HP союзнику рядом каждые 4 с. Зелёная связь.	Restores 0.35 HP to a nearby ally every 4 s. Green link.
+Ретранслятор	Relay
+Ускоряет заряд союзника рядом на 15%. Голубая связь.	Speeds up a nearby ally’s charge by 15%. Blue link.
+Щитоносец	Shield carrier
+Снижает урон союзнику рядом на 30%. Фиолетовая связь.	Reduces damage taken by a nearby ally by 30%. Purple link.
+Стабильный сектор	Stable sector
+Обычный темп и награды.	Standard pace and rewards.
+Перегретый сектор	Overheated sector
+Скорость снарядов +18%. Осколки за время и обычных врагов этого сектора +18%.	Projectile speed +18%. Shards from time and regular enemies in this sector +18%.
+Сектор помех	Interference sector
+Враги поддержки появляются чаще. Вес редких технологий +25% за ступень редкости.	More support enemies. Upgrade rarity weight +25% per rarity tier.
+Без контракта	No contract
+Свободная попытка.	Free run.
+Точная серия	Precision streak
+Сделайте 3 идеальных отражения подряд.	Make 3 perfect reflections in a row.
+Чистая победа	Clean victory
+Победите босса без Перегрузки во время боя с ним.	Defeat a boss without using Overload during that fight.
+Дальний рубеж	Distant frontier
+Продержитесь 90 секунд.	Survive for 90 seconds.
+Разветвление	Fork
+Две дополнительные цели, урон цепи −35%.	Two extra targets, chain damage −35%.
+Концентрация	Focus
+Одна цель цепи, урон цепи +60%.	One chain target, chain damage +60%.
+Рой эха	Echo swarm
+Два дополнительных эха, каждое наносит 30% урона отражения.	Two extra echoes, each dealing 30% reflection damage.
+Эхо-копьё	Echo lance
+Одно эхо с 95% урона отражения.	One echo dealing 95% reflection damage.
+Ударная волна	Shockwave
+Радиус взрыва +35, урон взрыва −25%.	Blast radius +35, blast damage −25%.
+Плотный взрыв	Dense blast
+Радиус взрыва −35%, урон взрыва +35%.	Blast radius −35%, blast damage +35%.
+Искатель	Seeker
+Пробивает ещё одну цель, урон отражения −15%.	Pierces one extra target, reflection damage −15%.
+Охотник на боссов	Boss hunter
+Урон боссам +20%, на одну пробиваемую цель меньше.	Boss damage +20%, one fewer pierced target.
+Скорострельность	Rapid fire
+Интервал турели −35%, урон выстрела −35%.	Turret interval −35%, shot damage −35%.
+Тяжёлое орудие	Heavy gun
+Интервал турели +30%, урон выстрела +40%.	Turret interval +30%, shot damage +40%.
+Укрытие	Shelter
+Щит шире на 10°, скорость поворота −12%.	Shield width +10°, turn speed −12%.
+Манёвренность	Agility
+Щит уже на 8°, скорость поворота +90°/с.	Shield width −8°, turn speed +90°/s.
+КОНТРАКТ	CONTRACT
+ТРЕНИРОВКА БОССОВ	BOSS TRAINING
+Базовый щит и 3 HP. Без наград, рекордов и постоянных бонусов. Босс открывается после первой встречи.	Base shield and 3 HP. No rewards, records or permanent bonuses. Meet a boss to unlock it.
+ПОЛНЫЙ БОЙ	FULL FIGHT
+Сначала встретитесь с этим боссом.	Meet this boss first.
+ВЫПОЛНЕНО	COMPLETE
+БОСС ПОБЕЖДЁН	BOSS DEFEATED
+Выберите маршрут	Choose a route
+Условия действуют до появления следующего босса. Время остановлено на время выбора.	Conditions last until the next boss appears. Time is paused while you choose.
+МАКСИМАЛЬНЫЙ УРОВЕНЬ	MAXIMUM LEVEL
+Специализация:	Specialization:
+Выберите направление до конца попытки. Каждое усиление имеет свою цену.	Choose a branch for this run. Each benefit has a tradeoff.
+Тренировка завершена: босс побеждён	Training complete: boss defeated
+Босс побеждён	Boss defeated
+Тренировка завершена	Training complete
+Осколки, достижения и рекорды в тренировке не начисляются.	Training awards no shards, achievements or records.
+Контракт:	Contract:
+Маршрут:	Route:

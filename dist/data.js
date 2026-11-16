@@ -59,6 +59,30 @@ const enemies=[
  {id:'splitter',name:'Разделитель',color:'#d986ff',sides:6,hp:2,speed:135,unlock:110,desc:'После гибели выпускает два малых объекта с предупреждением.'},
  {id:'suppressor',name:'Подавитель',color:'#9bdd87',sides:8,hp:2.3,speed:145,unlock:130,desc:'При попадании замедляет щит и отключает автоматику на 3 с.'}
 ];
+enemies.push(
+ {id:'healer',name:'Ремонтник',color:'#65e6a4',sides:4,hp:1.4,speed:115,unlock:50,support:true,desc:'Восстанавливает 0,35 HP союзнику рядом каждые 4 с. Зелёная связь.'},
+ {id:'relay',name:'Ретранслятор',color:'#6fd9ff',sides:3,hp:1.8,speed:125,unlock:85,support:true,desc:'Ускоряет заряд союзника рядом на 15%. Голубая связь.'},
+ {id:'carrier',name:'Щитоносец',color:'#b59aff',sides:6,hp:2.4,speed:115,unlock:110,support:true,desc:'Снижает урон союзнику рядом на 30%. Фиолетовая связь.'}
+);
+const routes=[
+ {id:'standard',name:'Стабильный сектор',desc:'Обычный темп и награды.'},
+ {id:'overheat',name:'Перегретый сектор',desc:'Скорость снарядов +18%. Осколки за время и обычных врагов этого сектора +18%.'},
+ {id:'interference',name:'Сектор помех',desc:'Враги поддержки появляются чаще. Вес редких технологий +25% за ступень редкости.'}
+];
+const contracts=[
+ {id:'none',name:'Без контракта',desc:'Свободная попытка.',reward:0},
+ {id:'perfect',name:'Точная серия',desc:'Сделайте 3 идеальных отражения подряд.',reward:8},
+ {id:'clean',name:'Чистая победа',desc:'Победите босса без Перегрузки во время боя с ним.',reward:12},
+ {id:'survive',name:'Дальний рубеж',desc:'Продержитесь 90 секунд.',reward:10}
+];
+const specializations={
+ chain:[{id:'fork',name:'Разветвление',desc:'Две дополнительные цели, урон цепи −35%.'},{id:'focus',name:'Концентрация',desc:'Одна цель цепи, урон цепи +60%.'}],
+ double:[{id:'swarm',name:'Рой эха',desc:'Два дополнительных эха, каждое наносит 30% урона отражения.'},{id:'lance',name:'Эхо-копьё',desc:'Одно эхо с 95% урона отражения.'}],
+ blast:[{id:'wide',name:'Ударная волна',desc:'Радиус взрыва +35, урон взрыва −25%.'},{id:'dense',name:'Плотный взрыв',desc:'Радиус взрыва −35%, урон взрыва +35%.'}],
+ pierce:[{id:'seeker',name:'Искатель',desc:'Пробивает ещё одну цель, урон отражения −15%.'},{id:'hunter',name:'Охотник на боссов',desc:'Урон боссам +20%, на одну пробиваемую цель меньше.'}],
+ turret:[{id:'rapid',name:'Скорострельность',desc:'Интервал турели −35%, урон выстрела −35%.'},{id:'heavy',name:'Тяжёлое орудие',desc:'Интервал турели +30%, урон выстрела +40%.'}],
+ wide:[{id:'shelter',name:'Укрытие',desc:'Щит шире на 10°, скорость поворота −12%.'},{id:'agile',name:'Манёвренность',desc:'Щит уже на 8°, скорость поворота +90°/с.'}]
+};
 const bosses=[
  {id:'guardian',name:'СТРАЖ',title:'Осадный автомат',color:'#ffb76d',hp:16,reward:'Укрепление: +1 HP к текущему максимуму (до 6)',icon:'⬡'},
  {id:'hydra',name:'ГИДРА',title:'Распределённое сознание',color:'#ad88ff',hp:21,reward:'Гидра: постоянное эхо отражения до конца попытки',icon:'⋈'},
@@ -86,6 +110,6 @@ const prestigeTech=[
 ];
 const rarity=['Обычная','Редкая','Эпическая','Легендарная'];
 function cost(t,level){return Math.round(t.cost*Math.pow(1.85,level));}
-const api={upgrades,tech,enemies,bosses,achievements,prestigeTech,rarity,cost};
+const api={routes,contracts,specializations,upgrades,tech,enemies,bosses,achievements,prestigeTech,rarity,cost};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreData=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

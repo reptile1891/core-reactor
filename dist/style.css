@@ -23,3 +23,6 @@
 .modal{align-items:flex-start}.page-head>div{min-width:0}.page h2{overflow-wrap:break-word}.settings-section p,.page-head p{max-width:65ch}
 
 .sidebar{max-height:100vh;max-height:100dvh;overflow-y:auto;scrollbar-width:thin}
+
+/* Run choices and training share the existing controller-accessible card layout. */
+.contract-picker{display:flex;flex-wrap:wrap;align-items:center;gap:5px 12px;margin:12px 0;font-size:11px}.contract-picker>span{color:var(--muted);letter-spacing:1px}.contract-picker .selected{color:var(--mint);text-decoration:underline}.contract-picker p{flex-basis:100%;margin:0;color:var(--muted);line-height:1.5}.training-panel{margin-top:40px}.training-panel>p{max-width:750px;line-height:1.6;color:var(--muted)}.training-buttons{display:flex;flex-wrap:wrap;gap:8px}.training-buttons button{flex:1 1 40%;min-height:44px}.specialization-options{grid-template-columns:repeat(2,minmax(0,1fr))}.run-status{font-size:10px;line-height:1.4;color:var(--muted);margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}@media(max-width:600px){.specialization-options{grid-template-columns:1fr}.contract-picker{gap:4px 9px}.training-panel{margin-top:24px}}

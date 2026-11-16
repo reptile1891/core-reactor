@@ -1,0 +1,44 @@
+[
+  {
+    "route": "standard",
+    "core": "standard",
+    "median": 52,
+    "expertBosses": 5,
+    "peakObjects": 29
+  },
+  {
+    "route": "standard",
+    "core": "bastion",
+    "median": 52,
+    "expertBosses": 5,
+    "peakObjects": 27
+  },
+  {
+    "route": "overheat",
+    "core": "standard",
+    "median": 52,
+    "expertBosses": 5,
+    "peakObjects": 24
+  },
+  {
+    "route": "overheat",
+    "core": "bastion",
+    "median": 52,
+    "expertBosses": 5,
+    "peakObjects": 25
+  },
+  {
+    "route": "interference",
+    "core": "standard",
+    "median": 52,
+    "expertBosses": 5,
+    "peakObjects": 24
+  },
+  {
+    "route": "interference",
+    "core": "bastion",
+    "median": 52,
+    "expertBosses": 5,
+    "peakObjects": 25
+  }
+]

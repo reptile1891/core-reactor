@@ -11,7 +11,7 @@ function play(type,seed,options={}){
   if(!options.unattended){
    const incoming=e.groups.filter(g=>!g.cancelled&&!g.resolved&&g.arrival>=e.time-.018).sort((a,b)=>a.arrival-b.arrival),g=incoming[0];
    if(g&&g.id!==lastGroup){lastGroup=g.id;const errorChance=options.expert?0:.18;const miss=rng()<errorChance;misses.set(g.id,miss);pendingAngle=g.angle+(miss?Math.PI/2:0);reactAt=e.time+(options.expert?.08:.22+rng()*.2);}
-   if(e.time>=reactAt)desired=pendingAngle;
+   if(g&&e.time>=reactAt)pendingAngle=g.angle+(misses.get(g.id)?Math.PI/2:0);if(e.time>=reactAt)desired=pendingAngle;
   }
   if(options.active&&e.hp<e.maxHp&&e.projectiles.some(p=>!p.friendly&&p.r<120&&!e.covers(p.angle)))e.overload();
   e.update(1/60,{angle:options.unattended?undefined:desired});e.drain();maxObjects=Math.max(maxObjects,e.projectiles.length+e.enemies.length+e.groups.length);if(!earliestPerfect&&e.perfects)earliestPerfect=e.time;

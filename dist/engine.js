@@ -2,7 +2,7 @@
 (function(root){
 'use strict';
 const D=typeof module!=='undefined'&&module.exports?require('./data.js'):root.CoreData;
-const BALANCE='1.6';
+const BALANCE='1.7';
 const TAU=Math.PI*2, RAD=Math.PI/180;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const angleDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
@@ -68,7 +68,7 @@ class Engine{
   const angle=options.angle??(e.angle+(e.type==='boss'&&e.spec!==0?(e.attackCycle%2?1.05:-1.05):0)),spec=D.enemies.find(x=>x.id===e.type)||D.enemies[0],speed=(options.speed||spec.speed||150)*(this.mode==='horizon'?1.15:this.mode==='challenge'?1.1:1);
   const slow=Math.min(.45,this.u('slow')*.15)+(this.singularityGift?.1:0);
   const travel=kind==='laser'?0:Math.max(0,(e.r-130))/speed+65/(speed*(1-slow));
-  const windup=options.windup??(e.type==='sniper'?1.25:kind==='laser'?1.2:.62);
+  const windup=options.windup??(e.type==='sniper'?1.6:kind==='laser'?1.4:1.1);
   const pressure=e.type==='boss'&&e.spec===0;
   const gap=options.sameGroup?.12:pressure?[.24,.21,.19][e.phase-1]:Math.max(.17,.63-Math.max(0,this.time-10)*.008)/this.difficulty;
   // Guardian has a tighter rhythm, still below the player's turn speed and with reaction time reserved.
@@ -77,7 +77,7 @@ class Engine{
   const arrival=Math.max(this.time+windup+travel,this.lastArrival+separation);
   this.lastArrival=arrival;this.lastAttackAngle=angle;
   // The charge stays at its telegraphed position while its owner continues orbiting.
-  const g={id:++this.nextId,owner:e.id,kind,angle,radius:e.r,arrival,launch:arrival-travel,created:this.time,speed,slow,fired:false,burst:options.burst||1,fan:options.fan||0,curve:options.curve||0,damage:1,suppress:e.type==='suppressor',trackedAt:null,aligned:false,perfect:false};
+  const g={id:++this.nextId,owner:e.id,kind,angle,aimOffset:angle-e.angle,locked:false,gap,rotationBudget,radius:e.r,arrival,launch:arrival-travel,created:this.time,speed,slow,fired:false,burst:options.burst||1,fan:options.fan||0,curve:options.curve||0,damage:1,suppress:e.type==='suppressor',trackedAt:null,aligned:false,perfect:false};
   if(kind==='laser'||e.type==='sniper')this.emit('warning',{enemy:e.type,kind});
   g.tracks=Array.from({length:g.fan||g.burst},(_,i)=>({angle:angle+(i-((g.fan||g.burst)-1)/2)*(g.fan?10:4)*RAD,aligned:false,trackedAt:null}));this.groups.push(g);this.warnings.push(g);return g;
  }
@@ -123,6 +123,11 @@ class Engine{
    this.schedule(e,'shot',{angle:e.angle+direction*1.4,burst:2,speed:210,windup:.95});
   }
  }
+ updateAim(){let previous=null;for(const g of this.groups){if(g.cancelled)continue;if(!g.fired){const owner=this.enemies.find(e=>e.id===g.owner&&!e.dead);if(!owner){g.cancelled=true;continue;}if(!g.locked){g.angle=owner.angle+g.aimOffset;g.radius=owner.r;for(let i=0;i<g.tracks.length;i++){const track=g.tracks[i];track.angle=g.angle+(i-(g.tracks.length-1)/2)*(g.fan?10:4)*RAD;track.trackedAt=null;}}
+ if(previous){const needed=previous.arrival+g.gap+Math.abs(angleDiff(g.angle,previous.angle))/Math.min(g.rotationBudget,this.turnSpeed*.8);if(needed>g.arrival){const delay=needed-g.arrival;g.arrival+=delay;g.launch+=delay;}}
+ if(!g.locked&&this.time>=g.launch-.5){const extra=Math.max(0,this.time+.5-g.launch);g.launch+=extra;g.arrival+=extra;g.locked=true;g.lockedAt=this.time;for(const track of g.tracks){track.aligned=this.covers(track.angle);track.trackedAt=null;}this.emit('aimLock');}}
+ previous=g;}
+ if(previous){this.lastArrival=previous.arrival;this.lastAttackAngle=previous.angle;}}
  fireGroup(g){
   const e=this.enemies.find(e=>e.id===g.owner);if(!e){g.cancelled=true;return;}
   g.fired=true;
@@ -207,8 +212,9 @@ class Engine{
    e.angle=Math.atan2(Math.sin(e.angle+dt*e.orbitVelocity),Math.cos(e.angle+dt*e.orbitVelocity));
    Object.assign(e,pos(e.angle,e.r));
   }
+  this.updateAim();
   // Record each group's first real overlap caused by shield movement. Holding a shield never refreshes the timestamp.
-  for(const g of this.groups){if(g.cancelled)continue;const moving=Math.abs(this.rotation)>20*RAD;for(const track of g.tracks){const aligned=this.covers(track.angle);if(aligned&&!track.aligned&&moving)track.trackedAt=this.time;track.aligned=aligned;if(!aligned)track.trackedAt=null;}g.trackedAt=g.tracks[0].trackedAt;
+  for(const g of this.groups){if(g.cancelled)continue;const moving=g.locked&&Math.abs(this.rotation)>20*RAD;for(const track of g.tracks){const aligned=this.covers(track.angle);if(aligned&&!track.aligned&&moving)track.trackedAt=this.time;track.aligned=aligned;if(!aligned)track.trackedAt=null;}g.trackedAt=g.tracks[0].trackedAt;
    if(!g.fired&&this.time>=g.launch)this.fireGroup(g);
    if(g.kind==='laser'&&g.fired&&this.time>=g.arrival&&!g.resolved){g.resolved=true;g.perfect=g.trackedAt!==null&&this.time-g.trackedAt<=.12&&this.covers(g.angle);if(this.covers(g.angle))this.reflect({angle:g.angle},g);else this.hitCore(false,'Лазер: щит не перекрыл предупреждающий луч',g.angle);this.effects.push({type:'laser',angle:g.angle,r:g.radius,life:.25,max:.25});}
   }

@@ -546,7 +546,11 @@ const catalog={
  "Что изменить": "What to change",
  "Золотая метка — место последнего удара · зелёная дуга — ваш щит": "Gold marker: final hit location · green arc: your shield",
  "СНАРЯД": "PROJECTILE",
- "Уровень": "Level"
+ "Уровень": "Level",
+ "ОПАСНАЯ СИГНАТУРА": "HOSTILE SIGNATURE",
+ "НОВАЯ ФАЗА": "NEW PHASE",
+ "Ритм атак изменился": "Attack rhythm has changed",
+ "БОСС ПОБЕЖДЁН · ПЕРЕДЫШКА": "BOSS DEFEATED · BREATHER"
 };
 let language='ru';
 const messages={...catalog};

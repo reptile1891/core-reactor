@@ -72,6 +72,7 @@ function effectPlan(name,enemy='',options={}){
  else if(name==='teleport'){[86,81,74].forEach((n,i)=>add(n,i*.035,.08,.045,'sine',{pan:i%2?.35:-.35}));}
  else if(name==='section'){[69,74,81].forEach((n,i)=>add(n,i*.04,.1,.065));}
  else if(name==='fire'){const types=['shooter','gunner','sniper','shotgun','laser','orbital','splitter','suppressor','boss','healer','relay','carrier'],i=Math.max(0,types.indexOf(enemy));add(48+i*2,0,.045,.035,'triangle',{endNote:43+i*2,cutoff:1500});}
+ if(['block','perfect'].includes(name)&&options.build){const note={blast:50,chain:86,echo:81}[options.build];if(note)add(note,.025,.08,.025,'sine');}
  return out;
 }
 class AudioSystem{

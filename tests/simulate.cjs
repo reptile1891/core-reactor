@@ -4,6 +4,7 @@ function loadout(type){const s=C.freshSave();if(type==='moderate')s.tech={hp:1,w
 function play(type,seed,options={}){
  const s=loadout(type),e=new C.Engine(s,{seed,mode:options.mode||'classic',core:options.core||'standard'}),rng=C.random(seed+976),misses=new Map();let desired=e.angle,pendingAngle=desired,reactAt=0,lastGroup=-1,maxObjects=0,earliestPerfect=0;
  for(let i=0;i<720*60&&e.state!=='dead';i++){
+  if(e.state==='victory'){e.continueEndless();continue;}
   if(e.state==='route'){e.chooseRoute(options.route||'standard');continue;}
   if(e.state==='specialization'){e.chooseSpecialization(D.specializations[e.pendingSpec][seed%2].id);continue;}
   if(e.state==='upgrade'){

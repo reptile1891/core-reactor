@@ -2,7 +2,7 @@
 (function(root){
 'use strict';
 const D=typeof module!=='undefined'&&module.exports?require('./data.js'):root.CoreData;
-const BALANCE='1.10';
+const BALANCE='1.11';
 const TAU=Math.PI*2, RAD=Math.PI/180;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const angleDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
@@ -46,7 +46,7 @@ class SaveStore{
 }
 class Engine{
  constructor(save=freshSave(),options={}){this.save=save;this.training=options.training&&Number.isInteger(options.training.boss)&&options.training.boss>=0&&options.training.boss<4?{boss:options.training.boss,phase:clamp(Math.floor(options.training.phase)||0,0,3)}:null;this.mode=this.training?'skill':options.mode||'classic';this.victory=false;this.endless=false;this.holdTime=0;this.damageTaken={};this.damageBy={};this.encounter=null;this.encounterResults=[];this.nextEncounter=32;this.encounterIndex=0;this.route='standard';this.routeCredit=0;this.spec={};this.tactic=null;this.tacticGuardCooldown=0;this.pendingSpec=null;this.overloads=0;this.contract=this.training?'none':(D.contracts.find(x=>x.id===save.settings.contract)?.id||'none');this.contractDone=false;this.rng=random(options.seed??Date.now());this.events=[];this.state='playing';this.time=0;this.score=0;this.wave=1;this.hp=3;this.level=1;this.energy=0;this.combo=0;this.bestCombo=0;this.perfectCombo=0;this.bestPerfectCombo=0;this.perfects=0;this.blocks=0;this.kills=0;this.bossKills=0;this.angle=-Math.PI/2;this.target=this.angle;this.rotation=0;this.invuln=0;this.barrier=0;this.suppressed=0;this.bounty=0;this.hitCount=0;this.up={};this.enemies=[];this.projectiles=[];this.warnings=[];this.effects=[];this.groups=[];this.choices=[];this.clearedBosses=[];this.nextSpawn=1.3;this.nextAttack=2.2;this.nextBoss=60;this.lastArrival=0;this.lastAttackAngle=this.angle;this.nextId=0;this.autoTimer=0;this.droneTimer=0;this.auraTimer=0;this.emergencyUsed=false;this.reviveUsed=false;this.boss=null;this.bossIndex=0;this.pendingLevels=0;this.rewarded=false;this.deathReason='';this.meta=this.mode==='skill'?{}:save.tech||{};this.pt=this.mode==='skill'?{}:save.prestigeTech||{};this.rerolls=this.m('choices');this.maxHp=Math.min(5,3+this.m('hp'));this.hp=this.maxHp;this.energy=this.m('initial')*10+(this.pt.memory||0)*5;this.id=options.id||('run-'+Date.now().toString(36)+'-'+Math.floor(this.rng()*1e9).toString(36));this.difficulty=this.mode==='horizon'?1.35:this.mode==='challenge'?1.16+this.m('challenge')*.05:1;this.core=this.mode==='skill'?'standard':(options.core||save.settings.core||'standard');this.overloadCooldown=0;this.replay=[];this.replayAt=0;this.lastHit=null;if(this.core==='storm')this.up.chain=1;this.challengeTitle=this.mode==='horizon'?'Горизонт событий':this.mode==='challenge'?'Разогнанный реактор':'';if(this.training){this.nextSpawn=Infinity;this.nextBoss=Infinity;this.addBoss(this.training.boss);}}
- get overloadCost(){return this.tactic==='volley'?30:20;}
+ get overloadCost(){return (this.tactic==='volley'?30:20)-2*this.m('pulse_link');}
  get overloadPeriod(){return this.tactic==='volley'?10:8;}
  overload(){if(this.state!=='playing'||this.energy<this.overloadCost||this.overloadCooldown>0)return false;this.energy-=this.overloadCost;this.overloads++;this.overloadCooldown=this.overloadPeriod;for(const p of this.projectiles)if(!p.friendly&&p.r<=140)p.active=false;if(this.tactic==='volley'){const targets=this.enemies.filter(e=>!e.dead).sort((a,b)=>Math.abs(angleDiff(a.angle,this.angle))-Math.abs(angleDiff(b.angle,this.angle))).slice(0,3);for(const e of targets)this.launchFriendly(e.angle,1.2,e.id,{auto:true,tactic:true});}this.effects.push({type:'pulse',r:140,life:.5,max:.5});this.emit('pulse');return true;}
  synergies(extra){const has=id=>this.u(id)>0||id===extra;return [{ids:['chain','crit'],name:'Грозовой резонанс',desc:'Цепные разряды могут наносить критический урон.'},{ids:['blast','pierce'],name:'Каскад взрывов',desc:'Каждое пробитое попадание создаёт взрыв.'},{ids:['double','damage'],name:'Зеркальный каскад',desc:'Эхо наследует усиленный урон отражения.'},{ids:['barrier','pcombo'],name:'Безупречный контур',desc:'Идеальные серии одновременно дают энергию и барьер.'}].filter(x=>x.ids.every(has));}
@@ -54,7 +54,7 @@ class Engine{
  m(id){return this.meta[id]||0;} u(id){return this.up[id]||0;}
  emit(type,data={}){this.events.push({type,...data});}
  drain(){return this.events.splice(0);}
- get width(){return Math.min(105,55+(this.tactic==='mobile'?-8:0)+(this.spec.wide==='shelter'?10:this.spec.wide==='agile'?-8:0)+(this.core==='bastion'?10:0)+this.m('width')*4+this.u('wide')*8)*RAD;}
+ get width(){return Math.min(105,55+4*this.m('kinetic_link')+(this.tactic==='mobile'?-8:0)+(this.spec.wide==='shelter'?10:this.spec.wide==='agile'?-8:0)+(this.core==='bastion'?10:0)+this.m('width')*4+this.u('wide')*8)*RAD;}
  get turnSpeed(){return (540+this.m('rotation')*30+this.u('turn')*65+(this.spec.wide==='agile'?90:0))*RAD*(this.spec.wide==='shelter'?.88:1)*(this.core==='bastion'?.82:1)*(this.suppressed>0?.7:1)*(this.tactic==='mobile'?1.15:1);}
  get damage(){return (1+this.m('reflect')*.15+this.u('damage')*.6)*(this.core==='storm'?.8:this.core==='mirror'?.9:1);}
  get threshold(){return Math.round((36+(this.level-1)*15)*Math.max(.76,1-this.u('learn')*.08));}
@@ -154,7 +154,7 @@ class Engine{
   this.perfectCombo=perfect?this.perfectCombo+1:0;this.bestPerfectCombo=Math.max(this.bestPerfectCombo,this.perfectCombo);if(perfect)this.perfects++;if(this.contract==='perfect'&&this.perfectCombo>=3)this.contractDone=true;const owner=this.enemies.find(e=>e.id===g.owner);if(owner?.type==='boss'){owner.seriesBlocks=(owner.seriesBlocks||0)+1;if(perfect||owner.seriesBlocks%4===0)owner.vulnerableUntil=Math.max(owner.vulnerableUntil||0,this.time+(perfect?2.1:.65));}
   const multi=Math.min(5,1+Math.floor(this.combo/8)*.25+this.perfectCombo*.1);
   this.score+=Math.round((perfect?70:25)*multi*(this.bounty>0?1.5:1));
-  this.gainEnergy((perfect?12:6)*(1+.25*this.u('energy')+.1*this.m('charge'))+(perfect?Math.min(5,this.perfectCombo)*this.u('pcombo')*2:0));
+  this.gainEnergy((perfect?12:6)*(1+.25*this.u('energy')+.1*this.m('charge'))+(perfect?Math.min(5,this.perfectCombo)*this.u('pcombo')*2+2*this.m('feedback_link'):0));
   if(perfect&&(this.u('barrier')||this.phantomGift))this.barrier=Math.max(this.barrier,this.u('barrier')*.6+(this.phantomGift?.5:0));
   if(this.tactic==='mobile'&&Math.abs(this.rotation)>90*RAD&&this.tacticGuardCooldown<=0){this.barrier=Math.max(this.barrier,.25);this.tacticGuardCooldown=3;this.emit('tacticGuard');}
   const crit=this.rng()<this.u('crit')*.18;
@@ -284,7 +284,7 @@ class Engine{
  }
 }
 function claimAchievements(s){const unlocked=[];for(const a of D.achievements)if(!s.achievements.includes(a.id)&&a.test(s)){s.achievements.push(a.id);s.shards+=a.reward;unlocked.push(a);}return unlocked;}
-function purchase(s,id){const t=D.tech.find(t=>t.id===id);if(!t)return false;const lv=s.tech[id]||0,price=D.cost(t,lv);if(lv>=t.max||s.shards<price)return false;s.shards-=price;s.tech[id]=lv+1;return true;}
+function purchase(s,id){const t=D.tech.find(t=>t.id===id);if(!t)return false;const lv=s.tech[id]||0,price=D.cost(t,lv);if(lv>=t.max||s.shards<price||t.requires?.some(id=>!s.tech[id]))return false;s.shards-=price;s.tech[id]=lv+1;return true;}
 function canPrestige(s){return s.bosses.length>=4&&Object.values(s.tech).reduce((a,b)=>a+b,0)>=12;}
 function prestige(s){if(!canPrestige(s))return false;const gain=3+Math.floor(Object.values(s.tech).reduce((a,b)=>a+b,0)/10);s.prestige++;s.rare+=gain;s.tech={};s.shards=0;claimAchievements(s);return gain;}
 function purchasePrestige(s,id){const t=D.prestigeTech.find(t=>t.id===id);if(!t)return false;const level=s.prestigeTech[id]||0,price=t.cost+level;if(level>=t.max||s.rare<price)return false;s.rare-=price;s.prestigeTech[id]=level+1;if(id==='void'&&!s.modes.includes('horizon'))s.modes.push('horizon');return true;}

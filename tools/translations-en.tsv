@@ -28,10 +28,9 @@
 ВХОДЯЩИЙ ПОТОК	INCOMING SIGNAL
 Ваш горизонт	Your Horizon
 Веер из трёх снарядов.	Fires a fan of three projectiles.
-Вес редких карт +35%.	Rare card weighting +35%.
-Вес редких технологий +15%.	Rare technology weighting +15%.
+Редкие, эпические и легендарные технологии появляются чаще. Каждый уровень усиливает этот эффект.	Rare, epic, and legendary technologies appear more often. Each level strengthens this effect.
 Включить звук	Unmute audio
-Восстанавливает 1 HP. Появляется при повреждении.	Restores 1 HP. Only offered when the core is damaged.
+Восстанавливает 1 единицу здоровья. Предлагается, если ядро повреждено.	Restores 1 health. Offered when the core is damaged.
 Время перевести дух	Time to Breathe
 Всё начинается с одного отражения.	It starts with a single reflection.
 Вторая дуга напротив основной: +18° за уровень.	Adds a second shield arc opposite the main one: +18° per level.
@@ -133,7 +132,7 @@
 МАКС. ВОЛНА	HIGHEST WAVE
 МАТРИЦА ЗАВЕРШЕНА · +300	MATRIX COMPLETE · +300
 Магнитный подвес	Magnetic Bearing
-Максимальное здоровье +1 (до 5 HP).	Maximum health +1 (up to 5 HP).
+Максимальное здоровье +1, но не больше 5 единиц.	Maximum health +1, up to 5.
 Малая турель	Mini Turret
 Малый спутник	Small Satellite
 Меньше частиц, без тряски. Полезно на мобильных устройствах.	Fewer particles and no screen shake. Useful on mobile devices.
@@ -170,7 +169,7 @@
 Обычная	Common
 Обычные технологии и осколки будут сброшены. Рекорды, достижения, режимы и дерево престижа сохранятся.	Regular technologies and shards will be reset. Records, achievements, modes, and the prestige tree will be kept.
 Один повторный выбор карт за попытку. Второй уровень: ещё один.	One card reroll per run. Level 2 adds another reroll.
-Один раз восстанавливает 1 HP после смертельного попадания.	Once per run, restores 1 HP after a fatal hit.
+Один раз за попытку спасает от смертельного попадания, оставляя 1 единицу здоровья.	Once per run, survives a fatal hit with 1 health remaining.
 Одиночные снаряды. Красный ромб.	Single projectiles. A red diamond.
 Орбитальный дрон	Orbital Drone
 Орбитальный спутник	Orbital Satellite
@@ -205,7 +204,7 @@
 Перезагрузить реактор.	Reboot the reactor.
 Перезагрузить реактор?	Reboot the reactor?
 Перезагрузка реактора	Reactor Reboot
-Победа над боссом восстанавливает 1 HP за уровень.	Defeating a boss restores 1 HP per level.
+Победа над боссом восстанавливает 1 единицу здоровья за каждый уровень этой технологии.	Defeating a boss restores 1 health per level of this technology.
 Победить Гидру.	Defeat Hydra.
 Победить Сингулярность.	Defeat Singularity.
 Победить Стража.	Defeat Guardian.
@@ -226,9 +225,9 @@
 Превратите угрозу в свою силу.	Turn every threat into your strength.
 Предзаряд	Precharge
 Престиж	Prestige
-При 1 HP включает барьер на 2 с. Один раз за попытку.	At 1 HP, activates a barrier for 2 s. Once per run.
+Если остаётся 1 единица здоровья, включает барьер на 2 секунды. Один раз за попытку.	At 1 health, activates a barrier for 2 seconds. Once per run.
 При попадании замедляет щит и отключает автоматику на 3 с.	On impact, slows the shield and disables automation for 3 s.
-При потере HP всем врагам наносится 1,5 урона за уровень.	Taking HP damage deals 1.5 damage per level to every enemy.
+Когда ядро теряет здоровье, все враги получают 1,5 урона за каждый уровень этой технологии.	When the core loses health, all enemies take 1.5 damage per level of this technology.
 Призма истока	Origin Prism
 Приобрести 10 уровней технологий.	Purchase 10 technology levels.
 Прогресс сброшен. Резервная копия доступна в настройках.	Progress reset. A backup is available in Settings.
@@ -396,7 +395,7 @@
 СТРАЖ: фаза	GUARDIAN: phase
 электронный саундтрек	electronic soundtrack
 Стандарт	Standard
-Базовые характеристики без модификаторов.	Base stats without modifiers.
+Начальные характеристики без дополнительных усилений.	Starting stats without extra bonuses.
 Зеркало	Mirror
 Идеальное отражение +25%, весь урон отражения −10%.	Perfect reflect +25%, all reflect damage −10%.
 Шторм	Storm
@@ -447,7 +446,6 @@
 Повтор / пауза	Play / pause
 Мёртвая зона стиков	Stick deadzone
 От 10% до 40%. Увеличьте при дрейфе.	From 10% to 40%. Increase if the stick drifts.
-
 Ремонтник	Repair drone
 Восстанавливает 0,35 HP союзнику рядом каждые 4 с. Зелёная связь.	Restores 0.35 HP to a nearby ally every 4 s. Green link.
 Ретранслятор	Relay
@@ -459,7 +457,7 @@
 Перегретый сектор	Overheated sector
 Скорость снарядов +18%. Осколки за время и обычных врагов этого сектора +18%.	Projectile speed +18%. Shards from time and regular enemies in this sector +18%.
 Сектор помех	Interference sector
-Враги поддержки появляются чаще. Вес редких технологий +25% за ступень редкости.	More support enemies. Upgrade rarity weight +25% per rarity tier.
+Враги поддержки появляются чаще, но вам чаще предлагают редкие, эпические и легендарные технологии.	Support enemies appear more often, but rare, epic, and legendary technologies are offered more often too.
 Разветвление	Fork
 Две дополнительные цели, урон цепи −35%.	Two extra targets, chain damage −35%.
 Концентрация	Focus
@@ -501,7 +499,6 @@
 Тренировка завершена	Training complete
 Осколки, достижения и рекорды в тренировке не начисляются.	Training awards no shards, achievements or records.
 Маршрут:	Route:
-
 Дальний перехват	Distant interception
 Смена фронта	Changing fronts
 Перехват конвоя	Convoy interception
@@ -527,7 +524,6 @@
 Лазерные попадания: раньше переключайтесь на сплошной луч.	Laser hits: switch to the solid beam earlier.
 Сначала следите за Подавителями: их попадания замедляют щит.	Watch suppressors first: their hits slow the shield.
 Следите за ближайшим ударом и сохраняйте энергию для Перегрузки.	Watch the nearest impact and save energy for Overload.
-
 Усиление вашей сборки	Strengthen your build
 Новая возможность	New ability
 В сборке	In your build
@@ -536,12 +532,10 @@
 Золотая метка — место последнего удара · зелёная дуга — ваш щит	Gold marker: final hit location · green arc: your shield
 СНАРЯД	PROJECTILE
 Уровень	Level
-
 ОПАСНАЯ СИГНАТУРА	HOSTILE SIGNATURE
 НОВАЯ ФАЗА	NEW PHASE
 Ритм атак изменился	Attack rhythm has changed
 БОСС ПОБЕЖДЁН · ПЕРЕДЫШКА	BOSS DEFEATED · BREATHER
-
 Текущая сборка	Current build
 Технологии появятся здесь после повышения уровня.	Technologies will appear here after you level up.
 Управление	Controls
@@ -550,17 +544,14 @@
 энергии	energy
 E / ПКМ / A · 20 энергии · перезарядка 8 с	E / RMB / A · 20 energy · 8 s cooldown
 Перегрузка: E / ПКМ · 20 энергии · 8 с	Overload: E / RMB · 20 energy · 8 s
-
 Техно	Tech
 Цели	Goals
 Опции	Options
-
 E / ПКМ · Геймпад: A / ✕ · 20 энергии · перезарядка 8 с	E / RMB · Gamepad: A / ✕ · 20 energy · 8 s cooldown
-
 Цель события выполнена	Event objective completed
 Уничтожьте 2 отмеченные цели	Destroy 2 marked targets
 Уничтожьте отмеченного ремонтника	Destroy the marked repair unit
-Отразите 5 атак без потери HP	Block 5 attacks without losing HP
+Отразите 5 атак без потери здоровья	Block 5 attacks without losing health
 ЦЕЛЬ ВЫПОЛНЕНА	OBJECTIVE COMPLETE
 ЗАЩИЩАЙТЕ ЯДРО	DEFEND THE CORE
 Результат попытки	Run result
@@ -570,9 +561,7 @@ E / ПКМ · Геймпад: A / ✕ · 20 энергии · перезаряд
 Цели событий	Event objectives
 Без дополнительных наград	No extra rewards
 Новый личный рекорд	New personal best
-
-ЦЕЛЬ ПРЕРВАНА · ПОТЕРЯ HP	OBJECTIVE ENDED · HP LOST
-
+ЗАДАНИЕ ПРЕРВАНО · ЯДРО ПОВРЕЖДЕНО	OBJECTIVE ENDED · CORE DAMAGED
 Точный импульс	Precision Pulse
 Урон идеальных отражений +35%, обычных −15%. Усиливает и эхо этих отражений.	Perfect reflection damage +35%, normal reflection damage −15%. Also affects their echoes.
 Ловите момент удара. Сочетайте с критическим уроном и барьером.	Time your blocks. Combine with critical damage and barriers.
@@ -590,17 +579,13 @@ E / ПКМ · Геймпад: A / ✕ · 20 энергии · перезаряд
 До конца попытки	For the rest of this run
 БАРЬЕР МАНЁВРА	MANEUVER BARRIER
 E / ПКМ · Геймпад: A / ✕	E / RMB · Gamepad: A / ✕
-
 Базовая стоимость 20 энергии, перезарядка 8 с; тактика залпа меняет их на 30 энергии и 10 с. «Резерв импульса» снижает стоимость на 2 энергии. Очищает	Base cost is 20 energy with an 8 s cooldown; the volley tactic changes these to 30 energy and 10 s. Pulse Reserve lowers the cost by 2 energy. Clears
-
 ПОПЫТКА ЗАВЕРШЕНА	RUN ENDED
 Результат сохранён	Result saved
 Личный рекорд	Personal best
 РЕКОРДА ВРЕМЕНИ ПОКА НЕТ	NO TIME RECORD YET
 РЕКОРДА ОЧКОВ ПОКА НЕТ	NO SCORE RECORD YET
-
-Три электронные темы · 126 ударов в минуту	Three electronic themes · 126 beats per minute
-
+Шесть электронных тем · темп растёт от 126 до 156 ударов в минуту	Six electronic themes · tempo rises from 126 to 156 beats per minute
 Перегрузка: E, правая кнопка мыши или кнопка над шкалой энергии. Базовая стоимость 20 энергии, перезарядка 8 с; тактика залпа меняет их на 30 энергии и 10 с. «Резерв импульса» снижает стоимость на 2 энергии. Очищает снаряды в радиусе 140, не даёт очков и не лечит ядро. Броня босса открывается на 2,1 с после идеального отражения или на 0,65 с после каждого четвёртого блока.	Overload: E, right mouse button, or the button above the energy bar. Base cost: 20 energy, with an 8 s cooldown. Volley tactics change this to 30 energy and 10 s. Pulse Reserve lowers the cost by 2 energy. Overload clears projectiles within 140 units, grants no points, and does not heal the core. Boss armor opens for 2.1 s after a perfect reflection, or 0.65 s after every fourth block.
 Связи	Links
 Кинетическая связь	Kinetic Link
@@ -612,7 +597,6 @@ E / ПКМ · Геймпад: A / ✕	E / RMB · Gamepad: A / ✕
 Требуется:	Requires:
 СОЕДИНЯЙТЕ ТЕХНОЛОГИИ ДЛЯ НОВЫХ БОНУСОВ	COMBINE TECHNOLOGIES FOR NEW BONUSES
 Тактика	Tactic
-
 Обычная попытка. Дополнительной задачи и награды нет.	A normal run with no extra objective or reward.
 Серия отражений	Reflection streak
 Трижды подряд идеально отразите атаку.	Make three perfect reflections in a row.
@@ -624,17 +608,14 @@ E / ПКМ · Геймпад: A / ✕	E / RMB · Gamepad: A / ✕
 Награда начисляется после завершения попытки.	The reward is granted when the run ends.
 ЦЕЛЬ:	OBJECTIVE:
 Цель вылета:	Run objective:
-
 Без контракта	No contract
 Играйте без условий: ни награды, ни штрафа.	Play without conditions: no reward and no penalty.
 КОНТРАКТ · НАГРАДА И ШТРАФ	CONTRACT · REWARD AND PENALTY
 Возьмите обязательство перед вылетом. Выполните его — получите награду; не выполните — заплатите штраф.	Accept an obligation before launch. Complete it for a reward; fail it and pay a penalty.
 Провал:	Failure:
 КОНТРАКТ:	CONTRACT:
-
 Успех:	Success:
 Провал или ранний выход:	Failure or early exit:
-
 Первые шаги	First Steps
 Завершите 5 попыток.	Complete 5 runs.
 На боевом посту	On Duty
@@ -692,7 +673,6 @@ E / ПКМ · Геймпад: A / ✕	E / RMB · Gamepad: A / ✕
 Новый цикл	New Cycle
 Перезагрузите реактор 2 раза.	Reboot the reactor twice.
 ЛЕГЕНДАРНОЕ	LEGENDARY
-
 Накопитель	Capacitor
 Каждый 8-й блок даёт 4 энергии за уровень.	Every 8th block grants 4 energy per level.
 Заряженное отражение	Charged Reflection
@@ -706,12 +686,10 @@ E / ПКМ · Геймпад: A / ✕	E / RMB · Gamepad: A / ✕
 Боевой ритм	Battle Rhythm
 При серии от 8 блоков скорость поворота +8% за уровень.	At a streak of 8 or more blocks, turn speed +8% per level.
 Самовосстановление	Self Repair
-Каждые 40 блоков восстанавливает 1 HP. Не больше двух ремонтов за попытку.	Every 40 blocks restores 1 HP. At most two repairs per run.
+Каждые 40 отражённых атак восстанавливает 1 единицу здоровья. Не больше двух ремонтов за попытку.	Every 40 blocked attacks restores 1 health. At most two repairs per run.
 Перехватчик	Interceptor
 Раз в 12 с уничтожает один снаряд в радиусе 130. Подавление отключает перехват.	Once every 12 s destroys one projectile within 130 units. Disabled by suppression.
-
 Подавление: щит замедлен, автоматика временно отключена.	Suppression: the shield is slowed and automation is temporarily disabled.
-
 Следующее исследование	Next research
 Можно открыть сейчас	Ready to research
 Осталось осколков:	Shards remaining:
@@ -748,3 +726,127 @@ E / ПКМ · Геймпад: A / ✕	E / RMB · Gamepad: A / ✕
 Коллекция	Collection
 Ядра	Cores
 НОВЫЙ РЕКОРД	NEW RECORD
+ЗАДАНИЕ ВЫПОЛНЕНО	OBJECTIVE COMPLETE
+КОНТРАКТ ВЫПОЛНЕН	CONTRACT COMPLETE
+Награда по итогам попытки	Reward at the end of the run
+МОДУЛЬ УСТАНОВЛЕН	MODULE INSTALLED
+СИНЕРГИЯ АКТИВНА	SYNERGY ONLINE
+РЕКОРД	NEW RECORD
+ДОСТИЖЕНИЕ	ACHIEVEMENT
+Чаще	More often
+
+Технологии появятся с новым уровнем	Technologies unlock as you level up
+Автоматика подавлена	Automation suppressed
+
+Щит закроет больше пространства	Cover more space with your shield
+Щит быстрее догонит атаку	Turn faster to meet incoming attacks
+Защита с противоположной стороны	Add protection on the opposite side
+Восстановите здоровье прямо сейчас	Restore health immediately
+Часть попаданий не причинит вреда	Absorb some hits without taking damage
+Идеальные отражения дадут защиту	Perfect blocks grant temporary protection
+Отражённые снаряды станут сильнее	Make reflected shots hit harder
+Попадания заденут соседних врагов	Let hits jump to nearby enemies
+Попадания вызовут взрывы	Make your hits explode
+Снаряды пройдут сквозь врагов	Send reflected shots through enemies
+Каждое отражение создаст второй выстрел	Add a second shot to every block
+Турель поможет атаковать врагов	Add automatic fire from a turret
+Отражения принесут больше энергии	Earn more energy from blocked attacks
+Новые уровни станут доступнее	Reach the next levels with less energy
+Идеальная серия принесёт больше энергии	Earn more energy from perfect-block streaks
+Уничтожение врагов даст больше энергии	Earn more energy from enemy kills
+Временно получайте больше очков и энергии	Temporarily earn more score and energy
+Ценные технологии станут встречаться чаще	Find valuable technologies more often
+Снаряды рядом с ядром замедлятся	Slow incoming shots near the core
+Спутник будет стрелять за вас	Let an orbiting drone fire for you
+Ядро будет бить врагов разрядами	Strike enemies with automatic discharges
+Повреждение ядра ударит по врагам	Strike back when the core takes damage
+Попадания смогут наносить тройной урон	Give your hits a chance to deal triple damage
+Отражения будут заряжать массовый удар	Charge a screen-wide strike by blocking attacks
+Регулярные отражения дадут запас энергии	Gain bonus energy by blocking consistently
+Каждое шестое отражение станет сильнее	Make every sixth reflected shot stronger
+Автоматика быстрее выйдет из подавления	Recover from suppression sooner
+Перегрузка ударит по всем врагам	Make Overload damage every enemy
+Отражения сильнее повредят боссов	Deal more reflected damage to bosses
+Серия отражений ускорит щит	Turn faster while maintaining a block streak
+Отражения помогут восстанавливать ядро	Repair the core by blocking attacks
+Перехватчик уничтожит опасный снаряд	Intercept an incoming shot near the core
+Открывает сочетание	Completes a synergy
+Усиление технологии	Technology upgrade
+✦ Открывает специализацию	✦ Unlocks specialization
+Ширина щита	Shield width
+Скорость щита	Shield turn speed
+Вторая дуга	Opposite shield arc
+Урон отражения	Reflected damage
+Здоровье	Health
+Энергия для нового уровня	Energy needed to level up
+Барьер после идеального отражения	Barrier after a perfect block
+Шанс тройного урона	Triple damage chance
+Замедление снарядов	Projectile slowdown
+Дополнительные цели	Additional targets
+Ответный урон	Retaliation damage
+Дополнительная энергия за врага	Bonus energy per enemy
+Энергия за каждое восьмое отражение	Energy every eighth block
+Урон Перегрузки	Overload damage
+Дополнительный урон по боссам	Bonus damage against bosses
+Длительность подавления	Suppression duration
+Усиление каждого шестого отражения	Every sixth reflected shot bonus
+Урон разряда	Discharge damage
+Уровень технологии	Technology level
+°/с	°/s
+
+Ваша цель	Your target
+Сначала откройте:	Unlock first:
+Цель закреплена ✓	Target pinned ✓
+Сделать целью	Set as target
+Выживаемость	Survival
+Больше здоровья и восстановление	More health and recovery
+Шире щит и сильнее ответный удар	A wider shield and stronger reflections
+Больше возможностей за попытку	More possibilities each run
+Сбалансированная сборка	Balanced build
+Разрядная сборка	Arc build
+Взрывная сборка	Blast build
+Защитная сборка	Defensive build
+Автоматическая сборка	Automation build
+Здоровье босса	Boss health
+БРОНЯ ОТКРЫТА · АТАКУЙТЕ	ARMOR OPEN · STRIKE NOW
+Идеальное отражение открывает броню	Perfect blocks open the armor
+Отражайте серии, чтобы открыть броню.	Block attack sequences to open the armor.
+После потери секции ритм атак меняется.	The attack rhythm changes after a section is lost.
+Пунктирный луч — безопасное эхо.	The dashed beam is a harmless echo.
+Следите за изгибом траекторий.	Watch the curved attack paths.
+Выстояли до конца попытки	You held the line
+Побеждено боссов	Bosses defeated
+Лучшая серия отражений	Best block streak
+Достигнутая волна	Wave reached
+Изменение осколков	Shard balance change
+3 варианта · листайте →	3 choices · swipe →
+
+КОНТРАКТ НЕ ВЫПОЛНЕН	CONTRACT NOT COMPLETED
+
+СВЯЗЬ С ЯДРОМ	CORE LINK ESTABLISHED
+07 / ИСТОК	07 / ORIGIN
+ЗАЩИТНЫЙ ИНТЕЛЛЕКТ	DEFENSE INTELLIGENCE
+Я ещё горю.	I am still burning.
+Держи рубеж.	Hold the line.
+Один щит. Последний источник света.	One shield. The last source of light.
+Начать попытку	Start a run
+ИСТОК	ORIGIN
+
+01 / ЭВОЛЮЦИЯ	01 / EVOLUTION
+02 / АРХИВ	02 / ARCHIVE
+Последнее достижение	Latest achievement
+Оставь свой след.	Leave your mark.
+← К ядру	← Back to core
+Следующая цель	Next goal
+
+Финальная форма ядра	Final core form
+СИГНАТУРА ПОПЫТКИ	RUN SIGNATURE
+Побеждён босс	Boss defeated
+Ваша сборка	Your build
+Новая лучшая серия	New best streak
+Лучшая серия блоков	Best block streak
+Внешний контур	Outer perimeter
+Энергетический узел	Energy nexus
+Глубинный архив	Deep archive
+Сердце системы	System heart
+Рекордов за попытку	Records set this run

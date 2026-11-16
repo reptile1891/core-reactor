@@ -2,7 +2,7 @@
 (function(root){
 'use strict';
 const catalog=/*CATALOG*/{};
-let language='ru';
+let language='en';
 const messages={...catalog};
 for(const [key,value] of Object.entries(catalog)){
  const upper=key.toUpperCase();if(!(upper in messages))messages[upper]=value.toUpperCase();
@@ -10,7 +10,7 @@ for(const [key,value] of Object.entries(catalog)){
 const escapeRegex=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 const matcher=new RegExp(Object.keys(messages).sort((a,b)=>b.length-a.length).map(escapeRegex).join('|'),'gu');
 const letter=c=>Boolean(c)&&/\p{L}/u.test(c);
-function setLanguage(value){language=value==='en'?'en':'ru';return language;}
+function setLanguage(value){language=value==='ru'?'ru':'en';return language;}
 function getLanguage(){return language;}
 function t(value){
  const input=String(value??'');if(language==='ru'||!/[\u0400-\u04ff]/.test(input))return input;

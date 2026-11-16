@@ -27,6 +27,88 @@ const upgrades = [
  ['crit','Критическая масса','18% шанс тройного урона отражений и цепных разрядов.', 'Спецтехнологии',2,3,'18%','✦'],
  ['pulse','Сверхновая','Каждый 8-й блок очищает вражеские снаряды и наносит 1,5 урона всем врагам.', 'Спецтехнологии',3,2,'8 блоков','✺']
 ].map(([id,name,desc,category,rarity,max,value,icon])=>({id,name,desc,category,rarity,max,value,icon}));
+upgrades.push(...[
+ {
+  "id": "capacitor",
+  "name": "Накопитель",
+  "desc": "Каждый 8-й блок даёт 4 энергии за уровень.",
+  "category": "Энергия",
+  "rarity": 1,
+  "max": 2,
+  "value": "+4",
+  "icon": "⚡"
+ },
+ {
+  "id": "charged",
+  "name": "Заряженное отражение",
+  "desc": "Каждое 6-е отражение наносит на 30% больше урона за уровень.",
+  "category": "Атака",
+  "rarity": 1,
+  "max": 2,
+  "value": "+30%",
+  "icon": "↗"
+ },
+ {
+  "id": "insulate",
+  "name": "Изоляция",
+  "desc": "Подавление длится на 0,5 с меньше за уровень.",
+  "category": "Защита",
+  "rarity": 0,
+  "max": 2,
+  "value": "−0,5 с",
+  "icon": "◇"
+ },
+ {
+  "id": "shock",
+  "name": "Ударный импульс",
+  "desc": "Перегрузка наносит всем врагам 0,3 урона за уровень.",
+  "category": "Атака",
+  "rarity": 2,
+  "max": 2,
+  "value": "0,3",
+  "icon": "✳"
+ },
+ {
+  "id": "breaker",
+  "name": "Разрушитель брони",
+  "desc": "Урон отражений по боссам +10% за уровень.",
+  "category": "Атака",
+  "rarity": 1,
+  "max": 3,
+  "value": "+10%",
+  "icon": "⇢"
+ },
+ {
+  "id": "momentum",
+  "name": "Боевой ритм",
+  "desc": "При серии от 8 блоков скорость поворота +8% за уровень.",
+  "category": "Защита",
+  "rarity": 1,
+  "max": 2,
+  "value": "+8%",
+  "icon": "↻"
+ },
+ {
+  "id": "rebuild",
+  "name": "Самовосстановление",
+  "desc": "Каждые 40 блоков восстанавливает 1 HP. Не больше двух ремонтов за попытку.",
+  "category": "Защита",
+  "rarity": 2,
+  "max": 1,
+  "value": "+1 HP",
+  "icon": "✚"
+ },
+ {
+  "id": "interceptor",
+  "name": "Перехватчик",
+  "desc": "Раз в 12 с уничтожает один снаряд в радиусе 130. Подавление отключает перехват.",
+  "category": "Спецтехнологии",
+  "rarity": 2,
+  "max": 1,
+  "value": "12 с",
+  "icon": "⌖"
+ }
+]);
 const tech = [
  ['hp','Усиленный корпус','Максимальное здоровье +1 (до 5 HP).','Корпус',45,2,'+1 HP','⬡'],
  ['plate','Композитная обшивка','Каждое 8-е попадание блокируется; второй уровень — каждое 7-е.','Корпус',90,2,'1 / 8','▱'],
@@ -113,6 +195,36 @@ const achievements=[
  ['veteran','Снова в бой','Завершить 25 попыток.',s=>s.totals.runs>=25,120,'✧'],
  ['prestige','Новое начало','Перезагрузить реактор.',s=>s.prestige>0,100,'✺']
 ].map(([id,name,desc,test,reward,icon])=>({id,name,desc,test,reward,icon}));
+achievements.push(
+ {id:"runs5",name:"Первые шаги",desc:"Завершите 5 попыток.",test:s=>s.totals.runs>=5,reward:25,icon:'◇'},
+ {id:"runs10",name:"На боевом посту",desc:"Завершите 10 попыток.",test:s=>s.totals.runs>=10,reward:40,icon:'◇'},
+ {id:"runs50",name:"Несгибаемый",desc:"Завершите 50 попыток.",test:s=>s.totals.runs>=50,reward:150,icon:'◇'},
+ {id:"runs100",name:"Легенда станции",desc:"Завершите 100 попыток.",test:s=>s.totals.runs>=100,reward:300,icon:'✺',legendary:true},
+ {id:"kills25",name:"Первый рубеж",desc:"Уничтожьте всего 25 врагов.",test:s=>s.totals.kills>=25,reward:30,icon:'◇'},
+ {id:"kills100",name:"Оборона станции",desc:"Уничтожьте всего 100 врагов.",test:s=>s.totals.kills>=100,reward:60,icon:'◇'},
+ {id:"kills500",name:"Гроза орбиты",desc:"Уничтожьте всего 500 врагов.",test:s=>s.totals.kills>=500,reward:150,icon:'◇'},
+ {id:"kills1000",name:"Хранитель сектора",desc:"Уничтожьте всего 1000 врагов.",test:s=>s.totals.kills>=1000,reward:300,icon:'✺',legendary:true},
+ {id:"blocks25",name:"Первый щит",desc:"Отразите всего 25 атак.",test:s=>s.totals.blocks>=25,reward:20,icon:'◇'},
+ {id:"blocks500",name:"Несокрушимый щит",desc:"Отразите всего 500 атак.",test:s=>s.totals.blocks>=500,reward:120,icon:'◇'},
+ {id:"blocks1000",name:"Стена света",desc:"Отразите всего 1000 атак.",test:s=>s.totals.blocks>=1000,reward:250,icon:'✺',legendary:true},
+ {id:"perfect50",name:"Точный расчёт",desc:"Выполните всего 50 идеальных отражений.",test:s=>s.totals.perfect>=50,reward:60,icon:'◇'},
+ {id:"perfect100",name:"Чистый резонанс",desc:"Выполните всего 100 идеальных отражений.",test:s=>s.totals.perfect>=100,reward:100,icon:'◇'},
+ {id:"perfect500",name:"Мастер резонанса",desc:"Выполните всего 500 идеальных отражений.",test:s=>s.totals.perfect>=500,reward:300,icon:'✺',legendary:true},
+ {id:"time30",name:"Первые секунды",desc:"Продержитесь 30 секунд за одну попытку.",test:s=>s.totals.time>=30,reward:20,icon:'◇'},
+ {id:"time90",name:"Дальний рубеж",desc:"Продержитесь 90 секунд за одну попытку.",test:s=>s.totals.time>=90,reward:80,icon:'◇'},
+ {id:"time180",name:"Долгая ночь",desc:"Продержитесь 180 секунд за одну попытку.",test:s=>s.totals.time>=180,reward:160,icon:'◇'},
+ {id:"time300",name:"Вечное ядро",desc:"Продержитесь 300 секунд за одну попытку.",test:s=>s.totals.time>=300,reward:350,icon:'✺',legendary:true},
+ {id:"combo10",name:"Ритм защиты",desc:"Отразите 10 атак подряд.",test:s=>s.totals.combo>=10,reward:30,icon:'◇'},
+ {id:"combo50",name:"Безупречный рубеж",desc:"Отразите 50 атак подряд.",test:s=>s.totals.combo>=50,reward:130,icon:'◇'},
+ {id:"combo100",name:"Непробиваемый",desc:"Отразите 100 атак подряд.",test:s=>s.totals.combo>=100,reward:350,icon:'✺',legendary:true},
+ {id:"bosses3",name:"Охотник за боссами",desc:"Победите всего 3 боссов.",test:s=>s.totals.bosses>=3,reward:60,icon:'◇'},
+ {id:"bosses10",name:"Гроза титанов",desc:"Победите всего 10 боссов.",test:s=>s.totals.bosses>=10,reward:130,icon:'◇'},
+ {id:"bosses25",name:"Покоритель титанов",desc:"Победите всего 25 боссов.",test:s=>s.totals.bosses>=25,reward:300,icon:'✺',legendary:true},
+ {id:"tech5",name:"Первые разработки",desc:"Приобретите 5 уровней технологий.",test:s=>Object.values(s.tech).reduce((a,b)=>a+b,0)>=5,reward:35,icon:'◇'},
+ {id:"tech20",name:"Архитектор ядра",desc:"Приобретите 20 уровней технологий.",test:s=>Object.values(s.tech).reduce((a,b)=>a+b,0)>=20,reward:120,icon:'◇'},
+ {id:"tech35",name:"Гений реактора",desc:"Приобретите 35 уровней технологий.",test:s=>Object.values(s.tech).reduce((a,b)=>a+b,0)>=35,reward:240,icon:'✺',legendary:true},
+ {id:"prestige2",name:"Новый цикл",desc:"Перезагрузите реактор 2 раза.",test:s=>s.prestige>=2,reward:180,icon:'◇'}
+);
 const prestigeTech=[
  {id:'prism',name:'Призма истока',desc:'Энергия +5% за уровень во всех режимах, кроме «Чистого навыка».',max:3,cost:1,icon:'◇'},
  {id:'memory',name:'Память реактора',desc:'Начальная энергия +5 за уровень. Новый след у щита.',max:3,cost:1,icon:'∞'},

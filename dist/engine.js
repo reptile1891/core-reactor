@@ -2,18 +2,21 @@
 (function(root){
 'use strict';
 const D=typeof module!=='undefined'&&module.exports?require('./data.js'):root.CoreData;
-const BALANCE='1.11';
+const BALANCE='1.13';
 const TAU=Math.PI*2, RAD=Math.PI/180;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const angleDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 const pos=(a,r)=>({x:Math.cos(a)*r,y:Math.sin(a)*r});
 // A shared polar track keeps simulation and arena geometry in agreement.
-function orbitRadius(angle,time,base=265){const cycle=((time%48)+48)%48,blend=cycle>10&&cycle<38?Math.sin((cycle-10)/28*Math.PI)**2:0,rotation=time*.065;return base+blend*(18*Math.cos(2*(angle-rotation))+6*Math.sin(3*(angle+rotation*.6)));}
+function orbitRadius(angle,time,base=265){const cycle=((time%48)+48)%48,blend=cycle>10&&cycle<38?Math.sin((cycle-10)/28*Math.PI)**2:0,rotation=time*.065;return base+blend*(1+Math.min(1.25,Math.max(0,time)/240))*(18*Math.cos(2*(angle-rotation))+6*Math.sin(3*(angle+rotation*.6)));}
 function random(seed){let s=seed>>>0;return()=>((s=(Math.imul(s,1664525)+1013904223)>>>0)/4294967296);}
-function freshSave(){return{version:4,shards:0,rare:0,prestige:0,prestigeTech:{},tech:{},achievements:[],bosses:[],seenBosses:[],modes:['classic','skill'],records:{classic:[],skill:[],challenge:[],horizon:[]},bests:{},currentBalance:BALANCE,currentBests:{},recordsArchive:{classic:[],skill:[],challenge:[],horizon:[]},totals:{runs:0,kills:0,bosses:0,perfect:0,blocks:0,time:0,combo:0},settings:{sfx:.55,music:.16,reduced:false,language:'ru',deadzone:.22,core:'standard',contract:'none'},settled:[]};}
+function dailyKey(date=new Date()){return date.toISOString().slice(0,10);}
+function dailySeed(key){let hash=2166136261;for(const ch of key)hash=Math.imul(hash^ch.charCodeAt(0),16777619);return hash>>>0;}
+function freshSave(){return{version:4,dailyRecords:{},shards:0,rare:0,prestige:0,prestigeTech:{},tech:{},achievements:[],bosses:[],seenBosses:[],modes:['classic','skill'],records:{classic:[],skill:[],challenge:[],horizon:[]},bests:{},currentBalance:BALANCE,currentBests:{},recordsArchive:{classic:[],skill:[],challenge:[],horizon:[]},totals:{runs:0,kills:0,bosses:0,perfect:0,blocks:0,time:0,combo:0},settings:{sfx:.55,music:.16,reduced:false,language:'en',deadzone:.22,core:'standard',contract:'none'},settled:[]};}
 function validateSave(value){
  if(!value||typeof value!=='object'||Array.isArray(value)||![1,2,3,4].includes(value.version))throw Error('Неподдерживаемая версия сохранения.');
  const s=freshSave(), integer=(v,max=1e9)=>Number.isFinite(v)&&v>=0?Math.min(max,Math.floor(v)):0;
+ for(const key of Object.keys(value.dailyRecords||{}).filter(k=>/^\d{4}-\d{2}-\d{2}$/.test(k)).sort().slice(-7)){const row=value.dailyRecords[key];if(row&&typeof row==='object')s.dailyRecords[key]={score:integer(row.score),time:integer(row.time,86400),attempts:integer(row.attempts)};}
  s.shards=integer(value.shards,1e7);s.rare=integer(value.rare,1e4);s.prestige=integer(value.prestige,1e4);
  for(const t of D.tech)s.tech[t.id]=integer(value.tech?.[t.id],t.max);
  for(const t of D.prestigeTech)s.prestigeTech[t.id]=integer(value.prestigeTech?.[t.id],t.max);
@@ -34,7 +37,7 @@ function validateSave(value){
  s.settings.sfx=typeof value.settings?.sfx==='number'?clamp(value.settings.sfx,0,1):.55;
  s.settings.music=typeof value.settings?.music==='number'?clamp(value.settings.music,0,1):.16;
  s.settings.reduced=Boolean(value.settings?.reduced);
- s.settings.language=value.settings?.language==='en'?'en':'ru';s.settings.core=['mirror','storm','bastion'].includes(value.settings?.core)?value.settings.core:'standard';
+ s.settings.language=value.settings?.language==='ru'?'ru':'en';s.settings.core=['mirror','storm','bastion'].includes(value.settings?.core)?value.settings.core:'standard';
  s.settled=Array.isArray(value.settled)?value.settled.filter(x=>typeof x==='string').slice(-30):[];
  return s;
 }
@@ -45,27 +48,27 @@ class SaveStore{
  original(){try{return this.storage.getItem(this.key)||JSON.stringify(this.data);}catch(e){return JSON.stringify(this.data);}}
 }
 class Engine{
- constructor(save=freshSave(),options={}){this.save=save;this.training=options.training&&Number.isInteger(options.training.boss)&&options.training.boss>=0&&options.training.boss<4?{boss:options.training.boss,phase:clamp(Math.floor(options.training.phase)||0,0,3)}:null;this.mode=this.training?'skill':options.mode||'classic';this.victory=false;this.endless=false;this.holdTime=0;this.damageTaken={};this.damageBy={};this.encounter=null;this.encounterResults=[];this.nextEncounter=32;this.encounterIndex=0;this.route='standard';this.routeCredit=0;this.spec={};this.tactic=null;this.tacticGuardCooldown=0;this.pendingSpec=null;this.overloads=0;this.contract=this.training?'none':(D.contracts.find(x=>x.id===save.settings.contract)?.id||'none');this.contractDone=false;this.rng=random(options.seed??Date.now());this.events=[];this.state='playing';this.time=0;this.score=0;this.wave=1;this.hp=3;this.level=1;this.energy=0;this.combo=0;this.bestCombo=0;this.perfectCombo=0;this.bestPerfectCombo=0;this.perfects=0;this.blocks=0;this.kills=0;this.bossKills=0;this.angle=-Math.PI/2;this.target=this.angle;this.rotation=0;this.invuln=0;this.barrier=0;this.suppressed=0;this.bounty=0;this.hitCount=0;this.up={};this.enemies=[];this.projectiles=[];this.warnings=[];this.effects=[];this.groups=[];this.choices=[];this.clearedBosses=[];this.nextSpawn=1.3;this.nextAttack=2.2;this.nextBoss=60;this.lastArrival=0;this.lastAttackAngle=this.angle;this.nextId=0;this.autoTimer=0;this.droneTimer=0;this.auraTimer=0;this.emergencyUsed=false;this.reviveUsed=false;this.boss=null;this.bossIndex=0;this.pendingLevels=0;this.rewarded=false;this.deathReason='';this.meta=this.mode==='skill'?{}:save.tech||{};this.pt=this.mode==='skill'?{}:save.prestigeTech||{};this.rerolls=this.m('choices');this.maxHp=Math.min(5,3+this.m('hp'));this.hp=this.maxHp;this.energy=this.m('initial')*10+(this.pt.memory||0)*5;this.id=options.id||('run-'+Date.now().toString(36)+'-'+Math.floor(this.rng()*1e9).toString(36));this.difficulty=this.mode==='horizon'?1.35:this.mode==='challenge'?1.16+this.m('challenge')*.05:1;this.core=this.mode==='skill'?'standard':(options.core||save.settings.core||'standard');this.overloadCooldown=0;this.replay=[];this.replayAt=0;this.lastHit=null;if(this.core==='storm')this.up.chain=1;this.challengeTitle=this.mode==='horizon'?'Горизонт событий':this.mode==='challenge'?'Разогнанный реактор':'';if(this.training){this.nextSpawn=Infinity;this.nextBoss=Infinity;this.addBoss(this.training.boss);}}
+ constructor(save=freshSave(),options={}){this.save=save;this.training=options.training&&Number.isInteger(options.training.boss)&&options.training.boss>=0&&options.training.boss<4?{boss:options.training.boss,phase:clamp(Math.floor(options.training.phase)||0,0,3)}:null;this.daily=!this.training&&typeof options.daily==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(options.daily)?options.daily:null;this.mode=this.training||this.daily?'skill':options.mode||'classic';this.victory=false;this.endless=false;this.holdTime=0;this.damageTaken={};this.damageBy={};this.encounter=null;this.encounterResults=[];this.nextEncounter=32;this.encounterIndex=0;this.route='standard';this.routeCredit=0;this.spec={};this.tactic=null;this.tacticGuardCooldown=0;this.pendingSpec=null;this.overloads=0;this.contract=this.training||this.daily?'none':(D.contracts.find(x=>x.id===save.settings.contract)?.id||'none');this.contractDone=false;this.rng=random(this.daily?dailySeed(this.daily):options.seed??Date.now());this.events=[];this.state='playing';this.time=0;this.score=0;this.wave=1;this.hp=3;this.level=1;this.energy=0;this.combo=0;this.bestCombo=0;this.perfectCombo=0;this.bestPerfectCombo=0;this.perfects=0;this.blocks=0;this.kills=0;this.bossKills=0;this.angle=-Math.PI/2;this.target=this.angle;this.rotation=0;this.invuln=0;this.barrier=0;this.suppressed=0;this.bounty=0;this.hitCount=0;this.up={};this.enemies=[];this.projectiles=[];this.warnings=[];this.effects=[];this.groups=[];this.choices=[];this.clearedBosses=[];this.nextSpawn=1.3;this.nextAttack=2.2;this.nextBoss=60;this.lastArrival=0;this.lastAttackAngle=this.angle;this.nextId=0;this.autoTimer=0;this.droneTimer=0;this.auraTimer=0;this.emergencyUsed=false;this.reviveUsed=false;this.boss=null;this.bossIndex=0;this.pendingLevels=0;this.rewarded=false;this.deathReason='';this.meta=this.mode==='skill'?{}:save.tech||{};this.pt=this.mode==='skill'?{}:save.prestigeTech||{};this.rerolls=this.m('choices');this.maxHp=Math.min(5,3+this.m('hp'));this.hp=this.maxHp;this.energy=this.m('initial')*10+(this.pt.memory||0)*5;this.id=options.id||('run-'+Date.now().toString(36)+'-'+Math.floor(this.rng()*1e9).toString(36));this.difficulty=this.mode==='horizon'?1.35:this.mode==='challenge'?1.16+this.m('challenge')*.05:1;this.core=this.mode==='skill'?'standard':(options.core||save.settings.core||'standard');this.overloadCooldown=0;this.replay=[];this.replayAt=0;this.lastHit=null;if(this.core==='storm')this.up.chain=1;this.challengeTitle=this.mode==='horizon'?'Горизонт событий':this.mode==='challenge'?'Разогнанный реактор':'';if(this.training){this.nextSpawn=Infinity;this.nextBoss=Infinity;this.addBoss(this.training.boss);}}
  get overloadCost(){return (this.tactic==='volley'?30:20)-2*this.m('pulse_link');}
  get overloadPeriod(){return this.tactic==='volley'?10:8;}
- overload(){if(this.state!=='playing'||this.energy<this.overloadCost||this.overloadCooldown>0)return false;this.energy-=this.overloadCost;this.overloads++;this.overloadCooldown=this.overloadPeriod;for(const p of this.projectiles)if(!p.friendly&&p.r<=140)p.active=false;if(this.tactic==='volley'){const targets=this.enemies.filter(e=>!e.dead).sort((a,b)=>Math.abs(angleDiff(a.angle,this.angle))-Math.abs(angleDiff(b.angle,this.angle))).slice(0,3);for(const e of targets)this.launchFriendly(e.angle,1.2,e.id,{auto:true,tactic:true});}this.effects.push({type:'pulse',r:140,life:.5,max:.5});this.emit('pulse');return true;}
+ overload(){if(this.state!=='playing'||this.energy<this.overloadCost||this.overloadCooldown>0)return false;this.energy-=this.overloadCost;this.overloads++;if(this.u('shock'))this.areaDamage(.3*this.u('shock'));this.overloadCooldown=this.overloadPeriod;for(const p of this.projectiles)if(!p.friendly&&p.r<=140)p.active=false;if(this.tactic==='volley'){const targets=this.enemies.filter(e=>!e.dead).sort((a,b)=>Math.abs(angleDiff(a.angle,this.angle))-Math.abs(angleDiff(b.angle,this.angle))).slice(0,3);for(const e of targets)this.launchFriendly(e.angle,1.2,e.id,{auto:true,tactic:true});}this.effects.push({type:'pulse',r:140,life:.5,max:.5});this.emit('pulse');return true;}
  synergies(extra){const has=id=>this.u(id)>0||id===extra;return [{ids:['chain','crit'],name:'Грозовой резонанс',desc:'Цепные разряды могут наносить критический урон.'},{ids:['blast','pierce'],name:'Каскад взрывов',desc:'Каждое пробитое попадание создаёт взрыв.'},{ids:['double','damage'],name:'Зеркальный каскад',desc:'Эхо наследует усиленный урон отражения.'},{ids:['barrier','pcombo'],name:'Безупречный контур',desc:'Идеальные серии одновременно дают энергию и барьер.'}].filter(x=>x.ids.every(has));}
  captureReplay(){this.replay.push({time:this.time,angle:this.angle,width:this.width,secondary:this.secondary,barrier:this.barrier,invuln:this.invuln,hp:this.hp,bullets:this.projectiles.filter(p=>!p.friendly&&p.active).slice(0,35).map(p=>({x:p.x,y:p.y})),feints:this.effects.filter(f=>f.type==='feint').map(f=>f.angle),beams:this.groups.filter(g=>g.kind==='laser'&&!g.resolved).map(g=>g.angle)});this.replay=this.replay.filter(f=>this.time-f.time<=1.8);}
  m(id){return this.meta[id]||0;} u(id){return this.up[id]||0;}
  emit(type,data={}){this.events.push({type,...data});}
  drain(){return this.events.splice(0);}
  get width(){return Math.min(105,55+4*this.m('kinetic_link')+(this.tactic==='mobile'?-8:0)+(this.spec.wide==='shelter'?10:this.spec.wide==='agile'?-8:0)+(this.core==='bastion'?10:0)+this.m('width')*4+this.u('wide')*8)*RAD;}
- get turnSpeed(){return (540+this.m('rotation')*30+this.u('turn')*65+(this.spec.wide==='agile'?90:0))*RAD*(this.spec.wide==='shelter'?.88:1)*(this.core==='bastion'?.82:1)*(this.suppressed>0?.7:1)*(this.tactic==='mobile'?1.15:1);}
+ get turnSpeed(){return (540+this.m('rotation')*30+this.u('turn')*65+(this.spec.wide==='agile'?90:0))*RAD*(this.spec.wide==='shelter'?.88:1)*(this.core==='bastion'?.82:1)*(this.suppressed>0?.7:1)*(this.tactic==='mobile'?1.15:1)*(this.combo>=8?1+.08*this.u('momentum'):1);}
  get damage(){return (1+this.m('reflect')*.15+this.u('damage')*.6)*(this.core==='storm'?.8:this.core==='mirror'?.9:1);}
  get threshold(){return Math.round((36+(this.level-1)*15)*Math.max(.76,1-this.u('learn')*.08));}
  get secondary(){return (this.m('arc')*12+this.u('segment')*18)*RAD;}
  covers(a,angle=this.angle){const d=Math.abs(angleDiff(a,angle));return d<=this.width/2||(this.secondary>0&&Math.abs(Math.PI-d)<=this.secondary/2);}
  orbitSpeed(e){
   if(e.type==='boss')return [.16,-.22,.30,-.24][e.spec]*(1+.15*((e.phase||1)-1));
-  const progress=clamp((this.time-18)/90,0,1),direction=e.id%2===0?-1:1;
-  if(e.type==='orbital')return direction*(.24+.1*progress);
+  const progress=clamp((this.time-18)/90,0,1),acceleration=1+clamp((this.time-108)/240,0,.6),direction=e.id%2===0?-1:1;
+  if(e.type==='orbital')return direction*(.24+.1*progress)*acceleration;
   const rates={shooter:.16,gunner:.13,sniper:.11,shotgun:.15,laser:.1,splitter:.17,suppressor:.14};
-  return direction*(rates[e.type]||.14)*(.25+.75*progress);
+  return direction*(rates[e.type]||.14)*(.25+.75*progress)*acceleration;
  }
  addEnemy(type,angle,r=265){const spec=D.enemies.find(x=>x.id===type)||D.enemies[0];const e={id:++this.nextId,type:spec.id,angle,r:orbitRadius(angle,this.time,r),orbitBase:r,hp:spec.hp,maxHp:spec.hp,size:13,born:this.time,cool:0,...pos(angle,orbitRadius(angle,this.time,r))};if(this.encounter&&this.time<this.encounter.until&&this.encounter.index<2&&(this.encounter.index===0?['gunner','shooter'].includes(e.type):e.type==='healer'))e.encounterTarget=this.encounter.id;this.enemies.push(e);this.emit('spawn',{enemy:type});return e;}
  addBoss(index=this.bossIndex){this.finishEncounter();const spec=D.bosses[index%4],cycle=Math.floor(index/4);this.projectiles=this.projectiles.filter(p=>p.friendly);this.warnings=[];this.groups=[];this.lastArrival=this.time;this.enemies=[];const e={id:++this.nextId,type:'boss',spec:index%4,angle:-Math.PI/2,r:248,orbitBase:248,hp:spec.hp*(1+cycle*.35),maxHp:spec.hp*(1+cycle*.35),size:30,born:this.time,cool:0,sections:3,phase:1,...pos(-Math.PI/2,248)};this.enemies.push(e);this.route='standard';this.bossOverloads=this.overloads;this.boss=e;if(this.training?.phase){e.phase=this.training.phase;e.sections=4-e.phase;}e.r=orbitRadius(e.angle,this.time,e.orbitBase);Object.assign(e,pos(e.angle,e.r));this.nextAttack=this.time+1.6;this.emit('boss',{name:spec.name,index:index%4});return e;}
@@ -155,10 +158,11 @@ class Engine{
   const multi=Math.min(5,1+Math.floor(this.combo/8)*.25+this.perfectCombo*.1);
   this.score+=Math.round((perfect?70:25)*multi*(this.bounty>0?1.5:1));
   this.gainEnergy((perfect?12:6)*(1+.25*this.u('energy')+.1*this.m('charge'))+(perfect?Math.min(5,this.perfectCombo)*this.u('pcombo')*2+2*this.m('feedback_link'):0));
+  if(this.u('capacitor')&&this.blocks%8===0)this.gainEnergy(4*this.u('capacitor'));if(this.u('rebuild')&&this.blocks%40===0&&(this.repairsUsed||0)<2&&this.hp<this.maxHp){this.hp++;this.repairsUsed=(this.repairsUsed||0)+1;}
   if(perfect&&(this.u('barrier')||this.phantomGift))this.barrier=Math.max(this.barrier,this.u('barrier')*.6+(this.phantomGift?.5:0));
   if(this.tactic==='mobile'&&Math.abs(this.rotation)>90*RAD&&this.tacticGuardCooldown<=0){this.barrier=Math.max(this.barrier,.25);this.tacticGuardCooldown=3;this.emit('tacticGuard');}
   const crit=this.rng()<this.u('crit')*.18;
-  const damage=this.damage*(this.tactic==='precision'?(perfect?1.35:.85):1)*(this.spec.pierce==='seeker'?.85:1)*(perfect&&this.core==='mirror'?1.25:1)*(perfect?2*(1+.15*this.m('perfect')):1)*(crit?3:1);
+  const damage=this.damage*(this.blocks%6===0?1+.3*this.u('charged'):1)*(this.tactic==='precision'?(perfect?1.35:.85):1)*(this.spec.pierce==='seeker'?.85:1)*(perfect&&this.core==='mirror'?1.25:1)*(perfect?2*(1+.15*this.m('perfect')):1)*(crit?3:1);
   this.launchFriendly(p.angle,damage,g.owner,{pierce:this.u('pierce')+1+(this.spec.pierce==='seeker'?1:this.spec.pierce==='hunter'?-1:0),crit});
   const echoes=(this.spec.double==='lance'?1:this.u('double')+(this.spec.double==='swarm'?2:0))+(this.hydraGift?1:0);for(let i=0;i<echoes;i++)this.launchFriendly(p.angle+.12*(i+1),damage*(this.spec.double==='swarm'?.3:this.spec.double==='lance'?.95:.45),null,{pierce:1,crit});
   this.effects.push({type:perfect?'perfect':'block',...pos(p.angle,65),angle:p.angle,life:perfect?.55:.3,max:perfect?.55:.3});
@@ -170,7 +174,7 @@ class Engine{
   if(this.invuln>0||this.barrier>0)return;
   this.hitCount++;
   if((this.u('armor')&&this.hitCount%(6-this.u('armor'))===0)||(this.m('plate')&&this.hitCount%(9-this.m('plate'))===0)){this.barrier=.4;this.emit('armor');return;}
-  this.lastHit=miss||this.missInfo(Number.isFinite(attackAngle)?attackAngle:this.angle+Math.PI);this.hp--;const source=reason.includes('Лазер')?'laser':suppress?'suppressor':'projectile';this.damageTaken[source]=(this.damageTaken[source]||0)+1;this.combo=0;this.perfectCombo=0;this.invuln=.7+.1*this.m('grace');if(suppress){this.suppressed=3;this.emit('suppress');}
+  this.lastHit=miss||this.missInfo(Number.isFinite(attackAngle)?attackAngle:this.angle+Math.PI);this.hp--;const source=reason.includes('Лазер')?'laser':suppress?'suppressor':'projectile';this.damageTaken[source]=(this.damageTaken[source]||0)+1;this.combo=0;this.perfectCombo=0;this.invuln=.7+.1*this.m('grace');if(suppress){this.suppressed=3-.5*this.u('insulate');this.emit('suppress');}
   if(this.encounter?.index===2&&!this.encounter.done)this.encounter.failed=true;this.emit('hurt',{hp:this.hp});this.effects.push({type:'hurt',life:.5,max:.5});
   if(this.u('revenge'))this.areaDamage(1.5*this.u('revenge'));
   if(this.hp===1&&this.m('emergency')&&!this.emergencyUsed){this.emergencyUsed=true;this.barrier=2;this.emit('emergency');}
@@ -179,7 +183,7 @@ class Engine{
  }
  missInfo(angle){const late=Math.abs(angleDiff(this.target,angle))<=this.width/2;const fake=this.effects.some(f=>f.type==='feint'&&Math.abs(angleDiff(f.angle,this.angle))<this.width/2);return {angle,shield:this.angle,width:this.width,secondary:this.secondary,time:this.time,hint:fake?'Вы защищали ложный луч. Пунктир с меткой ЭХО безопасен.':late?'Щит не успел повернуться. Начинайте поворот раньше.':'Вы защищали другое направление. Следите за ближайшим ударом.'};}
  areaDamage(n){for(const e of this.enemies.slice())this.damageEnemy(e,n,'automation');}
- damageEnemy(e,n,source='reflection'){if(e.dead)return;if(e.type==='boss'&&this.spec.pierce==='hunter')n*=1.2;if(e.type!=='boss'&&this.enemies.some(q=>!q.dead&&q.type==='carrier'&&q.link===e.id))n*=.7;if(e.type==='boss')n*=this.time<(e.vulnerableUntil||0)?1.45:.65;this.damageBy[source]=(this.damageBy[source]||0)+Math.min(Math.max(0,e.hp),n);e.hp-=n;this.effects.push({type:'hit',x:e.x,y:e.y,life:.2,max:.2});if(e.hp<=0)this.kill(e);}
+ damageEnemy(e,n,source='reflection'){if(e.dead)return;if(e.type==='boss'&&source==='reflection')n*=1+.1*this.u('breaker');if(e.type==='boss'&&this.spec.pierce==='hunter')n*=1.2;if(e.type!=='boss'&&this.enemies.some(q=>!q.dead&&q.type==='carrier'&&q.link===e.id))n*=.7;if(e.type==='boss')n*=this.time<(e.vulnerableUntil||0)?1.45:.65;this.damageBy[source]=(this.damageBy[source]||0)+Math.min(Math.max(0,e.hp),n);e.hp-=n;this.effects.push({type:'hit',x:e.x,y:e.y,life:.2,max:.2});if(e.hp<=0)this.kill(e);}
  kill(e){
   if(e.dead)return;e.dead=true;if(e.encounterTarget===this.encounter?.id)this.advanceEncounter('target');if(this.training&&e.type==='boss'){this.boss=null;this.trainingVictory=true;this.state='dead';this.deathReason='Тренировка завершена: босс побеждён';this.emit('trainingEnd');return;}if(this.route==='overheat'&&e.type!=='boss')this.routeCredit+=.5*.18;this.kills++;this.score+=e.type==='boss'?1500:100;
   this.gainEnergy((e.type==='boss'?22:4)+this.u('salvage')*3);this.emit('kill',{x:e.x,y:e.y});this.effects.push({type:'destroy',x:e.x,y:e.y,life:.6,max:.6});
@@ -194,8 +198,8 @@ class Engine{
  offer(){
   if(!this.training&&!this.tactic&&this.level===3){this.choices=D.tactics.slice();this.state='upgrade';this.emit('level',{level:this.level});return this.choices;}
   const pool=D.upgrades.filter(u=>this.u(u.id)<u.max&&(u.id!=='heal'||this.hp<this.maxHp));const selected=[];
-  for(let i=0;i<Math.min(3,pool.length);i++){
-   const weights=pool.map(u=>[8,3,1,.28][u.rarity]*Math.pow(1+this.m('rarity')*.15+this.u('lucky')*.35+(this.route==='interference'?.25:0),u.rarity));let v=this.rng()*weights.reduce((a,b)=>a+b,0),index=0;for(;index<pool.length-1;index++){v-=weights[index];if(v<=0)break;}selected.push(pool.splice(index,1)[0]);
+  const count=Math.min(3,pool.length);for(let i=0;i<count;i++){
+   const weights=pool.map(u=>(this.u(u.id)>0?1.35:this.synergies(u.id).length>this.synergies().length?1.5:1)*[8,3,1,.28][u.rarity]*Math.pow(1+this.m('rarity')*.15+this.u('lucky')*.35+(this.route==='interference'?.25:0),u.rarity));let v=this.rng()*weights.reduce((a,b)=>a+b,0),index=0;for(;index<pool.length-1;index++){v-=weights[index];if(v<=0)break;}selected.push(pool.splice(index,1)[0]);
   }
   if(!selected.length){this.choices=[];this.score+=300;this.emit('overflow');return [];}this.choices=selected;this.state='upgrade';this.emit('level',{level:this.level});return selected;
  }
@@ -222,7 +226,7 @@ class Engine{
   if(this.time>=this.nextAttack){
    const candidates=this.enemies.filter(e=>!e.dead&&e.cool<=this.time);const e=candidates[Math.floor(this.rng()*candidates.length)];if(e)this.attack(e);const interval=this.boss?.spec===0?[1.1,.9,.75][this.boss.phase-1]:Math.max(.5,1.8-this.time*.011);this.nextAttack=this.time+interval/(this.difficulty*(this.time>=18?1.16:1));
   }
-  this.updateSupport(dt);
+  this.updateSupport(dt);if(this.u('interceptor')&&this.suppressed<=0){this.interceptTimer=(this.interceptTimer||0)+dt;if(this.interceptTimer>=12){const p=this.projectiles.filter(p=>p.active&&!p.friendly&&p.r<=130).sort((a,b)=>a.r-b.r)[0];if(p){p.active=false;this.interceptTimer=0;this.effects.push({type:'pulse',r:130,life:.3,max:.3});}}}
   for(const e of this.enemies){
    e.orbitVelocity=this.orbitSpeed(e);
    e.angle=Math.atan2(Math.sin(e.angle+dt*e.orbitVelocity),Math.cos(e.angle+dt*e.orbitVelocity));
@@ -270,7 +274,7 @@ class Engine{
  analysis(){const total=this.blocks+Object.values(this.damageTaken).reduce((a,b)=>a+b,0);return {accuracy:total?Math.round(this.blocks/total*100):0,taken:this.damageTaken,damage:this.damageBy,hint:this.damageTaken.laser?'Лазерные попадания: раньше переключайтесь на сплошной луч.':this.damageTaken.suppressor?'Сначала следите за Подавителями: их попадания замедляют щит.':this.lastHit?.hint||'Следите за ближайшим ударом и сохраняйте энергию для Перегрузки.'};}
  result(){return{id:this.id,balance:BALANCE,core:this.core,tactic:this.tactic||'',time:Math.floor(this.time),score:Math.floor(this.score),kills:this.kills,bosses:this.bossKills,combo:this.bestCombo,perfect:this.perfects,perfectCombo:this.bestPerfectCombo,wave:this.wave,date:new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Vladivostok'})};}
  settle(){
-  if(this.state!=='dead'||this.rewarded||this.save.settled.includes(this.id))return null;this.rewarded=true;if(this.training)return {...this.result(),training:true,victory:!!this.trainingVictory,shards:0,achievementShards:0,unlocked:[],newRecords:[],old:{}};const s=this.save,r=this.result(),old={...(s.currentBests[this.mode]||{})};
+  if(this.state!=='dead'||this.rewarded||this.save.settled.includes(this.id))return null;this.rewarded=true;if(this.training)return {...this.result(),training:true,victory:!!this.trainingVictory,shards:0,achievementShards:0,unlocked:[],newRecords:[],old:{}};if(this.daily){this.save.settled.push(this.id);this.save.settled=this.save.settled.slice(-30);const rows=this.save.dailyRecords||(this.save.dailyRecords={}),old=rows[this.daily]||{score:0,time:0,attempts:0},r=this.result();rows[this.daily]={score:Math.max(old.score,r.score),time:Math.max(old.time,r.time),attempts:old.attempts+1};for(const key of Object.keys(rows).sort().slice(0,-7))delete rows[key];return {...r,daily:this.daily,shards:0,achievementShards:0,unlocked:[],newRecords:r.score>old.score?['score']:[],old};}const s=this.save,r=this.result(),old={...(s.currentBests[this.mode]||{})};
   // No reward for an immediate exit. One settlement per run; output is bounded by actual simulated play time.
   const base=this.time<8?0:Math.floor(12+this.time*.42+Math.min(this.kills,this.time*2)*.5+this.bossKills*15);
   const multiplier=(1+.1*this.m('shards'))*(this.mode==='horizon'?1.8:this.mode==='challenge'?1.4+.15*this.m('challenge'):1);
@@ -288,5 +292,5 @@ function purchase(s,id){const t=D.tech.find(t=>t.id===id);if(!t)return false;con
 function canPrestige(s){return s.bosses.length>=4&&Object.values(s.tech).reduce((a,b)=>a+b,0)>=12;}
 function prestige(s){if(!canPrestige(s))return false;const gain=3+Math.floor(Object.values(s.tech).reduce((a,b)=>a+b,0)/10);s.prestige++;s.rare+=gain;s.tech={};s.shards=0;claimAchievements(s);return gain;}
 function purchasePrestige(s,id){const t=D.prestigeTech.find(t=>t.id===id);if(!t)return false;const level=s.prestigeTech[id]||0,price=t.cost+level;if(level>=t.max||s.rare<price)return false;s.rare-=price;s.prestigeTech[id]=level+1;if(id==='void'&&!s.modes.includes('horizon'))s.modes.push('horizon');return true;}
-const api={BALANCE,Engine,SaveStore,freshSave,validateSave,claimAchievements,purchase,canPrestige,prestige,purchasePrestige,clamp,angleDiff,pos,random,orbitRadius,RAD,TAU};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreEngine=api;
+const api={dailyKey,dailySeed,BALANCE,Engine,SaveStore,freshSave,validateSave,claimAchievements,purchase,canPrestige,prestige,purchasePrestige,clamp,angleDiff,pos,random,orbitRadius,RAD,TAU};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreEngine=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

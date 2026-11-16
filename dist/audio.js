@@ -31,7 +31,7 @@ const THEMES=[
  {name:'Neon Run',transpose:5,arp:[0,1,2,1,3,2,1,0,2,3,1,2,0,2,3,1],bass:[0,2,5,8,10,13]},
  {name:'Solar Drive',transpose:7,arp:[0,2,3,2,1,3,2,0,3,1,2,3,1,0,2,1],bass:[0,3,7,8,12,14]}
 ];
-function scoreStep(index,mode='combat'){
+function scoreStep(index,mode='combat',tension=0){
  const theme=THEMES[Math.floor(index/256)%THEMES.length],s=index%16,bar=Math.floor(index/16),soft=mode==='paused'||mode==='result';
  const events=baseScoreStep(index,mode);
  // Change voicing, articulation and stereo motion without changing the shared beat grid.
@@ -118,11 +118,11 @@ class AudioSystem{
   const voice={source,nodes};this.voices.add(voice);source.onended=()=>{for(const node of nodes)node.disconnect();this.voices.delete(voice);};source.start(start);source.stop(end+.015);
  }
  play(name,enemy='',options={}){if(!this.ctx||this.ctx.state!=='running'||!this.getSettings().sfx)return;const at=this.ctx.currentTime;const variant=this.effectCounts[name]||0;this.effectCounts[name]=(variant+1)%3;for(const e of effectPlan(name,enemy,{...options,variant}))this.render(e,at+e.offset,false);}
- update(mode=this.mode){
+ update(mode=this.mode,tension=0){
   if(!this.ctx||this.ctx.state!=='running')return;this.syncVolumes();this.setMode(mode);
   const now=this.ctx.currentTime;if(this.next<now-.2){this.next=now+.025;this.step=Math.ceil(this.step/16)*16;}
   if(!this.getSettings().music){this.next=now+.025;return;}
-  let count=0;while(this.next<now+.105&&count++<4){for(const event of scoreStep(this.step,this.mode))this.render(event,this.next+event.offset,true);this.step++;this.next+=STEP;}
+  let count=0;while(this.next<now+.105&&count++<4){for(const event of scoreStep(this.step,this.mode,tension))this.render(event,this.next+event.offset,true);this.step++;this.next+=STEP;}
  }
 }
 const api={THEMES,AudioSystem,scoreStep,effectPlan,BPM,STEP,MAX_VOICES,midi};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreAudio=api;

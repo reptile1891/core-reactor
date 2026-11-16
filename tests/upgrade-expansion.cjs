@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),C=require('../dist/engine');const make=()=>new C.Engine(C.freshSave(),{seed:42});
+let e=make();e.up.insulate=2;e.hitCore(true);assert.equal(e.suppressed,2);
+e=make();e.up.rebuild=1;e.hp=1;e.blocks=39;e.reflect({angle:0},{perfect:false});assert.equal(e.hp,2);assert.equal(e.repairsUsed,1);
+e=make();e.up.capacitor=1;e.blocks=7;e.reflect({angle:0},{perfect:false});assert.equal(e.energy,10);
+e=make();e.up.momentum=2;const speed=e.turnSpeed;e.combo=8;assert.ok(Math.abs(e.turnSpeed/speed-1.16)<1e-9);
+e=make();e.up.charged=1;e.blocks=5;e.reflect({angle:0},{perfect:false});assert.ok(Math.abs(e.projectiles[0].damage-1.3)<1e-9);
+console.log('Suppression, limited repair, energy, movement and charged reflection passed.');
+e=make();e.up.shock=1;e.energy=30;let target=e.addEnemy('gunner',0);e.overload();assert.ok(target.hp<2);
+e=make();e.up.breaker=3;target=e.addBoss(0);const hp=target.hp;e.damageEnemy(target,1);assert.ok(Math.abs(hp-target.hp-.845)<1e-9);
+e=make();e.nextBoss=e.nextSpawn=e.nextAttack=Infinity;e.up.interceptor=1;e.interceptTimer=12;e.projectiles.push({active:true,friendly:false,r:100,x:100,y:0,angle:0,speed:0});e.update(.01,{});assert.equal(e.projectiles.length,0);
+console.log('Overload damage, boss damage and interception passed.');

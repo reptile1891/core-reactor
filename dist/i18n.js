@@ -550,7 +550,20 @@ const catalog={
  "ОПАСНАЯ СИГНАТУРА": "HOSTILE SIGNATURE",
  "НОВАЯ ФАЗА": "NEW PHASE",
  "Ритм атак изменился": "Attack rhythm has changed",
- "БОСС ПОБЕЖДЁН · ПЕРЕДЫШКА": "BOSS DEFEATED · BREATHER"
+ "БОСС ПОБЕЖДЁН · ПЕРЕДЫШКА": "BOSS DEFEATED · BREATHER",
+ "КОНТРАКТ · НЕОБЯЗАТЕЛЬНО": "CONTRACT · OPTIONAL",
+ "Текущая сборка": "Current build",
+ "Технологии появятся здесь после повышения уровня.": "Technologies will appear here after you level up.",
+ "Управление": "Controls",
+ "Перегрузка · ГОТОВА": "Overload · READY",
+ "Перегрузка · нужно ещё": "Overload · need",
+ "энергии": "energy",
+ "E / ПКМ / A · 20 энергии · перезарядка 8 с": "E / RMB / A · 20 energy · 8 s cooldown",
+ "Перегрузка: E / ПКМ · 20 энергии · 8 с": "Overload: E / RMB · 20 energy · 8 s",
+ "Техно": "Tech",
+ "Цели": "Goals",
+ "Опции": "Options",
+ "E / ПКМ · Геймпад: A / ✕ · 20 энергии · перезарядка 8 с": "E / RMB · Gamepad: A / ✕ · 20 energy · 8 s cooldown"
 };
 let language='ru';
 const messages={...catalog};

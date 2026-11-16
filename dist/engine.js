@@ -7,6 +7,8 @@ const TAU=Math.PI*2, RAD=Math.PI/180;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
 const angleDiff=(a,b)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 const pos=(a,r)=>({x:Math.cos(a)*r,y:Math.sin(a)*r});
+// A shared polar track keeps simulation and arena geometry in agreement.
+function orbitRadius(angle,time,base=265){const cycle=((time%48)+48)%48,blend=cycle>10&&cycle<38?Math.sin((cycle-10)/28*Math.PI)**2:0,rotation=time*.065;return base+blend*(18*Math.cos(2*(angle-rotation))+6*Math.sin(3*(angle+rotation*.6)));}
 function random(seed){let s=seed>>>0;return()=>((s=(Math.imul(s,1664525)+1013904223)>>>0)/4294967296);}
 function freshSave(){return{version:4,shards:0,rare:0,prestige:0,prestigeTech:{},tech:{},achievements:[],bosses:[],seenBosses:[],modes:['classic','skill'],records:{classic:[],skill:[],challenge:[],horizon:[]},bests:{},currentBalance:BALANCE,currentBests:{},recordsArchive:{classic:[],skill:[],challenge:[],horizon:[]},totals:{runs:0,kills:0,bosses:0,perfect:0,blocks:0,time:0,combo:0},settings:{sfx:.55,music:.16,reduced:false,language:'ru',deadzone:.22,core:'standard',contract:'none'},settled:[]};}
 function validateSave(value){
@@ -61,10 +63,10 @@ class Engine{
   const progress=clamp((this.time-18)/90,0,1),direction=e.id%2===0?-1:1;
   if(e.type==='orbital')return direction*(.24+.1*progress);
   const rates={shooter:.16,gunner:.13,sniper:.11,shotgun:.15,laser:.1,splitter:.17,suppressor:.14};
-  return direction*(rates[e.type]||.14)*progress;
+  return direction*(rates[e.type]||.14)*(.25+.75*progress);
  }
- addEnemy(type,angle,r=265){const spec=D.enemies.find(x=>x.id===type)||D.enemies[0];const e={id:++this.nextId,type:spec.id,angle,r,hp:spec.hp,maxHp:spec.hp,size:13,born:this.time,cool:0,...pos(angle,r)};this.enemies.push(e);this.emit('spawn',{enemy:type});return e;}
- addBoss(index=this.bossIndex){const spec=D.bosses[index%4],cycle=Math.floor(index/4);this.projectiles=this.projectiles.filter(p=>p.friendly);this.warnings=[];this.groups=[];this.lastArrival=this.time;this.enemies=[];const e={id:++this.nextId,type:'boss',spec:index%4,angle:-Math.PI/2,r:248,hp:spec.hp*(1+cycle*.35),maxHp:spec.hp*(1+cycle*.35),size:30,born:this.time,cool:0,sections:3,phase:1,...pos(-Math.PI/2,248)};this.enemies.push(e);this.route='standard';this.bossOverloads=this.overloads;this.boss=e;if(this.training?.phase){e.phase=this.training.phase;e.sections=4-e.phase;}this.nextAttack=this.time+1.6;this.emit('boss',{name:spec.name,index:index%4});return e;}
+ addEnemy(type,angle,r=265){const spec=D.enemies.find(x=>x.id===type)||D.enemies[0];const e={id:++this.nextId,type:spec.id,angle,r:orbitRadius(angle,this.time,r),orbitBase:r,hp:spec.hp,maxHp:spec.hp,size:13,born:this.time,cool:0,...pos(angle,orbitRadius(angle,this.time,r))};this.enemies.push(e);this.emit('spawn',{enemy:type});return e;}
+ addBoss(index=this.bossIndex){const spec=D.bosses[index%4],cycle=Math.floor(index/4);this.projectiles=this.projectiles.filter(p=>p.friendly);this.warnings=[];this.groups=[];this.lastArrival=this.time;this.enemies=[];const e={id:++this.nextId,type:'boss',spec:index%4,angle:-Math.PI/2,r:248,orbitBase:248,hp:spec.hp*(1+cycle*.35),maxHp:spec.hp*(1+cycle*.35),size:30,born:this.time,cool:0,sections:3,phase:1,...pos(-Math.PI/2,248)};this.enemies.push(e);this.route='standard';this.bossOverloads=this.overloads;this.boss=e;if(this.training?.phase){e.phase=this.training.phase;e.sections=4-e.phase;}e.r=orbitRadius(e.angle,this.time,e.orbitBase);Object.assign(e,pos(e.angle,e.r));this.nextAttack=this.time+1.6;this.emit('boss',{name:spec.name,index:index%4});return e;}
  schedule(e,kind='shot',options={}){
   if(!e||this.groups.length>9)return null;
   const angle=options.angle??(e.angle+(e.type==='boss'&&e.spec!==0?(e.attackCycle%2?1.05:-1.05):0)),spec=D.enemies.find(x=>x.id===e.type)||D.enemies[0],speed=(options.speed||spec.speed||150)*(this.mode==='horizon'?1.15:this.mode==='challenge'?1.1:1)*(this.route==='overheat'?1.18:1);
@@ -127,7 +129,7 @@ class Engine{
    this.schedule(e,'shot',{angle:e.angle+direction*1.4,burst:2,speed:210,windup:.95});
   }
  }
- updateAim(){let previous=null;for(const g of this.groups){if(g.cancelled)continue;if(!g.fired){const owner=this.enemies.find(e=>e.id===g.owner&&!e.dead);if(!owner){g.cancelled=true;continue;}if(!g.locked){g.angle=owner.angle+g.aimOffset;g.radius=owner.r;for(let i=0;i<g.tracks.length;i++){const track=g.tracks[i];track.angle=g.angle+(i-(g.tracks.length-1)/2)*(g.fan?10:4)*RAD;track.trackedAt=null;}}
+ updateAim(){let previous=null;for(const g of this.groups){if(g.cancelled)continue;if(!g.fired){const owner=this.enemies.find(e=>e.id===g.owner&&!e.dead);if(!owner){g.cancelled=true;continue;}if(!g.locked){g.angle=owner.angle+g.aimOffset;g.radius=owner.r;const travel=g.kind==='laser'?0:Math.max(0,g.radius-130)/g.speed+65/(g.speed*(1-g.slow));g.launch=g.arrival-travel;for(let i=0;i<g.tracks.length;i++){const track=g.tracks[i];track.angle=g.angle+(i-(g.tracks.length-1)/2)*(g.fan?10:4)*RAD;track.trackedAt=null;}}
  if(previous){const needed=previous.arrival+g.gap+Math.abs(angleDiff(g.angle,previous.angle))/Math.min(g.rotationBudget,this.turnSpeed*.8);if(needed>g.arrival){const delay=needed-g.arrival;g.arrival+=delay;g.launch+=delay;}}
  if(!g.locked&&this.time>=g.launch-.5){const extra=Math.max(0,this.time+.5-g.launch);g.launch+=extra;g.arrival+=extra;g.locked=true;g.lockedAt=this.time;for(const track of g.tracks){track.aligned=this.covers(track.angle);track.trackedAt=null;}this.emit('aimLock');}}
  previous=g;}
@@ -178,7 +180,7 @@ class Engine{
  kill(e){
   if(e.dead)return;e.dead=true;if(this.training&&e.type==='boss'){this.boss=null;this.trainingVictory=true;this.state='dead';this.deathReason='Тренировка завершена: босс побеждён';this.emit('trainingEnd');return;}if(this.route==='overheat'&&e.type!=='boss')this.routeCredit+=.5*.18;this.kills++;this.score+=e.type==='boss'?1500:100;
   this.gainEnergy((e.type==='boss'?22:4)+this.u('salvage')*3);this.emit('kill',{x:e.x,y:e.y});this.effects.push({type:'destroy',x:e.x,y:e.y,life:.6,max:.6});
-  if(e.type==='splitter')for(const offset of [-.35,.35]){const child=this.addEnemy('shooter',e.angle+offset,e.r);child.hp=.5;child.maxHp=.5;child.size=8;child.fragment=true;child.cool=this.time+4;this.schedule(child,'shot',{speed:120,windup:.9});}
+  if(e.type==='splitter')for(const offset of [-.35,.35]){const child=this.addEnemy('shooter',e.angle+offset,e.orbitBase??e.r);child.hp=.5;child.maxHp=.5;child.size=8;child.fragment=true;child.cool=this.time+4;this.schedule(child,'shot',{speed:120,windup:.9});}
   if(e.type==='boss'){
    if(this.contract==='clean'&&this.overloads===this.bossOverloads)this.contractDone=true;this.bossKills++;this.clearedBosses.push(D.bosses[e.spec].id);this.boss=null;this.bossIndex++;this.nextBoss=Math.max(this.nextBoss+60,this.time+20);this.hp=Math.min(this.maxHp,this.hp+this.m('repair'));
    if(e.spec===0){this.maxHp=Math.min(6,this.maxHp+1);this.hp=Math.min(this.maxHp,this.hp+1);}
@@ -220,6 +222,7 @@ class Engine{
   for(const e of this.enemies){
    e.orbitVelocity=this.orbitSpeed(e);
    e.angle=Math.atan2(Math.sin(e.angle+dt*e.orbitVelocity),Math.cos(e.angle+dt*e.orbitVelocity));
+   e.orbitBase??=e.r;e.r=orbitRadius(e.angle,this.time,e.orbitBase);
    Object.assign(e,pos(e.angle,e.r));
   }
   this.updateAim();
@@ -279,5 +282,5 @@ function purchase(s,id){const t=D.tech.find(t=>t.id===id);if(!t)return false;con
 function canPrestige(s){return s.bosses.length>=4&&Object.values(s.tech).reduce((a,b)=>a+b,0)>=12;}
 function prestige(s){if(!canPrestige(s))return false;const gain=3+Math.floor(Object.values(s.tech).reduce((a,b)=>a+b,0)/10);s.prestige++;s.rare+=gain;s.tech={};s.shards=0;claimAchievements(s);return gain;}
 function purchasePrestige(s,id){const t=D.prestigeTech.find(t=>t.id===id);if(!t)return false;const level=s.prestigeTech[id]||0,price=t.cost+level;if(level>=t.max||s.rare<price)return false;s.rare-=price;s.prestigeTech[id]=level+1;if(id==='void'&&!s.modes.includes('horizon'))s.modes.push('horizon');return true;}
-const api={BALANCE,Engine,SaveStore,freshSave,validateSave,claimAchievements,purchase,canPrestige,prestige,purchasePrestige,clamp,angleDiff,pos,random,RAD,TAU};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreEngine=api;
+const api={BALANCE,Engine,SaveStore,freshSave,validateSave,claimAchievements,purchase,canPrestige,prestige,purchasePrestige,clamp,angleDiff,pos,random,orbitRadius,RAD,TAU};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreEngine=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

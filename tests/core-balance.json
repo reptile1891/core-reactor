@@ -2,49 +2,49 @@
   {
     "core": "standard",
     "active": false,
-    "median": 52,
-    "max": 90.9
+    "median": 51.4,
+    "max": 81.3
   },
   {
     "core": "standard",
     "active": true,
-    "median": 65.2,
-    "max": 69.4
+    "median": 67,
+    "max": 105.4
   },
   {
     "core": "mirror",
     "active": false,
-    "median": 52,
-    "max": 95.6
+    "median": 50.3,
+    "max": 81.3
   },
   {
     "core": "mirror",
     "active": true,
-    "median": 65.2,
-    "max": 69.4
+    "median": 67,
+    "max": 89.4
   },
   {
     "core": "storm",
     "active": false,
-    "median": 59.9,
-    "max": 96.2
+    "median": 67,
+    "max": 83.7
   },
   {
     "core": "storm",
+    "active": true,
+    "median": 67.3,
+    "max": 125.7
+  },
+  {
+    "core": "bastion",
+    "active": false,
+    "median": 51.4,
+    "max": 87.8
+  },
+  {
+    "core": "bastion",
     "active": true,
     "median": 67.1,
-    "max": 95
-  },
-  {
-    "core": "bastion",
-    "active": false,
-    "median": 52,
-    "max": 86.8
-  },
-  {
-    "core": "bastion",
-    "active": true,
-    "median": 65.2,
-    "max": 108.2
+    "max": 79.9
   }
 ]

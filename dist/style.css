@@ -46,3 +46,5 @@
 @media(max-height:480px) and (orientation:landscape){.overload-button{min-width:0}.pause-dashboard{margin:12px 0}.pause-dashboard>div{padding:9px 12px}.pause-actions{margin:12px 0}}
 
 .nav-short{display:none}@media(max-width:600px){.sidebar .nav-button>span[data-i18n]:not(.nav-short){display:none!important}.sidebar .nav-button>span.nav-short{display:block!important;font-size:11px;letter-spacing:0}.sidebar .rail-bottom,.sidebar .rail-bottom .nav-button{flex-basis:54px;width:54px}}
+
+@media(max-height:480px) and (orientation:landscape){.game-footer .overload-button{position:absolute;right:0;bottom:0}}

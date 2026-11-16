@@ -1,0 +1,60 @@
+{
+  "balance": "1.10",
+  "method": "72 matched seeded moderate-defender runs and 6 expert runs. Active uses overload for threats; not human playtesting.",
+  "rows": [
+    {
+      "tactic": "precision",
+      "active": false,
+      "median": 65.2,
+      "selected": 11,
+      "expertBosses": 5,
+      "expertTime": 360,
+      "peakObjects": 22
+    },
+    {
+      "tactic": "precision",
+      "active": true,
+      "median": 65.2,
+      "selected": 11,
+      "expertBosses": 5,
+      "expertTime": 360,
+      "peakObjects": 22
+    },
+    {
+      "tactic": "volley",
+      "active": false,
+      "median": 64.2,
+      "selected": 11,
+      "expertBosses": 5,
+      "expertTime": 360,
+      "peakObjects": 18
+    },
+    {
+      "tactic": "volley",
+      "active": true,
+      "median": 67,
+      "selected": 11,
+      "expertBosses": 5,
+      "expertTime": 360,
+      "peakObjects": 23
+    },
+    {
+      "tactic": "mobile",
+      "active": false,
+      "median": 64.2,
+      "selected": 11,
+      "expertBosses": 5,
+      "expertTime": 360,
+      "peakObjects": 18
+    },
+    {
+      "tactic": "mobile",
+      "active": true,
+      "median": 67.3,
+      "selected": 11,
+      "expertBosses": 5,
+      "expertTime": 360,
+      "peakObjects": 20
+    }
+  ]
+}

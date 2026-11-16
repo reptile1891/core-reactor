@@ -83,6 +83,11 @@ const specializations={
  turret:[{id:'rapid',name:'Скорострельность',desc:'Интервал турели −35%, урон выстрела −35%.'},{id:'heavy',name:'Тяжёлое орудие',desc:'Интервал турели +30%, урон выстрела +40%.'}],
  wide:[{id:'shelter',name:'Укрытие',desc:'Щит шире на 10°, скорость поворота −12%.'},{id:'agile',name:'Манёвренность',desc:'Щит уже на 8°, скорость поворота +90°/с.'}]
 };
+const tactics=[
+ {id:'precision',name:'Точный импульс',desc:'Урон идеальных отражений +35%, обычных −15%. Усиливает и эхо этих отражений.',style:'Ловите момент удара. Сочетайте с критическим уроном и барьером.',icon:'⌖',color:'#ffd27a'},
+ {id:'volley',name:'Залповая Перегрузка',desc:'Перегрузка выпускает до 3 самонаводящихся снарядов по разным врагам с уроном 1,2. Стоимость 30 энергии, перезарядка 10 с.',style:'Копите энергию и выбирайте момент для залпа. Его снаряды не запускают цепь и взрывы.',icon:'ϟ',color:'#b48aff'},
+ {id:'mobile',name:'Маневровый контур',desc:'Скорость щита +15%, ширина −8°. Блок при повороте быстрее 90°/с даёт барьер на 0,25 с, не чаще раза в 3 с.',style:'Двигайтесь навстречу атакам. Сочетайте с гироскопом и шириной щита.',icon:'↻',color:'#70f5d1'}
+].map(t=>({...t,kind:'tactic',category:'Тактика',rarity:1,max:1}));
 const bosses=[
  {id:'guardian',name:'СТРАЖ',title:'Осадный автомат',color:'#ffb76d',hp:16,reward:'Укрепление: +1 HP к текущему максимуму (до 6)',icon:'⬡'},
  {id:'hydra',name:'ГИДРА',title:'Распределённое сознание',color:'#ad88ff',hp:21,reward:'Гидра: постоянное эхо отражения до конца попытки',icon:'⋈'},
@@ -110,6 +115,6 @@ const prestigeTech=[
 ];
 const rarity=['Обычная','Редкая','Эпическая','Легендарная'];
 function cost(t,level){return Math.round(t.cost*Math.pow(1.85,level));}
-const api={routes,contracts,specializations,upgrades,tech,enemies,bosses,achievements,prestigeTech,rarity,cost};
+const api={tactics,routes,contracts,specializations,upgrades,tech,enemies,bosses,achievements,prestigeTech,rarity,cost};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreData=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

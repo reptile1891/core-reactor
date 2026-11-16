@@ -8,6 +8,7 @@ function play(type,seed,options={}){
   if(e.state==='route'){e.chooseRoute(options.route||'standard');continue;}
   if(e.state==='specialization'){e.chooseSpecialization(D.specializations[e.pendingSpec][seed%2].id);continue;}
   if(e.state==='upgrade'){
+   if(e.choices.some(u=>u.kind==='tactic')){e.choose(options.tactic||'precision');continue;}
    const priority=['heal','wide','damage','chain','double','crit','barrier','slow','turn','pulse','blast','drone','turret','salvage','energy'];
    const choices=e.choices.slice().sort((a,b)=>priority.indexOf(a.id)-priority.indexOf(b.id));e.choose(choices[0].id);continue;
   }
@@ -16,11 +17,11 @@ function play(type,seed,options={}){
    if(g&&g.id!==lastGroup){lastGroup=g.id;const errorChance=options.expert?0:.18;const miss=rng()<errorChance;misses.set(g.id,miss);pendingAngle=g.angle+(miss?Math.PI/2:0);reactAt=e.time+(options.expert?.08:.22+rng()*.2);}
    if(g&&e.time>=reactAt)pendingAngle=g.angle+(misses.get(g.id)?Math.PI/2:0);if(e.time>=reactAt)desired=pendingAngle;
   }
-  if(options.active&&e.hp<e.maxHp&&e.projectiles.some(p=>!p.friendly&&p.r<120&&!e.covers(p.angle)))e.overload();
+  if(options.active&&(e.hp<e.maxHp||(e.tactic==='volley'&&e.enemies.length>1))&&e.projectiles.some(p=>!p.friendly&&p.r<120&&!e.covers(p.angle)))e.overload();
   e.update(1/60,{angle:options.unattended?undefined:desired});e.drain();maxObjects=Math.max(maxObjects,e.projectiles.length+e.enemies.length+e.groups.length);if(!earliestPerfect&&e.perfects)earliestPerfect=e.time;
   if(e.time>=(options.limit||360))break;
  }
- return{type,seed,time:+e.time.toFixed(1),hp:e.hp,kills:e.kills,bosses:e.bossKills,perfect:e.perfects,level:e.level,score:e.score,maxObjects,dead:e.state==='dead',bossIds:e.clearedBosses};
+ return{type,seed,tactic:e.tactic,time:+e.time.toFixed(1),hp:e.hp,kills:e.kills,bosses:e.bossKills,perfect:e.perfects,level:e.level,score:e.score,maxObjects,dead:e.state==='dead',bossIds:e.clearedBosses};
 }
 if(require.main===module){
 const results=[];for(const type of ['none','moderate','max'])for(let seed=1;seed<=30;seed++)results.push(play(type,seed));

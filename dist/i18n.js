@@ -577,7 +577,25 @@ const catalog={
  "Цели событий": "Event objectives",
  "Без дополнительных наград": "No extra rewards",
  "Новый личный рекорд": "New personal best",
- "ЦЕЛЬ ПРЕРВАНА · ПОТЕРЯ HP": "OBJECTIVE ENDED · HP LOST"
+ "ЦЕЛЬ ПРЕРВАНА · ПОТЕРЯ HP": "OBJECTIVE ENDED · HP LOST",
+ "Точный импульс": "Precision Pulse",
+ "Урон идеальных отражений +35%, обычных −15%. Усиливает и эхо этих отражений.": "Perfect reflection damage +35%, normal reflection damage −15%. Also affects their echoes.",
+ "Ловите момент удара. Сочетайте с критическим уроном и барьером.": "Time your blocks. Combine with critical damage and barriers.",
+ "Залповая Перегрузка": "Volley Overload",
+ "Перегрузка выпускает до 3 самонаводящихся снарядов по разным врагам с уроном 1,2. Стоимость 30 энергии, перезарядка 10 с.": "Overload fires up to 3 homing shots at different enemies for 1.2 damage each. Costs 30 energy, 10 s cooldown.",
+ "Копите энергию и выбирайте момент для залпа. Его снаряды не запускают цепь и взрывы.": "Save energy and time your volley. Its shots do not trigger chains or explosions.",
+ "Маневровый контур": "Maneuver Circuit",
+ "Скорость щита +15%, ширина −8°. Блок при повороте быстрее 90°/с даёт барьер на 0,25 с, не чаще раза в 3 с.": "Shield speed +15%, width −8°. Blocking while turning faster than 90°/s grants a 0.25 s barrier, at most once every 3 s.",
+ "Двигайтесь навстречу атакам. Сочетайте с гироскопом и шириной щита.": "Turn into attacks. Combine with turn speed and shield width.",
+ "ТАКТИКА ПОПЫТКИ": "RUN TACTIC",
+ "УРОВЕНЬ 3 · ТАКТИКА ПОПЫТКИ": "LEVEL 3 · RUN TACTIC",
+ "Выберите свой стиль боя": "Choose your combat style",
+ "Одна тактика до конца попытки. У каждого усиления есть ограничение.": "One tactic for the rest of this run. Each advantage comes with a tradeoff.",
+ "ТАКТИКА": "TACTIC",
+ "До конца попытки": "For the rest of this run",
+ "БАРЬЕР МАНЁВРА": "MANEUVER BARRIER",
+ "E / ПКМ · Геймпад: A / ✕": "E / RMB · Gamepad: A / ✕",
+ "Базовая стоимость 20 энергии, перезарядка 8 с; тактика залпа меняет их на 30 энергии и 10 с. Очищает": "Base cost is 20 energy with an 8 s cooldown; the volley tactic changes these to 30 energy and 10 s. Clears"
 };
 let language='ru';
 const messages={...catalog};

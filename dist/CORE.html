@@ -196,6 +196,24 @@ body:has(.mission-notice) .toasts,body:has(.boss-moment) .toasts{visibility:hidd
 
 .mode-actions{margin-bottom:14px}
 
+/* Keep the compact arena inside the visible area, including display cutouts. */
+@media (max-height: 500px) and (orientation: landscape) {
+  #app.game-active .main {
+    box-sizing: border-box;
+    padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+             env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  }
+  .game-active .topbar { flex: 0 0 44px; height: 44px; }
+  .game-active .game-footer { min-height: 44px; }
+  .game-active .game-footer .overload-button {
+    bottom: 48px;
+    width: clamp(128px, 28vw, 190px);
+    min-width: 0;
+    white-space: normal;
+  }
+  .game-active .modal { padding: 12px 16px; }
+}
+
 </style>
 
 </head>
@@ -3827,7 +3845,19 @@ function showBossMoment(label,detail){
  bossMomentLife=2.6;
  renderBossMoment();
 }
-function start(){clearMissionNotices();for(const el of $('#toasts').children)el.remove();document.body.classList.toggle('reduced-effects',save.settings.reduced);clearBossMoment();bossPhaseSeen=0;lastBossVictory=null;audio.unlock();engine=new C.Engine(save,{mode,training:trainingSelection,daily:dailySelection});pixoRun('run-start');runResult=null;isRunning=true;notifiedBest=false;input.angle=undefined;keys.clear();labels.length=0;coreDamageGlow=0;$('#app').classList.add('game-active');screen.innerHTML='';hideModal();$('#hud').classList.remove('hidden');$('#game-footer').classList.remove('hidden');$('#boss-hud').classList.add('hidden');$('#page-label').textContent=t(engine?.daily?'ИСПЫТАНИЕ ДНЯ':engine?.training&&isRunning?'ТРЕНИРОВКА БОССОВ':modes[mode].name.toUpperCase());renderHudShell();resize();updateHud();canvas.focus({preventScroll:true});}
+async function enterMobileFullscreen(){
+ if(!window.matchMedia?.('(pointer: coarse) and (max-width: 1000px)').matches || !navigator.userActivation?.isActive)return;
+ try{
+  if(!document.fullscreenElement){
+   if(!document.fullscreenEnabled || !document.documentElement.requestFullscreen)return;
+   await document.documentElement.requestFullscreen();
+  }
+  await window.screen.orientation?.lock?.('landscape');
+ }catch{
+  // The browser or embedding page may restrict fullscreen or orientation.
+ }
+}
+function start(){void enterMobileFullscreen();clearMissionNotices();for(const el of $('#toasts').children)el.remove();document.body.classList.toggle('reduced-effects',save.settings.reduced);clearBossMoment();bossPhaseSeen=0;lastBossVictory=null;audio.unlock();engine=new C.Engine(save,{mode,training:trainingSelection,daily:dailySelection});pixoRun('run-start');runResult=null;isRunning=true;notifiedBest=false;input.angle=undefined;keys.clear();labels.length=0;coreDamageGlow=0;$('#app').classList.add('game-active');screen.innerHTML='';hideModal();$('#hud').classList.remove('hidden');$('#game-footer').classList.remove('hidden');$('#boss-hud').classList.add('hidden');$('#page-label').textContent=t(engine?.daily?'ИСПЫТАНИЕ ДНЯ':engine?.training&&isRunning?'ТРЕНИРОВКА БОССОВ':modes[mode].name.toUpperCase());renderHudShell();resize();updateHud();canvas.focus({preventScroll:true});}
 function renderHudShell(){$('#hud').innerHTML=h('<div class="hud-left"><div><small>ЦЕЛОСТНОСТЬ ЯДРА</small><div id="health" class="health" role="meter" aria-label="Здоровье ядра" aria-valuemin="0"></div></div><div><small>ВРЕМЯ</small><div id="run-time" class="value">00:00</div></div></div><div class="hud-right"><div><small>ОЧКИ <span id="multiplier"></span></small><div id="run-score" class="value">0</div></div><button class="hud-pause" data-action="pause" aria-label="Пауза">Ⅱ</button></div>');
  $('#game-footer').innerHTML=h('<button id="overload-button" class="secondary overload-button" data-action="overload">Перегрузка · E / ПКМ · 20 энергии</button><div class="energy-head"><span id="energy-level"></span><span id="energy-count"></span></div><div id="energy-track" class="energy-track" role="progressbar" aria-label="Боевая энергия" aria-valuemin="0"><div id="energy-fill" class="energy-fill"></div></div><button class="active-build build-dock" id="active-build" data-action="pause" aria-label="Открыть сборку"></button><div class="game-info"><span id="wave-label"></span><span id="sector-label"></span><span id="boss-countdown"></span></div><div id="encounter-status" class="encounter-status hidden"></div><div id="run-status" class="run-status"></div>');$('#page-label').textContent=t(engine?.daily?'ИСПЫТАНИЕ ДНЯ':engine?.training&&isRunning?'ТРЕНИРОВКА БОССОВ':modes[mode].name.toUpperCase());}
 function pause(){if(!engine||engine.state!=='playing')return;engine.state='paused';keys.clear();showPause();}
@@ -4000,7 +4030,24 @@ document.addEventListener('keydown',event=>{
 });document.addEventListener('keyup',event=>keys.delete(event.key.toLowerCase()));
 function focusLost(){windowFocused=false;controller.reset();keys.clear();input.angle=undefined;if(isRunning&&engine?.state==='playing')pause();}
 window.addEventListener('blur',focusLost);window.addEventListener('focus',()=>{windowFocused=true;controller.reset();});document.addEventListener('visibilitychange',()=>{if(document.hidden){focusLost();audio.suspend();}else{windowFocused=true;controller.reset();audio.resume();}});
-function resize(){const rect=stage.getBoundingClientRect();width=Math.max(1,rect.width);height=Math.max(1,rect.height);dpr=Math.min(2,window.devicePixelRatio||1);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);canvas.style.width=width+'px';canvas.style.height=height+'px';const compact=width>height&&height<480,top=compact?64:engine?.boss?138:90,bottom=compact?92:139;scale=Math.max(.08,Math.min(width/650,Math.max(40,height-top-bottom)/590));cx=width/2;cy=top+Math.max(40,height-top-bottom)/2;}
+function resize(){
+ const rect=stage.getBoundingClientRect();
+ width=Math.max(1,rect.width);
+ height=Math.max(1,rect.height);
+ dpr=Math.min(2,window.devicePixelRatio||1);
+ const pixelWidth=Math.round(width*dpr),pixelHeight=Math.round(height*dpr);
+ if(canvas.width!==pixelWidth)canvas.width=pixelWidth;
+ if(canvas.height!==pixelHeight)canvas.height=pixelHeight;
+ canvas.style.width=width+'px';
+ canvas.style.height=height+'px';
+ const compact=window.matchMedia?.('(max-height: 500px) and (orientation: landscape)').matches ?? (width>height&&height<480);
+ const top=compact?(isRunning&&engine?.boss?84:66):engine?.boss?138:90;
+ const bottom=compact?82:139;
+ const availableHeight=Math.max(1,height-top-bottom);
+ scale=Math.min(width/650,availableHeight/590);
+ cx=width/2;
+ cy=top+availableHeight/2;
+}
 window.addEventListener('resize',resize);new ResizeObserver(resize).observe(stage);
 // Procedural 2D renderer. Nothing is downloaded: stars, machines, particles, reactor and UI marks.
 const starRandom=C.random(42);const stars=Array.from({length:125},()=>({x:starRandom(),y:starRandom(),r:starRandom()*1.05+.25,a:starRandom()*.6+.15}));

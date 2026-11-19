@@ -22,6 +22,12 @@ for (const [locale, reason, phase] of [
   );
 }
 
+I.setLanguage('tr');
+assert.equal(I.t('Перегрузка · нужно ещё 20 энергии'), 'Aşırı yükleme · gereken: 20 enerji');
+assert.equal(I.t('ДО БОССА 00:59'), 'BOSSA KALAN 00:59');
+assert.equal(I.t('КРУГ 1/2'), 'TUR 1/2');
+assert.equal(I.t('ФАЗА 3'), 'AŞAMA 3');
+
 assert.equal(I.setLanguage('ru'), 'ru');
 assert.equal(I.t('Причина поражения'), 'Причина поражения');
 assert.equal(I.setLanguage('unsupported'), 'en');

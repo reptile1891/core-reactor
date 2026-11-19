@@ -54,7 +54,7 @@
 Громкость музыки	Müzik sesi
 Громкость эффектов	Efekt sesi
 ДАТА	DATE DATE
-ДО БОССА	Patron in Boss in
+ДО БОССА	BOSSA KALAN
 ДО РЕКОРДА:	En iyisine:
 ДОСТИЖЕНИЯ	Başarılar Başarılar
 Движется по орбите и меняет направление атаки.	Orbitlar, temel ve değişen yönlerden saldırılar.
@@ -324,7 +324,7 @@
 Урон отражения +0,6.	Yan hasar +0.6.
 Усиленный корпус	Donmuş Hull
 Условия: победить всех 4 боссов и приобрести 12 уровней технологий.	Gereksinimler: Tüm 4 bossları yenin ve 12 teknoloji seviyelerini satın alın.
-ФАЗА	faz faz faz faz fazı
+ФАЗА	AŞAMA
 ФАНТОМ	HAYALET
 Фазовый пробой	Fazraz
 Файл слишком большой: максимум 2 МБ.	Dosya çok büyük: maksimum boyut 2 MB.
@@ -532,16 +532,16 @@
 Золотая метка — место последнего удара · зелёная дуга — ваш щит	Altın işaretleyici: son hit location · yeşil ark: kalkanınız
 СНАРЯД	MERMİ
 Уровень	Seviye
-ОПАСНАЯ СИГНАТУРА	Hostile imza
-НОВАЯ ФАЗА	Yeni aşama
+ОПАСНАЯ СИГНАТУРА	TEHLİKELİ SİNYAL
+НОВАЯ ФАЗА	YENİ AŞAMA
 Ритм атак изменился	Saldırı ritmi değişti
 БОСС ПОБЕЖДЁН · ПЕРЕДЫШКА	Patron mağlup oldu · nefeser
 Текущая сборка	Mevcut dizilim
 Технологии появятся здесь после повышения уровня.	Teknolojiler, seviyenizden sonra burada görünecektir.
 Управление	Kontroller
 Перегрузка · ГОТОВА	Aşırı yükleme · HAZIR
-Перегрузка · нужно ещё	Aşırı yükleme · gereken ek enerji
-энергии	Enerji enerji enerji enerji enerji enerji enerji enerji enerji enerji enerji
+Перегрузка · нужно ещё	Aşırı yükleme · gereken:
+энергии	enerji
 E / ПКМ / A · 20 энергии · перезарядка 8 с	E / RMB / A · 20 enerji · 8 s cooldown
 Перегрузка: E / ПКМ · 20 энергии · 8 с	Aşırı yükleme: E / sağ tık · 20 enerji · 8 sn
 Техно	Tech Tech Tech
@@ -734,7 +734,7 @@ E / ПКМ · Геймпад: A / ✕	E / sağ tık · Oyun kumandası: A / ✕
 РЕКОРД	YENİ REKOR
 ДОСТИЖЕНИЕ	Başarı Başarı Başarı Başarı Başarı Başarı
 Чаще	Daha sık sık sık sık sık sık
-Технологии появятся с новым уровнем	Teknolojiler sizin seviyeniz olarak kilidini açıyor
+Технологии появятся с новым уровнем	Seviye atladıkça teknolojiler açılır
 Автоматика подавлена	Otomasyon baskılandı
 Щит закроет больше пространства	kalkanınızla daha fazla yer örtün
 Щит быстрее догонит атаку	Gelen saldırıları karşılamak için daha hızlı dön
@@ -805,12 +805,12 @@ E / ПКМ · Геймпад: A / ✕	E / sağ tık · Oyun kumandası: A / ✕
 Защитная сборка	Savunma dizilimi
 Автоматическая сборка	Otomasyon inşa
 Здоровье босса	Boss canı
-БРОНЯ ОТКРЫТА · АТАКУЙТЕ	Zırh açık · grev şimdi
-Идеальное отражение открывает броню	Mükemmel bloklar zırhı açın
-Отражайте серии, чтобы открыть броню.	Blok saldırı dizileri zırhı açmak için.
-После потери секции ритм атак меняется.	Bir bölümden sonra saldırı ritmi değişiklikleri kaybolur.
-Пунктирный луч — безопасное эхо.	Yıkılmış kiriş zararsız bir yankıdır.
-Следите за изгибом траекторий.	Bazlı saldırı yollarını izleyin.
+БРОНЯ ОТКРЫТА · АТАКУЙТЕ	ZIRH AÇIK · SALDIR
+Идеальное отражение открывает броню	Kusursuz yansıtma zırhı açar
+Отражайте серии, чтобы открыть броню.	Zırhı açmak için saldırı serilerini engelle.
+После потери секции ритм атак меняется.	Bir bölüm yok edildiğinde saldırı ritmi değişir.
+Пунктирный луч — безопасное эхо.	Kesik çizgili ışın zararsız bir yankıdır.
+Следите за изгибом траекторий.	Kavisli saldırı yollarına dikkat et.
 Выстояли до конца попытки	Sonuna kadar dayandın
 Побеждено боссов	Bosses mağlup oldu
 Лучшая серия отражений	En iyi blok çizgisi
@@ -838,7 +838,7 @@ E / ПКМ · Геймпад: A / ✕	E / sağ tık · Oyun kumandası: A / ✕
 Ваша сборка	Dizilimin
 Новая лучшая серия	Yeni en iyi çizgi
 Лучшая серия блоков	En iyi blok çizgisi
-Внешний контур	Dış Perometre
+Внешний контур	Dış çevre
 Энергетический узел	Enerji nexus
 Глубинный архив	Derin arşiv arşivi
 Сердце системы	Sistem kalbi
@@ -848,7 +848,7 @@ E / ПКМ · Геймпад: A / ✕	E / sağ tık · Oyun kumandası: A / ✕
 ПЕРВЫЙ КРУГ ПРОЙДЕН	İlk devre tamamlandı
 Глубинная оборона	Derin savunma
 Боссы возвращаются в усиленном виде. Впереди ещё четыре боя.	bosslar daha güçlü döner. Dört savaş bekliyor.
-КРУГ	Devre Devre Devre
+КРУГ	TUR
 Сектор точности	Hassasiyet sektörü
 Снаряды быстрее на 10%. Идеальное отражение даёт ещё 5 энергии, один раз за атаку.	Projectiles% 10 daha hızlı hareket eder. Mükemmel bir yansıma, saldırı başına bir kez 5 ekstra enerji verir.
 Подвижный фронт	Hareketli cephe
@@ -863,13 +863,13 @@ E / ПКМ · Геймпад: A / ✕	E / sağ tık · Oyun kumandası: A / ✕
 Завершает сборку	Tamamlar bir inşa inşa
 СБОРКА ЗАВЕРШЕНА	Build Complete Full Build Build Full Build Build Full Build Build Full Build Build Build Build Full Build Build Full Build Build Build Build Build Full Build Build Build Build Full Build Build Build Build Build Build Full Build Build Build Build Build Full Build Build Build Build Full Build Build Build Build Build Full Build Build Build Build Build Full Build Build Full Build Build Build Build Full Build Build Build Build Build Full Build Build Build Build Full Build Build Build Build Build Build Build Build Build Build Full Build Build Build Build Build Build Build Build Build Build Build Full Build Build Build Build Build Build Build Build Build
 СЕРДЦЕ СИСТЕМЫ	Sistem kalbi
-УСИЛЕННАЯ СИГНАТУРА	Donmuş imza
-Три оболочки. Отражайте атаки, чтобы открыть ядро.	Üç kabuk. Temeli açığa çıkarmak için saldırılar.
+УСИЛЕННАЯ СИГНАТУРА	GÜÇLENDİRİLMİŞ SİNYAL
+Три оболочки. Отражайте атаки, чтобы открыть ядро.	Üç kabuk. Çekirdeği açığa çıkarmak için saldırıları yansıt.
 Ожидайте перекрёстный лазер и ответный залп.	Bir haç lazeri ve bir geri dönüş volley bekleyin.
 Секции меняют стороны огня.	Silah bölümleri ateş yanlarını değiştiriyor.
 Пунктир отвлекает. Следите за сплошным прицелом.	Sıkıntıları dikkat edin. sağlam hedefleme çizgisini izleyin.
 Следите за сменой оболочек.	Kabuk değişimlerini izle.
-ОБОЛОЧКА РАЗРУШЕНА	Shell tahrip edildi
+ОБОЛОЧКА РАЗРУШЕНА	KABUK PARÇALANDI
 Лазер подключён. Следите за порядком ударов.	Lazer meşgul. Etkilerin siparişini takip edin.
 Последний рубеж: чередуйте направления.	Son savunma hattı: alternatif yönler.
 ОБОЛОЧКА ПЕРЕСТРАИВАЕТСЯ	KABUK YENİDEN YAPILANIYOR

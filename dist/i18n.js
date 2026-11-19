@@ -379,7 +379,7 @@ const catalog={
  "поворот": "rotate",
  "прогресс.json": "progress.json",
  "резервная-копия.json": "backup.json",
- "с": " s",
+ "с": "s",
  "с.": "s",
  "снаряд": "projectile",
  "спасение": "revive",
@@ -877,7 +877,11 @@ const catalog={
  "Лазер подключён. Следите за порядком ударов.": "Laser engaged. Follow the order of impacts.",
  "Последний рубеж: чередуйте направления.": "Last line of defense: alternate directions.",
  "ОБОЛОЧКА ПЕРЕСТРАИВАЕТСЯ": "SHELL RECONFIGURING",
- "5 маршрутов · листайте →": "5 routes · swipe →"
+ "5 маршрутов · листайте →": "5 routes · swipe →",
+ "Причина поражения": "Cause of defeat",
+ "Фаза": "Phase",
+ "Активные технологии": "Active technologies",
+ "Осколок Разделителя": "Splitter Fragment"
 };
 let language='en';
 const messages={...catalog};

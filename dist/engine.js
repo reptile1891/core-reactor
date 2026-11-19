@@ -120,6 +120,7 @@ class Engine{
   this.lastArrival=arrival;this.lastAttackAngle=angle;
   // Aim follows its owner until the final half-second lock; released shots keep their direction.
   const g={id:++this.nextId,owner:e.id,kind,angle,aimOffset:angle-e.angle,locked:false,gap,rotationBudget,radius:e.r,arrival,launch:arrival-travel,created:this.time,speed,slow,fired:false,burst:options.burst||1,fan:options.fan||0,curve:options.curve||0,damage:1,suppress:e.type==='suppressor',trackedAt:null,aligned:false,perfect:false};
+  g.attacker={type:e.type,boss:e.spec,fragment:Boolean(e.fragment)};
   if(kind==='laser'||e.type==='sniper')this.emit('warning',{enemy:e.type,kind});
   g.tracks=Array.from({length:g.fan||g.burst},(_,i)=>({angle:angle+(i-((g.fan||g.burst)-1)/2)*(g.fan?10:4)*RAD,aligned:false,trackedAt:null}));this.groups.push(g);this.warnings.push(g);return g;
  }
@@ -205,16 +206,17 @@ class Engine{
   if(this.u('pulse')&&this.blocks%8===0){this.projectiles=this.projectiles.filter(q=>q.friendly);for(const w of this.groups)if(w.fired)w.cancelled=true;this.areaDamage(1.5*this.u('pulse')*(1+.25*this.m('legend')));this.effects.push({type:'pulse',life:1,max:1});this.emit('pulse');}
  }
  launchFriendly(a,damage,target,opts={}){const targetEnemy=this.enemies.find(e=>e.id===target)||this.enemies.reduce((best,e)=>!best||Math.abs(angleDiff(e.angle,a))<Math.abs(angleDiff(best.angle,a))?e:best,null);const v=pos(a,68);this.projectiles.push({id:++this.nextId,friendly:true,active:true,x:v.x,y:v.y,angle:a,damage,target:targetEnemy?.id,age:0,trail:[],hit:[],pierce:opts.pierce||1,crit:opts.crit||false,auto:opts.auto||false,tactic:opts.tactic||false});}
- hitCore(suppress=false,reason='Снаряд прошёл мимо щита',attackAngle,miss){
+ hitCore(suppress=false,reason='Снаряд прошёл мимо щита',attackAngle,miss,attacker){
   if(this.invuln>0||this.barrier>0)return;
   this.hitCount++;
   if((this.u('armor')&&this.hitCount%(6-this.u('armor'))===0)||(this.m('plate')&&this.hitCount%(9-this.m('plate'))===0)){this.barrier=.4;this.emit('armor');return;}
   this.lastHit=miss||this.missInfo(Number.isFinite(attackAngle)?attackAngle:this.angle+Math.PI);this.hp--;const source=reason.includes('Лазер')?'laser':suppress?'suppressor':'projectile';this.damageTaken[source]=(this.damageTaken[source]||0)+1;this.combo=0;this.perfectCombo=0;this.invuln=.7+.1*this.m('grace');if(suppress){this.suppressed=3-.5*this.u('insulate');this.emit('suppress');}
   if(this.encounter?.index===2&&!this.encounter.done)this.encounter.failed=true;this.emit('hurt',{hp:this.hp});this.effects.push({type:'hurt',life:.5,max:.5});
+  const boss=this.hp<=0&&this.boss?{index:this.boss.spec,phase:this.boss.phase}:null;
   if(this.u('revenge'))this.areaDamage(1.5*this.u('revenge'));
   if(this.hp===1&&this.m('emergency')&&!this.emergencyUsed){this.emergencyUsed=true;this.barrier=2;this.emit('emergency');}
   if(this.hp<=0&&this.m('revive')&&!this.reviveUsed){this.reviveUsed=true;this.hp=1;this.barrier=2;this.emit('revive');}
-  if(this.hp<=0){this.hp=0;this.state='dead';this.deathReason=reason;this.emit('death');}this.captureReplay();
+  if(this.hp<=0){this.hp=0;this.state='dead';this.deathReason=reason;this.deathCause={source,attacker,boss};this.emit('death');}this.captureReplay();
  }
  missInfo(angle){const late=Math.abs(angleDiff(this.target,angle))<=this.width/2;const fake=this.effects.some(f=>f.type==='feint'&&Math.abs(angleDiff(f.angle,this.angle))<this.width/2);return {angle,shield:this.angle,width:this.width,secondary:this.secondary,time:this.time,hint:fake?'Вы защищали ложный луч. Пунктир с меткой ЭХО безопасен.':late?'Щит не успел повернуться. Начинайте поворот раньше.':'Вы защищали другое направление. Следите за ближайшим ударом.'};}
  areaDamage(n){for(const e of this.enemies.slice())this.damageEnemy(e,n,'automation');}
@@ -274,7 +276,7 @@ class Engine{
   // Record each group's first real overlap caused by shield movement. Holding a shield never refreshes the timestamp.
   for(const g of this.groups){if(g.cancelled)continue;const moving=g.locked&&Math.abs(this.rotation)>20*RAD;for(const track of g.tracks){const aligned=this.covers(track.angle);if(aligned&&!track.aligned&&moving)track.trackedAt=this.time;track.aligned=aligned;if(!aligned)track.trackedAt=null;}g.trackedAt=g.tracks[0].trackedAt;
    if(!g.fired&&this.time>=g.launch)this.fireGroup(g);
-   if(g.kind==='laser'&&g.fired&&this.time>=g.arrival&&!g.resolved){g.resolved=true;g.perfect=g.trackedAt!==null&&this.time-g.trackedAt<=.12&&this.covers(g.angle);if(this.covers(g.angle))this.reflect({angle:g.angle},g);else this.hitCore(false,'Лазер: щит не перекрыл предупреждающий луч',g.angle);this.effects.push({type:'laser',angle:g.angle,r:g.radius,life:.25,max:.25});}
+   if(g.kind==='laser'&&g.fired&&this.time>=g.arrival&&!g.resolved){g.resolved=true;g.perfect=g.trackedAt!==null&&this.time-g.trackedAt<=.12&&this.covers(g.angle);if(this.covers(g.angle))this.reflect({angle:g.angle},g);else this.hitCore(false,'Лазер: щит не перекрыл предупреждающий луч',g.angle,undefined,g.attacker);this.effects.push({type:'laser',angle:g.angle,r:g.radius,life:.25,max:.25});}
   }
   const current=this.projectiles.slice();
   for(const p of current){if(!p.active)continue;p.age+=dt;if(p.age>12){p.active=false;continue;}p.trail.push({x:p.x,y:p.y});if(p.trail.length>6)p.trail.shift();
@@ -287,7 +289,7 @@ class Engine{
     const oldR=p.r;p.r-=p.speed*(p.r<=130?1-p.slow:1)*dt;
     const a=p.finalAngle-p.curve*clamp((p.r-65)/(p.originRadius-65),0,1);p.angle=a;Object.assign(p,pos(a,p.r));
     if(oldR>65&&p.r<=65){const g=p.group;g.perfect=p.track.trackedAt!==null&&this.time-p.track.trackedAt<=.12&&this.covers(p.angle);if(this.covers(p.angle)){this.reflect(p,g);p.active=false;continue;}p.miss=this.missInfo(p.angle);this.captureReplay();}
-    if(p.r<26){p.active=false;this.hitCore(p.suppress,p.suppress?'Подавитель: атака прошла мимо щита':'Снаряд прошёл через незащищённую сторону ядра',p.angle,p.miss);}
+    if(p.r<26){p.active=false;this.hitCore(p.suppress,p.suppress?'Подавитель: атака прошла мимо щита':'Снаряд прошёл через незащищённую сторону ядра',p.angle,p.miss,p.group?.attacker);}
    }
   }
   if(this.suppressed<=0){

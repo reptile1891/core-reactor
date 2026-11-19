@@ -1,19 +1,30 @@
 /* Presentation-only localization. Stable IDs, save keys and gameplay data stay unchanged. */
 (function(root){
 'use strict';
-const catalog=/*CATALOG*/{};
+const catalogs=/*CATALOGS*/{};
+const catalog=catalogs.en;
+const languages=Object.freeze(['ru',...Object.keys(catalogs)]);
 let language='en';
-const messages={...catalog};
-for(const [key,value] of Object.entries(catalog)){
- const upper=key.toUpperCase();if(!(upper in messages))messages[upper]=value.toUpperCase();
-}
+const lookup=new Map();
 const escapeRegex=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-const matcher=new RegExp(Object.keys(messages).sort((a,b)=>b.length-a.length).map(escapeRegex).join('|'),'gu');
+function languageLookup(locale){
+ if(!lookup.has(locale)){
+  const messages={...catalogs[locale]};
+  for(const [key,value] of Object.entries(messages)){
+   const upper=key.toUpperCase();
+   if(!Object.hasOwn(messages,upper))messages[upper]=value.toLocaleUpperCase(locale);
+  }
+  const matcher=new RegExp(Object.keys(messages).sort((a,b)=>b.length-a.length).map(escapeRegex).join('|'),'gu');
+  lookup.set(locale,{messages,matcher});
+ }
+ return lookup.get(locale);
+}
 const letter=c=>Boolean(c)&&/\p{L}/u.test(c);
-function setLanguage(value){language=value==='ru'?'ru':'en';return language;}
+function setLanguage(value){language=languages.includes(value)?value:'en';return language;}
 function getLanguage(){return language;}
 function t(value){
  const input=String(value??'');if(language==='ru'||!/[\u0400-\u04ff]/.test(input))return input;
+ const {messages,matcher}=languageLookup(language);
  if(Object.hasOwn(messages,input))return messages[input];
  return input.replace(matcher,(key,index,source)=>{
   // Never replace a translated word inside another word or a stable identifier.
@@ -36,6 +47,6 @@ function translateShell(doc){
   const selected=el.dataset.language===language;el.classList.toggle('selected',selected);el.setAttribute('aria-pressed',String(selected));
  }
 }
-const api={t,html,setLanguage,getLanguage,translateShell,catalog};
+const api={t,html,setLanguage,getLanguage,translateShell,catalog,languages};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;root.CoreI18n=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

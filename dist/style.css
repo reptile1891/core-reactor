@@ -178,3 +178,5 @@ body:has(.mission-notice) .toasts,body:has(.boss-moment) .toasts{visibility:hidd
 .defeat-cause p{margin:4px 0;color:#e0cbd3;font-size:13px}
 .defeat-cause summary{display:list-item;align-content:center;min-height:44px;color:#e0cbd3;font-size:13px;cursor:pointer}
 .defeat-cause summary:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+
+.settings-language-switch{flex-wrap:wrap;max-width:100%}

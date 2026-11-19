@@ -38,7 +38,7 @@ function validateSave(value){
  s.settings.sfx=typeof value.settings?.sfx==='number'?clamp(value.settings.sfx,0,1):.55;
  s.settings.music=typeof value.settings?.music==='number'?clamp(value.settings.music,0,1):.16;
  s.settings.reduced=Boolean(value.settings?.reduced);
- s.settings.language=value.settings?.language==='ru'?'ru':'en';s.settings.core=['mirror','storm','bastion'].includes(value.settings?.core)?value.settings.core:'standard';
+ s.settings.language=['ru','en','zh-CN','tr'].includes(value.settings?.language)?value.settings.language:'en';s.settings.core=['mirror','storm','bastion'].includes(value.settings?.core)?value.settings.core:'standard';
  s.settled=Array.isArray(value.settled)?value.settled.filter(x=>typeof x==='string').slice(-30):[];
  return s;
 }
